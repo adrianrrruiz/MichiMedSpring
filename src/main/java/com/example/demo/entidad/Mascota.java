@@ -1,35 +1,30 @@
 package com.example.demo.entidad;
 
 public class Mascota {
-    private int id;
+
     private String nombre;
-    private String raza;
     private int edad;
-    private double peso;
+    private String raza;
+    private Float peso;
     private String enfermedad;
-    private String urlImage;
     private String estado;
+    private String fechaEntrada;
+    private String fechaSalida;
+    private String medicamento;
+    private String foto;
 
-    public Mascota() {
-    }
-
-    public Mascota(int id, String nombre, String raza, int edad, double peso, String enfermedad, String urlImage, String estado) {
-        this.id = id;
+    public Mascota(String nombre, int edad, String raza, float peso, String enfermedad, String estado,
+            String fechaEntrada, String fechaSalida, String medicamento, String foto) {
         this.nombre = nombre;
-        this.raza = raza;
         this.edad = edad;
+        this.raza = raza;
         this.peso = peso;
         this.enfermedad = enfermedad;
-        this.urlImage = urlImage;
         this.estado = estado;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.fechaEntrada = fechaEntrada;
+        this.fechaSalida = fechaSalida;
+        this.medicamento = medicamento;
+        this.foto = foto;
     }
 
     public String getNombre() {
@@ -40,14 +35,6 @@ public class Mascota {
         this.nombre = nombre;
     }
 
-    public String getRaza() {
-        return raza;
-    }
-
-    public void setRaza(String raza) {
-        this.raza = raza;
-    }
-
     public int getEdad() {
         return edad;
     }
@@ -56,11 +43,19 @@ public class Mascota {
         this.edad = edad;
     }
 
-    public double getPeso() {
+    public String getRaza() {
+        return raza;
+    }
+
+    public void setRaza(String raza) {
+        this.raza = raza;
+    }
+
+    public Float getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(Float peso) {
         this.peso = peso;
     }
 
@@ -72,14 +67,6 @@ public class Mascota {
         this.enfermedad = enfermedad;
     }
 
-    public String getUrlImage() {
-        return urlImage;
-    }
-
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
-    }
-
     public String getEstado() {
         return estado;
     }
@@ -87,4 +74,39 @@ public class Mascota {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public String getFechaEntrada() {
+        return fechaEntrada;
+    }
+
+    public void setFechaEntrada(String fechaEntrada) {
+        this.fechaEntrada = fechaEntrada;
+    }
+
+    public String getFechaSalida() {
+        return fechaSalida;
+    }
+
+    public void setFechaSalida(String fechaSalida) {
+        this.fechaSalida = fechaSalida;
+    }
+
+    public String getMedicamento() {
+        return medicamento;
+    }
+
+    public void setMedicamento(String medicamento) {
+        this.medicamento = medicamento;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    
+
 }
