@@ -9,40 +9,119 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/mascotasStyle.css" />
     <title>Mascotas</title>
   </head>
   <body>
-    <h1>Mascotas</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Raza</th>
-                <th>Edad</th>
-                <th>Peso</th>
-                <th>Enfermedad</th>
-                <th>Estado</th>
-                <th>Foto</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="mascota : ${mascotas}">
-                <td th:text="${mascota.nombre}"></td>
-                <td th:text="${mascota.raza}"></td>
-                <td th:text="${mascota.edad}"></td>
-                <td th:text="${mascota.peso + ' kg'}"></td>
-                <td th:text="${mascota.enfermedad}"></td>
-                <td th:text="${mascota.estado}"></td>
-                <td th:text="${mascota.foto}"></td>
-            </tr>
-        </tbody>
-    </table>
+    <header>
+      <nav>
+        <div class="logo">
+          <img src="../assets/img/Michimed_Logo 1.png" alt="MichiMed Logo" />
+        </div>
+        <div class="user">
+          <img src="../assets/img/user.png" alt="" />
+        </div>
+      </nav>
+    </header>
 
-    <img src="" alt="">
+    <main>
+      <div class="info">
+        <h1>Todos nuestros gatitos</h1>
+        <input
+          type="text"
+          placeholder="buscar por el nombre del gatito"
+          required
+        />
+      </div>
+      <container class="table-container">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Raza</th>
+              <th>Edad</th>
+              <th>Peso</th>
+              <th>Enfermedad</th>
+              <th>Estado</th>
+              <th>Foto</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="mascota : ${mascotas}">
+              <td th:text="${mascota.nombre}"></td>
+              <td th:text="${mascota.raza}"></td>
+              <td th:text="${mascota.edad + ' años'}"></td>
+              <td th:text="${mascota.peso + ' kg'}"></td>
+              <td th:text="${mascota.enfermedad}"></td>
+              <td
+                th:text="${mascota.estado}"
+                th:classappend="${mascota.estado == 'En tratamiento'} ? 'estado-tratamiento' : 'estado-normal'"
+              ></td>
+              <td>
+                <img
+                  th:src="${mascota.foto}"
+                  alt=""
+                  class="table-img img-fluid"
+                />
+              </td>
+              <td>
+                <button
+                  class="btn btn-primary"
+                  onclick="redirectToDetail(this)"
+                >
+                  ver
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </container>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const cells = document.querySelectorAll("table tbody td");
+        cells.forEach(cell => {
+          if (!cell.querySelector("img") && (cell.textContent.trim() === "" || cell.textContent.trim().toLowerCase() === "null")) {
+            cell.textContent = "N/A";
+          }
+        });
+
+        const estadoCells = document.querySelectorAll("table tbody td:nth-child(6)");
+        estadoCells.forEach(cell => {
+          const text = cell.textContent.trim();
+          cell.innerHTML = `<span>${text}</span>`;
+          const span = cell.querySelector("span");
+          if (text === "En tratamiento") {
+            span.style.backgroundColor = "#B3261E";
+            span.style.color = "#ffffff"; 
+            span.style.padding = "1px 4px"; 
+            span.style.borderRadius = "10px"; 
+          } else {
+            span.style.backgroundColor = "#f0f2f5";
+            span.style.padding = "1px 4px";
+            span.style.borderRadius = "10px";
+          }
+        });
+      });
+    </script>
+    <script>
+      function redirectToDetail(button) {
+        const row = button.closest("tr");
+        const index = Array.from(row.parentNode.children).indexOf(row) + 1;
+        window.location.href = `http://localhost:8090/mascotas/${index}`;
+      }
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-</body>
+  </body>
 </html>

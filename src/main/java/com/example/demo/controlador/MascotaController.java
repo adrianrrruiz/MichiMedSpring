@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.servicio.MascotaService;
 
+
+// http://localhost:8090/mascotas
 @RequestMapping("/mascotas")
 @Controller
 public class MascotaController {
@@ -16,12 +18,14 @@ public class MascotaController {
     @Autowired
     MascotaService mascotaService;
 
+    // http://localhost:8090/mascotas
     @GetMapping("")
     public String Mascotas(Model model) {
         model.addAttribute("mascotas", mascotaService.SearchAll());
         return "mascotas";
     }
 
+    // http://localhost:8090/mascotas/{id}
     @GetMapping("/{id}")
     public String InfoMascota(Model model, @PathVariable("id")int id){
         model.addAttribute("mascota", mascotaService.SearchById(id));
