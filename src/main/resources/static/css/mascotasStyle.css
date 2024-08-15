@@ -11,6 +11,7 @@
     --white: #FFFFFF;
     --gray: #757575;
     --color-gainsboro-200: #e2dad6;
+    --schemes-error: #B3261E;
 }
 
 * {
@@ -136,6 +137,17 @@ input {
 .table td {
     color: var(--text-color);
     font-weight: 300;
+}
+
+.estado-tratamiento {
+    background-color: var(--schemes-error);
+    color: var(--white);
+    border-radius: 20px;
+    padding: 5px; /* Opcional: para añadir algo de espacio alrededor del texto */
+}
+
+.estado-normal {
+    background-color: var(--input-color);
 }
 
 .table-img {
