@@ -1,0 +1,29 @@
+body {
+    background-color: #f8f9fa;
+}
+.login-container {
+    max-width: 400px;
+    margin: auto;
+    padding-top: 10%;
+}
+.login-container .form-control {
+    border-radius: 8px;
+}
+.login-container .btn-primary {
+    background-color: #5f769d;
+    border-color: #5f769d;
+    border-radius: 8px;
+}
+.login-container .btn-primary:hover {
+    background-color: #4d617e;
+    border-color: #4d617e;
+}
+.footer-text {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #ced4da;
+    margin-top: 1.5rem;
+}
+.footer-text a {
+    color: #ced4da;
+}

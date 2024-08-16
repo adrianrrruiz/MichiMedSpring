@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,7 +23,7 @@
           <li><a href="#online-services">Services</a></li>
           <li><a href="#contact-email">Email</a></li>
           <li><a href="#contact">Contact</a></li>
-          <button class="sign-in-btn">Sign in</button>
+          <button class="sign-in-btn"><a th:href="@{/sign-in}" >Sign in</a></button>
         </ul>
       </nav>
     </header>
