@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,15 +23,16 @@
     </header>
     <div class="login-container text-center">
         <h1 class="mb-5 fw-bold">El bienestar de tu gatito comienza aquí . . .</h1>
-        <form>
+        <form th:object="${user}" th:action="@{/sign-in}" method="post">
             <div class="mb-3">
                 <label for="email" class="form-label w-100 text-start label-color">Email</label>
-                <input type="email" id="email" class="form-control" placeholder="Your email">
+                <input th:field="*{email}" type="email" id="email" class="form-control" placeholder="Your email" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label w-100 text-start label-color">Password</label>
-                <input type="password" id="password" class="form-control" placeholder="Your password">
+                <input th:field="*{password}" type="password" id="password" class="form-control" placeholder="Your password" required>
             </div>
+            <p th:text="${error}" style="color: red;"></p>
             <button type="submit" class="btn btn-primary w-100">Sign in</button>
         </form>
     </div>

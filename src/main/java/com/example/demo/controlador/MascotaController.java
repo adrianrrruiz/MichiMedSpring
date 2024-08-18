@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.servicio.MascotaService;
+import com.example.demo.servicio.MascotaServiceInterface;
 
 
 // http://localhost:8090/mascotas
@@ -16,7 +16,7 @@ import com.example.demo.servicio.MascotaService;
 public class MascotaController {
     
     @Autowired
-    MascotaService mascotaService;
+    MascotaServiceInterface mascotaService;
 
     // http://localhost:8090/mascotas
     @GetMapping("")
