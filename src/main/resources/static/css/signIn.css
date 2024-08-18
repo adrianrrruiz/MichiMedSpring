@@ -1,29 +1,25 @@
-body {
-    background-color: #f8f9fa;
-}
+body {height: 100vh;}
+
 .login-container {
-    max-width: 400px;
+    max-width: 500px;
     margin: auto;
-    padding-top: 10%;
+    padding: 0 20px;
 }
-.login-container .form-control {
-    border-radius: 8px;
-}
+
+.login-container h1 {color: var(--text-secondary);}
+
+.login-container .form-control {border-radius: 8px;}
+
+.login-container .label-color {color: var(--text-terciary);}
+
+.login-container input::placeholder {color: var(--text-secondary)}
+
 .login-container .btn-primary {
-    background-color: #5f769d;
-    border-color: #5f769d;
-    border-radius: 8px;
+    background-color: var(--text-secondary);
+    border-color: var(--text-secondary);
+    border-radius: 20px;
 }
 .login-container .btn-primary:hover {
     background-color: #4d617e;
     border-color: #4d617e;
-}
-.footer-text {
-    text-align: center;
-    font-size: 0.875rem;
-    color: #ced4da;
-    margin-top: 1.5rem;
-}
-.footer-text a {
-    color: #ced4da;
 }
