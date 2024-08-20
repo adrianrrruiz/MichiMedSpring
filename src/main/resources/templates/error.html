@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - MichiMed</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/error.css" />
+</head>
+<body class="error-background">
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="/"><img src="../assets/img/Michimed_Logo 1.png" alt="MichiMed Logo" /></a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1">
+        <div class="error-container text-center bg-light p-5 rounded shadow">
+            <h1 class="display-4 fw-bold oops-title">¡Oops!</h1>
+            <h2 class="mb-4 error-code" th:text="'Error ' + 404"></h2>
+            <p class="lead mb-4 error-message" th:text="${message}"></p>
+            <a href="/" class="btn btn-primary">Regresar al inicio</a>
+        </div>
+    </div>
+    
+    <footer class="text-center mt-auto">
+        <div class="legal">
+            <a href="#">Privacy & policies</a>
+            <a href="#">Terms & conditions</a>
+        </div>
+        <p class="copy">&copy; 2024 MichiMed. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -5,11 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entidad.User;
 import com.example.demo.servicio.ClienteServiceInterface;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 // http://localhost:8090/sign-in
