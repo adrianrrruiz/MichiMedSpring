@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.servicio.MascotaService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 // http://localhost:8090/mascotas
@@ -31,4 +33,10 @@ public class MascotaController {
         model.addAttribute("mascota", mascotaService.SearchById(id));
         return "infoMascota";
     }
+
+    @GetMapping("/add")
+    public String mostrarFormularioCrear(Model model) {
+        return "crear_mascota";
+    }
+    
 }
