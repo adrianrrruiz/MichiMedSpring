@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.servicio.MascotaService;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
