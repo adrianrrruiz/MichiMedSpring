@@ -144,11 +144,26 @@
                       class="form-control"
                       placeholder="Ingresa el peso del gatito"
                     />
+
+                    <button class="add">Add</button>
                   </div>
 
                   <div class="col-md-6">
-                    <label for="foto">Upload image</label>
-                    <input type="file" id="foto" class="form-control" />
+                    <div class="upload">
+                      <label for="foto">Upload image</label>
+                      <input
+                        type="file"
+                        id="foto"
+                        class="rounded-file-input"
+                        style="display: none"
+                      />
+                      <img
+                        src="../assets/icons/upload.png"
+                        alt="Upload Logo"
+                        class="upload-logo"
+                        onclick="document.getElementById('foto').click();"
+                      />
+                    </div>
 
                     <label for="estado">Estado</label>
                     <select id="estado" class="form-control">
