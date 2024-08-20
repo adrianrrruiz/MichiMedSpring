@@ -31,6 +31,7 @@ html {
     scroll-behavior: smooth;
 }
 
+/* BUTTONS */
 button {
     font-weight: bold;
     border: none;
@@ -38,6 +39,16 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     border-radius: 40px;
+}
+
+.btn-primary {
+    background-color: var(--text-secondary);
+    border-color: var(--text-secondary);
+    border-radius: 20px;
+}
+.btn-primary:hover {
+    background-color: #4d617e;
+    border-color: #4d617e;
 }
 
 /* HEADER */
