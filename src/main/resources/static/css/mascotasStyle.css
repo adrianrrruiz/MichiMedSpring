@@ -163,6 +163,20 @@ input {
 }
 
 
+.modal-content {
+    background-color: var(--terciary-color);
+}
+
+.modal-body{
+    background-color: var(--white);
+    width: 80%;
+    align-self: center;
+    border-radius: 20px;
+}
+
+
+
+
 
 
 

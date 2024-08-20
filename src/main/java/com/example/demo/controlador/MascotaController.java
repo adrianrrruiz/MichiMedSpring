@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.entidad.Mascota;
 import com.example.demo.servicio.MascotaService;
 
 
@@ -36,7 +37,10 @@ public class MascotaController {
 
     @GetMapping("/add")
     public String mostrarFormularioCrear(Model model) {
-        return "crear_mascota";
+
+        Mascota mascota = new Mascota(0, null, 0, null, 0, null, null, null, null, null, null);
+        model.addAttribute("mascota", mascota);
+        return "mascotas";
     }
     
 }
