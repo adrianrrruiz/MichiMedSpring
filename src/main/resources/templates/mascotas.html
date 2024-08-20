@@ -80,14 +80,15 @@
                   class="btn btn-primary"
                   th:href="@{/mascotas/{id}(id=${mascota.id})}"
                 >
-                  ver
+                  Ver
                 </a>
                 <button
                   class="btn btn-info"
                   data-toggle="modal"
-                  data-target="#mascotaModal"
+                  data-target="#mascotaUpdateModal"
+                  data-id="${mascota.id}"
                 >
-                  l
+                  Editar
                 </button>
               </td>
             </tr>
@@ -95,7 +96,7 @@
         </table>
       </container>
 
-      <!-- Modal -->
+      <!-- Modal - Add -->
       <div
         class="modal fade"
         id="mascotaModal"
@@ -112,6 +113,109 @@
                 alt="Michimed_Logo"
               />
               <h5 class="" id="mascotaModalLabel">Agregar Mascota</h5>
+            </div>
+            <div class="modal-body">
+              <form action="">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="nombre">Nombre</label>
+                    <input
+                      type="text"
+                      id="nombre"
+                      class="form-control"
+                      placeholder="Ingresa el nombre del gatito"
+                    />
+
+                    <label for="enfermedad">Enfermedad</label>
+                    <input
+                      type="text"
+                      id="enfermedad"
+                      class="form-control"
+                      placeholder="Ingresa la enfermedad del gatito"
+                    />
+
+                    <label for="raza">Raza</label>
+                    <input
+                      type="text"
+                      id="raza"
+                      class="form-control"
+                      placeholder="Ingresa la raza del gatito"
+                    />
+
+                    <label for="peso">Peso (kg)</label>
+                    <input
+                      type="number"
+                      id="peso"
+                      class="form-control"
+                      placeholder="Ingresa el peso del gatito"
+                    />
+
+                    <button class="add">Add</button>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="upload">
+                      <label for="foto">Upload image</label>
+                      <input
+                        type="file"
+                        id="foto"
+                        class="rounded-file-input"
+                        style="display: none"
+                      />
+                      <img
+                        src="../assets/icons/upload.png"
+                        alt="Upload Logo"
+                        class="upload-logo"
+                        onclick="document.getElementById('foto').click();"
+                      />
+                    </div>
+
+                    <label for="estado">Estado</label>
+                    <select id="estado" class="form-control">
+                      <option value="">Seleccione un estado</option>
+                      <option value="En tratamiento">En tratamiento</option>
+                      <option value="Normal">Normal</option>
+                    </select>
+
+                    <label for="fecha de nacimiento">Fecha de nacimiento</label>
+                    <input
+                      type="date"
+                      id="fecha de nacimiento"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal - Editar -->
+      <div
+        class="modal fade"
+        id="mascotaUpdateModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mascotaModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+            <div class="header-modal">
+              <img
+                src="../assets/img/Michimed_Logo 1.png"
+                alt="Michimed_Logo"
+              />
+              <h5 class="" id="mascotaModalLabel">Editar Mascota</h5>
             </div>
             <div class="modal-body">
               <form action="">
