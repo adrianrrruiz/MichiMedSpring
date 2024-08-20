@@ -15,6 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/mascotasStyle.css" />
     <title>Mascotas</title>
   </head>
@@ -33,11 +34,14 @@
     <main>
       <div class="info">
         <h1>Todos nuestros gatitos</h1>
-        <input
-          type="text"
-          placeholder="buscar por el nombre del gatito"
-          required
-        />
+        <div class="d-flex flex-row">
+          <input
+            type="text"
+            placeholder="Buscar por el nombre del gatito..."
+            required
+          />
+          <a ><button class="btn-primary text-white ms-2 ">Add</button></a>
+        </div>
       </div>
       <container class="table-container">
         <table class="table align-middle">

@@ -13,13 +13,3 @@ body {height: 100vh;}
 .login-container .label-color {color: var(--text-terciary);}
 
 .login-container input::placeholder {color: var(--text-secondary)}
-
-.login-container .btn-primary {
-    background-color: var(--text-secondary);
-    border-color: var(--text-secondary);
-    border-radius: 20px;
-}
-.login-container .btn-primary:hover {
-    background-color: #4d617e;
-    border-color: #4d617e;
-}
