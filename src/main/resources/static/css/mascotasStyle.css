@@ -157,10 +157,24 @@ input {
     object-fit:cover;
 }
 
-.table button {
+.table a {
     background-color: var(--primary-color);
     border: 0;
 }
+
+
+.modal-content {
+    background-color: var(--terciary-color);
+}
+
+.modal-body{
+    background-color: var(--white);
+    width: 80%;
+    align-self: center;
+    border-radius: 20px;
+}
+
+
 
 
 

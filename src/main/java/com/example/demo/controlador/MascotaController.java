@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.servicio.MascotaServiceInterface;
+import com.example.demo.entidad.Mascota;
+import com.example.demo.servicio.MascotaService;
+
+
 
 
 // http://localhost:8090/mascotas
@@ -16,7 +19,7 @@ import com.example.demo.servicio.MascotaServiceInterface;
 public class MascotaController {
     
     @Autowired
-    MascotaServiceInterface mascotaService;
+    MascotaService mascotaService;
 
     // http://localhost:8090/mascotas
     @GetMapping("")
@@ -31,4 +34,13 @@ public class MascotaController {
         model.addAttribute("mascota", mascotaService.SearchById(id));
         return "infoMascota";
     }
+
+    @GetMapping("/add")
+    public String mostrarFormularioCrear(Model model) {
+
+        Mascota mascota = new Mascota(0, null, 0, null, 0, null, null, null, null, null, null);
+        model.addAttribute("mascota", mascota);
+        return "mascotas";
+    }
+    
 }
