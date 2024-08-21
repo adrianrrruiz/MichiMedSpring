@@ -157,12 +157,6 @@ input {
     object-fit:cover;
 }
 
-.table a {
-    background-color: var(--primary-color);
-    border: 0;
-}
-
-
 .modal-content {
     background-color: var(--terciary-color);
 }
@@ -205,7 +199,13 @@ input {
     background-color: #121417;
 }
 
-
+main .volver{
+    align-self: flex-start;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: larger;
+    font-weight: 300;
+}
 
 
 

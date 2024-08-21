@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Mascota</title>
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/mascotasStyle.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="/assets/img/Michimed_Logo 1.png" alt="MichiMed Logo" />
+            </div>
+            <div class="user">
+                <img src="/assets/img/User.png" alt="" />
+            </div>
+        </nav>
+    </header>
+    <main style="width: 60%;">
+        <a href="http://localhost:8090/mascotas" class="volver"><img src="/assets/icons/arrow_back.png"/>Volver</a>
+        <div class="info">
+            <h1>Editar Mascota</h1>
+        </div>
+        <form th:object="${mascota}" th:action="@{/mascotas/update/{id}(id=${mascota.id})}" method="post">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="nombre">Nombre</label>
+                <input
+                    th:field="*{nombre}"
+                    type="text"
+                    id="nombreUpdate"
+                    class="form-control"
+                    placeholder="Ingresa el nombre del gatito"
+                />
+    
+                <label for="enfermedad">Enfermedad</label>
+                <input
+                    th:field="*{enfermedad}"
+                    type="text"
+                    id="enfermedadUpdate"
+                    class="form-control"
+                    placeholder="Ingresa la enfermedad del gatito"
+                />
+    
+                <label for="raza">Raza</label>
+                <input
+                    th:field="*{raza}"
+                    id="razaUpdate"
+                    class="form-control"
+                    placeholder="Ingresa la raza del gatito"
+                    type="text"
+                />
+    
+                <label for="peso">Peso (kg)</label>
+                <input
+                    th:field="*{peso}"
+                    id="pesoUpdate"
+                    class="form-control"
+                    placeholder="Ingresa el peso del gatito"
+                    type="number"
+                />
+              </div>
+    
+              <div class="col-md-6">
+                <!-- <div class="upload">
+                  <label for="foto">Upload image</label>
+                  <input
+                    th:field="*{foto}"
+                    type="file"
+                    id="foto"
+                    class="rounded-file-input"
+                    style="display: none"
+                  />
+                  <img
+                    src="../assets/icons/upload.png"
+                    alt="Upload Logo"
+                    class="upload-logo"
+                    onclick="document.getElementById('foto').click();"
+                  />
+                </div> -->
+    
+                <label for="estado">Estado</label>
+                <select th:field="*{estado}" id="estadoUpdate" class="form-control">
+                    <option value="">Seleccione un estado</option>
+                    <option value="En tratamiento">En tratamiento</option>
+                    <option value="Tratado">Tratado</option>
+                </select>
+    
+                <label for="edadUpdate">Edad(años)</label>
+                <input
+                    th:field="*{edad}"
+                    id="edadUpdate"
+                    class="form-control"
+                    type="number"
+                />
+              </div>
+            </div>
+            <input type="hidden" th:field="*{medicamento}" />
+            <input type="hidden" th:field="*{fechaEntrada}" />
+            <input type="hidden" th:field="*{fechaSalida}" />
+            <input type="hidden" th:field="*{foto}" />
+            <button class="add">Update</button>
+        </form>
+    </main>
+</body>
+</html>
