@@ -49,7 +49,7 @@ public class MascotaController {
     }
 
     // http://localhost:8090/mascotas/{id}
-    @GetMapping("info/{id}")
+    @GetMapping("/{id}")
     public String InfoMascota(Model model, @PathVariable("id") int id) {
         model.addAttribute("mascota", mascotaService.SearchById(id));
         return "infoMascota";
