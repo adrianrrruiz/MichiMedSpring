@@ -1,7 +1,9 @@
 package com.example.demo.entidad;
 
-public class Mascota {
+import javax.validation.constraints.Null;
 
+public class Mascota {
+    @Null
     private int id;
     private String nombre;
     private int edad;

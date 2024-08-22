@@ -60,33 +60,43 @@
                     class="form-control"
                     placeholder="Ingresa el peso del gatito"
                     type="number"
+                    step="0.01"
                 />
               </div>
     
               <div class="col-md-6">
-                <!-- <div class="upload">
-                  <label for="foto">Upload image</label>
-                  <input
-                    th:field="*{foto}"
-                    type="file"
-                    id="foto"
-                    class="rounded-file-input"
-                    style="display: none"
-                  />
-                  <img
-                    src="../assets/icons/upload.png"
-                    alt="Upload Logo"
-                    class="upload-logo"
-                    onclick="document.getElementById('foto').click();"
-                  />
-                </div> -->
-    
+                <div class="col-md-6">
+                    <div class="upload">
+                      <label for="foto">Upload image</label>
+                      <input
+                        th:field="*{foto}"
+                        type="text"
+                        id="foto"
+                        placeholder="Ingresa la URL de la foto de tu mascota"
+                      />
+                    </div>
                 <label for="estado">Estado</label>
-                <select th:field="*{estado}" id="estadoUpdate" class="form-control">
-                    <option value="">Seleccione un estado</option>
-                    <option value="En tratamiento">En tratamiento</option>
-                    <option value="Tratado">Tratado</option>
-                </select>
+                <select
+              style="
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 10px;
+                width: 100%;
+                height: 30px;
+                color: #757575;
+                border: 0;
+                background-color: #f0f2f5;
+                padding: 5px;
+                border-radius: 10px;
+              "
+              th:field="*{estado}"
+              id="estadoUpdate"
+              class="form-control"
+            >
+              <option value="">Seleccione un estado</option>
+              <option value="En tratamiento">En tratamiento</option>
+              <option value="Tratado">Tratado</option>
+            </select>
     
                 <label for="edadUpdate">Edad(años)</label>
                 <input
@@ -97,11 +107,11 @@
                 />
               </div>
             </div>
+            <button type="submit"  class="add">Update</button>
             <input type="hidden" th:field="*{medicamento}" />
             <input type="hidden" th:field="*{fechaEntrada}" />
             <input type="hidden" th:field="*{fechaSalida}" />
             <input type="hidden" th:field="*{foto}" />
-            <button class="add">Update</button>
         </form>
     </main>
 </body>

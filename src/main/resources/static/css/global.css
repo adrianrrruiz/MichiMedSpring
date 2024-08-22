@@ -111,3 +111,13 @@ footer {
     margin-top: 20px;
     color: var(--text-terciary);
 }
+
+main a img {
+    margin-right: 4px;
+    width: 17px;
+    transition: transform 0.3s ease;
+}
+
+main a:hover img {
+    transform: translateX(-10px);
+}
