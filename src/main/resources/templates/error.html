@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,7 @@
     <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1">
         <div class="error-container text-center bg-light p-5 rounded shadow">
             <h1 class="display-4 fw-bold oops-title">¡Oops!</h1>
-            <h2 class="mb-4 error-code" th:text="'Error ' + 404"></h2>
+            <h2 class="mb-4 error-code" th:text="'Error ' + ${errorCode}"></h2>
             <p class="lead mb-4 error-message" th:text="${message}"></p>
             <a href="/" class="btn btn-primary">Regresar al inicio</a>
         </div>
