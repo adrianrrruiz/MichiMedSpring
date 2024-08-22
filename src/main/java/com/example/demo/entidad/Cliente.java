@@ -1,12 +1,17 @@
 package com.example.demo.entidad;
 
+import javax.validation.constraints.Null;
+
 public class Cliente {
+    @Null
+    private Integer id; // Cambiado de int a Integer
     private String cedula;
     private String nombre;
     private String correo;
     private String contrasena;
 
-    public Cliente(String cedula, String nombre, String correo, String contrasena) {
+    public Cliente(Integer id, String cedula, String nombre, String correo, String contrasena) {
+        this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
@@ -45,4 +50,11 @@ public class Cliente {
         this.contrasena = contrasena;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }
