@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Añadir Mascota</title>
+    <title>Añadir Cliente</title>
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/mascotasStyle.css" />
   </head>
@@ -19,11 +19,11 @@
       </nav>
     </header>
     <main style="width: 60%">
-      <a href="http://localhost:8090/mascotas" class="volver"
+      <a href="http://localhost:8090/clientes" class="volver"
         ><img src="/assets/icons/arrow_back.png" />Volver</a
       >
       <div class="info">
-        <h1>Añadir Mascota</h1>
+        <h1>Añadir Cliente</h1>
       </div>
       <form th:object="${cliente}" th:action="@{/clientes/add}" method="post">
         <div class="row">
