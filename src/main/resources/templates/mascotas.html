@@ -15,6 +15,9 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
     />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/mascotasStyle.css" />
     <title>Mascotas</title>
   </head>
@@ -22,10 +25,10 @@
     <header>
       <nav>
         <div class="logo">
-          <img src="../assets/img/Michimed_Logo 1.png" alt="MichiMed Logo" />
+          <img src="/assets/img/Michimed_Logo 1.png" alt="MichiMed Logo" />
         </div>
         <div class="user">
-          <img src="../assets/img/user.png" alt="" />
+          <img src="/assets/img/User.png" alt="" />
         </div>
       </nav>
     </header>
@@ -33,11 +36,14 @@
     <main>
       <div class="info">
         <h1>Todos nuestros gatitos</h1>
-        <input
-          type="text"
-          placeholder="buscar por el nombre del gatito"
-          required
-        />
+        <div class="d-flex flex-row">
+          <input
+            type="text"
+            placeholder="Buscar por el nombre del gatito..."
+            required
+          />
+          <a class="btn btn-primary text-white ms-2 d-flex align-items-center" th:href="@{/mascotas/add}">Add</a>
+        </div>
       </div>
       <container class="table-container">
         <table class="table align-middle">
@@ -72,37 +78,144 @@
                 />
               </td>
               <td>
-                <button
-                  class="btn btn-primary"
-                  onclick="redirectToDetail(this)"
-                >
-                  ver
-                </button>
+                <a class="btn btn-primary rounded-5" th:href="@{/mascotas/{id}(id=${mascota.id})}"><i class="bi bi-eye-fill"></i></i></a>
+                <a class="btn btn-primary rounded-5" th:href="@{/mascotas/update/{id}(id=${mascota.id})}"><i class="bi bi-pen"></i></a>
+                <a class="btn btn-danger rounded-5" th:href="@{/mascotas/delete/{id}(id=${mascota.id})}">X</a>
               </td>
             </tr>
           </tbody>
         </table>
       </container>
+
+      <!-- Modal - Add -->
+      <div
+        class="modal fade"
+        id="mascotaModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="mascotaModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+            <div class="header-modal">
+              <img
+                src="../assets/img/Michimed_Logo 1.png"
+                alt="Michimed_Logo"
+              />
+              <h5 class="" id="mascotaModalLabel">Agregar Mascota</h5>
+            </div>
+            <div class="modal-body">
+              <form action="">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="nombre">Nombre</label>
+                    <input
+                      type="text"
+                      id="nombre"
+                      class="form-control"
+                      placeholder="Ingresa el nombre del gatito"
+                    />
+
+                    <label for="enfermedad">Enfermedad</label>
+                    <input
+                      type="text"
+                      id="enfermedad"
+                      class="form-control"
+                      placeholder="Ingresa la enfermedad del gatito"
+                    />
+
+                    <label for="raza">Raza</label>
+                    <input
+                      type="text"
+                      id="raza"
+                      class="form-control"
+                      placeholder="Ingresa la raza del gatito"
+                    />
+
+                    <label for="peso">Peso (kg)</label>
+                    <input
+                      type="number"
+                      id="peso"
+                      class="form-control"
+                      placeholder="Ingresa el peso del gatito"
+                    />
+
+                    <button class="add">Add</button>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="upload">
+                      <label for="foto">Upload image</label>
+                      <input
+                        type="file"
+                        id="foto"
+                        class="rounded-file-input"
+                        style="display: none"
+                      />
+                      <img
+                        src="../assets/icons/upload.png"
+                        alt="Upload Logo"
+                        class="upload-logo"
+                        onclick="document.getElementById('foto').click();"
+                      />
+                    </div>
+
+                    <label for="estado">Estado</label>
+                    <select id="estado" class="form-control">
+                      <option value="">Seleccione un estado</option>
+                      <option value="En tratamiento">En tratamiento</option>
+                      <option value="Normal">Normal</option>
+                    </select>
+
+                    <label for="fecha de nacimiento">Fecha de nacimiento</label>
+                    <input
+                      type="date"
+                      id="fecha de nacimiento"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const cells = document.querySelectorAll("table tbody td");
-        cells.forEach(cell => {
-          if (!cell.querySelector("img") && (cell.textContent.trim() === "" || cell.textContent.trim().toLowerCase() === "null")) {
+        cells.forEach((cell) => {
+          if (
+            !cell.querySelector("img") &&
+            (cell.textContent.trim() === "" ||
+              cell.textContent.trim().toLowerCase() === "null")
+          ) {
             cell.textContent = "N/A";
           }
         });
 
-        const estadoCells = document.querySelectorAll("table tbody td:nth-child(6)");
-        estadoCells.forEach(cell => {
+        const estadoCells = document.querySelectorAll(
+          "table tbody td:nth-child(6)"
+        );
+        estadoCells.forEach((cell) => {
           const text = cell.textContent.trim();
           cell.innerHTML = `<span>${text}</span>`;
           const span = cell.querySelector("span");
           if (text === "En tratamiento") {
             span.style.backgroundColor = "#B3261E";
-            span.style.color = "#ffffff"; 
-            span.style.padding = "1px 4px"; 
-            span.style.borderRadius = "10px"; 
+            span.style.color = "#ffffff";
+            span.style.padding = "1px 4px";
+            span.style.borderRadius = "10px";
           } else {
             span.style.backgroundColor = "#f0f2f5";
             span.style.padding = "1px 4px";
@@ -111,17 +224,14 @@
         });
       });
     </script>
-    <script>
-      function redirectToDetail(button) {
-        const row = button.closest("tr");
-        const index = Array.from(row.parentNode.children).indexOf(row) + 1;
-        window.location.href = `http://localhost:8090/mascotas/${index}`;
-      }
-    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <!-- jQuery y Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>

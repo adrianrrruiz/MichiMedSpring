@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +9,8 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/landing.css" />
     <title>MichiMed</title>
   </head>
   <body>
@@ -23,6 +24,7 @@
           <li><a href="#online-services">Services</a></li>
           <li><a href="#contact-email">Email</a></li>
           <li><a href="#contact">Contact</a></li>
+          <a th:href="@{/sign-in}" ><button class="sign-in-btn">Sign in</button></a>
         </ul>
       </nav>
     </header>
@@ -51,7 +53,7 @@
             needs</mark
           >
         </p>
-        <button>Schedule your appointment</button>
+        <button class="action-btn">Schedule your appointment</button>
       </div>
     </section>
 

@@ -1,7 +1,10 @@
 package com.example.demo.entidad;
 
-public class Mascota {
+import javax.validation.constraints.Null;
 
+public class Mascota {
+    @Null
+    private int id;
     private String nombre;
     private int edad;
     private String raza;
@@ -13,8 +16,9 @@ public class Mascota {
     private String medicamento;
     private String foto;
 
-    public Mascota(String nombre, int edad, String raza, float peso, String enfermedad, String estado,
+    public Mascota(int id, String nombre, int edad, String raza, float peso, String enfermedad, String estado,
             String fechaEntrada, String fechaSalida, String medicamento, String foto) {
+        this.id = id;
         this.nombre = nombre;
         this.edad = edad;
         this.raza = raza;
@@ -107,6 +111,12 @@ public class Mascota {
         this.foto = foto;
     }
 
-    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 }

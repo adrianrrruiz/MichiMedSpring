@@ -4,7 +4,6 @@
     --primary-color: #7FA1C3;
     --secondary-color: #E2DAD6;
     --terciary-color: #F5EDED;
-    --input-color:#f0f2f5;
     --text-color: #121417;
     --text-secondary: #637387;
     --text-terciary: #ACAFCA;
@@ -32,14 +31,31 @@ html {
     scroll-behavior: smooth;
 }
 
+/* BUTTONS */
+button {
+    font-weight: bold;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 40px;
+}
+
+.btn-primary {
+    background-color: var(--text-secondary);
+    border-color: var(--text-secondary);
+    border-radius: 20px;
+}
+.btn-primary:hover {
+    background-color: #4d617e;
+    border-color: #4d617e;
+}
 
 /* HEADER */
-
-
-header {
+.header-2 {
     height: 10px;
     margin-bottom: 60px;
-    padding: 10px;
+    padding: 10px 30px;
 }
 
 nav {
@@ -69,24 +85,31 @@ nav {
     margin-right: 10px;
 }
 
-
-/* MAIN */
-
-main {
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 40px;
-    width: 60%;
+/* FOOTER */
+footer {
+    background-color: var(--white);
+    color: var(--text-secondary);
+    padding: 2rem 0;
+    text-align: center;
 }
 
-main a {
-    align-self: flex-start;
-    color: var(--text-secondary);
+
+.legal{
+    margin-top: 40px;
+    text-align: center;
+    color: var(--text-terciary);
+}
+
+.legal a {
+    color: var(--text-terciary);
     text-decoration: none;
-    font-size: larger;
-    font-weight: 300;
+    width: 20px;
+    height: 20px;
+}
+
+.copy {
+    margin-top: 20px;
+    color: var(--text-terciary);
 }
 
 main a img {
@@ -98,61 +121,3 @@ main a img {
 main a:hover img {
     transform: translateX(-10px);
 }
-
-.info {
-    align-self: center;
-    width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-evenly;
-    margin-top: 60px;
-}
-
-.info figure {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    width: 45%;
-    height: 400px;
-    overflow: hidden;
-    border-radius: 20px;
-}
-
-.figure-img {
-    object-fit: cover;
-    border-radius: 20px;
-}
-
-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-}
-
-container h1 {
-    color: #637387;
-    font-weight: 600;
-    margin-bottom: 30px;
-}
-
-.data {
-    align-self: flex-start;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.data li {
-    list-style-type: none;
-    color: var(--text-secondary);
-    font-weight: 700;
-}
-
-.data li span {
-    color: var(--text-color);
-    font-weight: 300;
-}
-
