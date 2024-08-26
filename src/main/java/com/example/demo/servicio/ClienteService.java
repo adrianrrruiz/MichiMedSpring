@@ -3,6 +3,8 @@ package com.example.demo.servicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
+import java.util.Optional;
+
 import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.User;
 import com.example.demo.repositorio.ClienteRepository;
@@ -15,16 +17,16 @@ public class ClienteService implements ClienteServiceInterface {
 
     @Override
     public boolean verifyCredentials(User user) {
-        Cliente cliente = repository.getClienteByEmail(user.getEmail());
-        if (cliente != null) {
-            return cliente.getContrasena().equals(user.getPassword());
+        Optional<Cliente> cliente = repository.findByEmail(user.getEmail());
+        if (cliente.isPresent()) {
+            return cliente.get().getContrasena().equals(user.getPassword());
         }
         return false;
     }
 
-   @Override
-    public Cliente SearchById(int id) {
-        return repository.getClienteById(id);
+    @Override
+    public Cliente SearchById(Long id) {
+        return repository.findById(id).get();
     }
 
     @Override
@@ -33,18 +35,18 @@ public class ClienteService implements ClienteServiceInterface {
     }
 
     @Override
-    public void deleteById(int id) {
-        repository.deleteByid(id);
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 
     @Override
     public void update(Cliente cliente) {
-        repository.update(cliente);
+        repository.save(cliente);
     }
 
     @Override
     public void add(Cliente cliente) {
-        repository.add(cliente);
+        repository.save(cliente);
     }
 
 

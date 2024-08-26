@@ -27,46 +27,48 @@ public class MascotaController {
         return "mascotas";
     }
 
+    // http://localhost:8090/mascotas/add
+    @GetMapping("/add")
+    public String mostrarFormularioCrear(Model model) {
+
+        Mascota mascota = new Mascota( null, 0, null, 0, null, null, null, null, null, null);
+        model.addAttribute("mascota", mascota);
+        return "add";
+    }
+
+    // http://localhost:8090/mascotas/add
+    @PostMapping("/add")
+    public String addMascota(@ModelAttribute("mascota") Mascota mascota) {
+        mascotaService.add(mascota);
+        return "redirect:/mascotas";
+    }
+
     // http://localhost:8090/mascotas/update/{id}
     @GetMapping("/update/{id}")
-    public String mostrarFormularioUpdate(@PathVariable("id") int id, Model model) {
+    public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("mascota", mascotaService.SearchById(id));
         return "updateMascota";
     }
 
     // http://localhost:8090/mascotas/update/{id}
     @PostMapping("/update/{id}")
-    public String updateMascota(@PathVariable("id") int id, @ModelAttribute Mascota mascota) {
+    public String updateMascota(@PathVariable("id") Long id, @ModelAttribute Mascota mascota) {
         mascotaService.update(mascota);
         return "redirect:/mascotas";
     }
 
     // http://localhost:8090/mascotas/delete/{id}
     @GetMapping("/delete/{id}")
-    public String deleteMascota(@PathVariable("id") int id) {
+    public String deleteMascota(@PathVariable("id") Long id) {
         mascotaService.deleteById(id);
         return "redirect:/mascotas";
     }
-
+    
     // http://localhost:8090/mascotas/{id}
     @GetMapping("/{id}")
-    public String InfoMascota(Model model, @PathVariable("id") int id) {
+    public String InfoMascota(Model model, @PathVariable("id") Long id) {
         model.addAttribute("mascota", mascotaService.SearchById(id));
         return "infoMascota";
-    }
-
-    @GetMapping("/add")
-    public String mostrarFormularioCrear(Model model) {
-
-        Mascota mascota = new Mascota(0, null, 0, null, 0, null, null, null, null, null, null);
-        model.addAttribute("mascota", mascota);
-        return "add";
-    }
-
-    @PostMapping("/add")
-    public String addMascota(@ModelAttribute("mascota") Mascota mascota) {
-        mascotaService.add(mascota);
-        return "redirect:/mascotas";
     }
 
 }

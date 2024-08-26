@@ -8,11 +8,11 @@ public interface ClienteServiceInterface {
 
     public boolean verifyCredentials(User user);
 
-    public Cliente SearchById(int id );
+    public Cliente SearchById(Long id );
 
     public Collection<Cliente> SearchAll();
 
-    public void deleteById(int id);
+    public void deleteById(Long id);
 
     public void update(Cliente cliente);
 

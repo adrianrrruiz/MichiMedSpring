@@ -29,28 +29,28 @@ public class ClienteController {
 
     // http://localhost:8090/Clientes/update/{id}
     @GetMapping("/update/{id}")
-    public String mostrarFormularioUpdate(@PathVariable("id") int id, Model model) {
+    public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("cliente", clienteService.SearchById(id));
         return "updateCliente";
     }
 
     // http://localhost:8090/Clientes/update/{id}
     @PostMapping("/update/{id}")
-    public String updateCliente(@PathVariable("id") int id, @ModelAttribute Cliente cliente) {
+    public String updateCliente(@PathVariable("id") Long id, @ModelAttribute Cliente cliente) {
         clienteService.update(cliente);
         return "redirect:/clientes";
     }
 
     // http://localhost:8090/Clientes/delete/{id}
     @GetMapping("/delete/{id}")
-    public String deleteCliente(@PathVariable("id") int id) {
+    public String deleteCliente(@PathVariable("id") Long id) {
         clienteService.deleteById(id);
         return "redirect:/clientes";
     }
 
     // http://localhost:8090/Clientes/{id}
     @GetMapping("/{id}")
-    public String InfoCliente(Model model, @PathVariable("id") int id) {
+    public String InfoCliente(Model model, @PathVariable("id") Long id) {
         model.addAttribute("cliente", clienteService.SearchById(id));
         return "infoClientes";
     }
@@ -58,7 +58,7 @@ public class ClienteController {
     @GetMapping("/add")
     public String mostrarFormularioCrear(Model model) {
 
-        Cliente cliente = new Cliente(0, null, null, null, null);
+        Cliente cliente = new Cliente( null, null, null, null);
         model.addAttribute("cliente", cliente);
         return "clientesAdd";
     }

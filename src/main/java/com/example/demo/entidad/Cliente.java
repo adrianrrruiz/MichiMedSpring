@@ -1,21 +1,45 @@
 package com.example.demo.entidad;
 
-import javax.validation.constraints.Null;
+import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Cliente {
-    @Null
-    private Integer id; // Cambiado de int a Integer
+    @Id
+    @GeneratedValue
+    private Long id;
     private String cedula;
     private String nombre;
-    private String correo;
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
     private String contrasena;
 
-    public Cliente(Integer id, String cedula, String nombre, String correo, String contrasena) {
+    @OneToMany(mappedBy = "cliente")
+    private List<Mascota> mascotas = new ArrayList<>();
+
+    public Cliente(Long id, String cedula, String nombre, String email, String contrasena) {
         this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
-        this.correo = correo;
+        this.email = email;
         this.contrasena = contrasena;
+    }
+
+    //Constructor sin id
+    public Cliente( String cedula, String nombre, String email, String contrasena) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.email = email;
+        this.contrasena = contrasena;
+    }
+
+    public Cliente() {
     }
 
     public String getCedula() {
@@ -34,12 +58,12 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getContrasena() {
@@ -50,11 +74,11 @@ public class Cliente {
         this.contrasena = contrasena;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
