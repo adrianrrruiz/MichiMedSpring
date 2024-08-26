@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entidad.Mascota;
-import com.example.demo.servicio.MascotaService;
+import com.example.demo.servicio.MascotaServiceInterface;
 
 // http://localhost:8090/mascotas
 @RequestMapping("/mascotas")
@@ -18,13 +18,13 @@ import com.example.demo.servicio.MascotaService;
 public class MascotaController {
 
     @Autowired
-    MascotaService mascotaService;
+    MascotaServiceInterface mascotaService;
 
     // http://localhost:8090/mascotas
     @GetMapping("")
     public String Mascotas(Model model) {
         model.addAttribute("mascotas", mascotaService.SearchAll());
-        return "mascotas";
+        return "mascotas/mascotas";
     }
 
     // http://localhost:8090/mascotas/add
@@ -33,7 +33,7 @@ public class MascotaController {
 
         Mascota mascota = new Mascota( null, 0, null, 0, null, null, null, null, null, null);
         model.addAttribute("mascota", mascota);
-        return "add";
+        return "mascotas/mascotasAdd";
     }
 
     // http://localhost:8090/mascotas/add
@@ -47,7 +47,7 @@ public class MascotaController {
     @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("mascota", mascotaService.SearchById(id));
-        return "updateMascota";
+        return "mascotas/updateMascota";
     }
 
     // http://localhost:8090/mascotas/update/{id}
@@ -68,7 +68,7 @@ public class MascotaController {
     @GetMapping("/{id}")
     public String InfoMascota(Model model, @PathVariable("id") Long id) {
         model.addAttribute("mascota", mascotaService.SearchById(id));
-        return "infoMascota";
+        return "mascotas/infoMascota";
     }
 
 }

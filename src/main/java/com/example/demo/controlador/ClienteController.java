@@ -24,14 +24,14 @@ public class ClienteController {
     @GetMapping("")
     public String Clientes(Model model) {
         model.addAttribute("clientes", clienteService.SearchAll());
-        return "clientes";
+        return "clientes/clientes";
     }
 
     // http://localhost:8090/Clientes/update/{id}
     @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("cliente", clienteService.SearchById(id));
-        return "updateCliente";
+        return "clientes/updateCliente";
     }
 
     // http://localhost:8090/Clientes/update/{id}
@@ -52,7 +52,7 @@ public class ClienteController {
     @GetMapping("/{id}")
     public String InfoCliente(Model model, @PathVariable("id") Long id) {
         model.addAttribute("cliente", clienteService.SearchById(id));
-        return "infoClientes";
+        return "clientes/infoClientes";
     }
 
     @GetMapping("/add")
@@ -60,7 +60,7 @@ public class ClienteController {
 
         Cliente cliente = new Cliente( null, null, null, null);
         model.addAttribute("cliente", cliente);
-        return "clientesAdd";
+        return "clientes/clientesAdd";
     }
 
     @PostMapping("/add")
