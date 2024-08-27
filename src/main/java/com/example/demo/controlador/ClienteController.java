@@ -20,41 +20,42 @@ public class ClienteController {
     @Autowired
     ClienteService clienteService;
 
-    // http://localhost:8090/Clientes
+    // http://localhost:8090/clientes
     @GetMapping("")
     public String Clientes(Model model) {
         model.addAttribute("clientes", clienteService.SearchAll());
         return "clientes/clientes";
     }
 
-    // http://localhost:8090/Clientes/update/{id}
+    // http://localhost:8090/clientes/update/{id}
     @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("cliente", clienteService.SearchById(id));
         return "clientes/updateCliente";
     }
 
-    // http://localhost:8090/Clientes/update/{id}
+    // http://localhost:8090/clientes/update/{id}
     @PostMapping("/update/{id}")
     public String updateCliente(@PathVariable("id") Long id, @ModelAttribute Cliente cliente) {
         clienteService.update(cliente);
         return "redirect:/clientes";
     }
 
-    // http://localhost:8090/Clientes/delete/{id}
+    // http://localhost:8090/clientes/delete/{id}
     @GetMapping("/delete/{id}")
     public String deleteCliente(@PathVariable("id") Long id) {
         clienteService.deleteById(id);
         return "redirect:/clientes";
     }
 
-    // http://localhost:8090/Clientes/{id}
-    @GetMapping("/{id}")
-    public String InfoCliente(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("cliente", clienteService.SearchById(id));
-        return "clientes/infoClientes";
+    // http://localhost:8090/clientes/mascotas/{id}
+    @GetMapping("/mascotas/{id}")
+    public String findMascotasCliente(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("mascotas", clienteService.getMascotas(id));
+        return "mascotas/mascotasCliente";
     }
 
+    // http://localhost:8090/clientes/add
     @GetMapping("/add")
     public String mostrarFormularioCrear(Model model) {
 
@@ -63,10 +64,19 @@ public class ClienteController {
         return "clientes/clientesAdd";
     }
 
+    // http://localhost:8090/clientes/add
     @PostMapping("/add")
     public String addCliente(@ModelAttribute("cliente") Cliente cliente) {
         clienteService.add(cliente);
         return "redirect:/clientes";
     }
+
+    // http://localhost:8090/clientes/{id}
+    @GetMapping("/{id}")
+    public String InfoCliente(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("cliente", clienteService.SearchById(id));
+        return "clientes/infoClientes";
+    }
+
 
 }

@@ -1,12 +1,16 @@
 package com.example.demo.servicio;
 
 import com.example.demo.entidad.Cliente;
+import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.User;
 import java.util.Collection;
+import java.util.List;
 
 public interface ClienteServiceInterface {
 
-    public boolean verifyCredentials(User user);
+    public Long verifyCredentials(User user);
+
+    public List<Mascota> getMascotas(Long id);
 
     public Cliente SearchById(Long id );
 

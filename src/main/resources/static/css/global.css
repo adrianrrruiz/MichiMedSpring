@@ -31,6 +31,11 @@ html {
     scroll-behavior: smooth;
 }
 
+h1 {
+    color: var(--text-secondary);
+    font-weight: 700;
+}
+
 /* BUTTONS */
 button {
     font-weight: bold;

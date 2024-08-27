@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.List;
 
 import com.example.demo.entidad.Cliente;
+import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.User;
 import com.example.demo.repositorio.ClienteRepository;
 
@@ -16,12 +18,17 @@ public class ClienteService implements ClienteServiceInterface {
     ClienteRepository repository;
 
     @Override
-    public boolean verifyCredentials(User user) {
+    public Long verifyCredentials(User user) {
         Optional<Cliente> cliente = repository.findByEmail(user.getEmail());
         if (cliente.isPresent()) {
-            return cliente.get().getContrasena().equals(user.getPassword());
+            return cliente.get().getContrasena().equals(user.getPassword()) ? cliente.get().getId() : -1L;
         }
-        return false;
+        return -1L;
+    }
+
+    @Override
+    public List<Mascota> getMascotas(Long id) {
+        return repository.findById(id).get().getMascotas();
     }
 
     @Override

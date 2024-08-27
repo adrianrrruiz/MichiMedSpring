@@ -35,6 +35,13 @@ public class DatabaseInit implements ApplicationRunner {
         clienteRepository.save(new Cliente("987654321", "Maria Lopez", "maria@gmail.com", "4321"));
         clienteRepository.save(new Cliente("456789123", "Pedro Ramirez", "pedro@gmail.com", "5678"));
         clienteRepository.save(new Cliente("789123456", "Ana Rodriguez", "ana@gmail.com", "8765"));
+
+        //Asociando todas las mascotas al cliente con id 1
+        Cliente cliente = clienteRepository.findById(1L).get();
+        for (Mascota mascota : mascotaRepository.findAll()) {
+          mascota.setCliente(cliente);
+          mascotaRepository.save(mascota);
+        }
     }
 
 }

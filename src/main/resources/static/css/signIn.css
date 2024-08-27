@@ -6,8 +6,6 @@ body {height: 100vh;}
     padding: 0 20px;
 }
 
-.login-container h1 {color: var(--text-secondary);}
-
 .login-container .form-control {border-radius: 8px;}
 
 .login-container .label-color {color: var(--text-terciary);}

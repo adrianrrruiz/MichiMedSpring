@@ -88,12 +88,6 @@ main {
     margin-bottom: 20px;
 }
 
-h1 {
-    color: var(--text-secondary);
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
 input {
     padding: 10px;
     width: 100%;

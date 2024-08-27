@@ -81,4 +81,12 @@ public class Cliente {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public List<Mascota> getMascotas() {
+        return mascotas;
+    }
+
+    public void setMascotas(List<Mascota> mascotas) {
+        this.mascotas = mascotas;
+    }
 }
