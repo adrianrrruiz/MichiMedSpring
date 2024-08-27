@@ -62,7 +62,7 @@
               <td th:text="${cliente.cedula}"></td>
               <td th:text="${cliente.email}"></td>
               <td>
-                <a class="pets"><img src="/assets/icons/MascotasButton.png" class="table-img img-fluid" /></a>
+                <a th:href="@{/clientes/mascotas/{id}(id=${cliente.id})}" class="pets"><img src="/assets/icons/MascotasButton.png" class="table-img img-fluid" /></a>
               </td>
               <td>
                 <a class="btn btn-primary rounded-5" th:href="@{/clientes/{id}(id=${cliente.id})}"><i class="bi bi-eye-fill"></i></i></a>
