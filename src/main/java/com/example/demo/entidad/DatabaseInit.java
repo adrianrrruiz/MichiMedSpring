@@ -1,5 +1,8 @@
 package com.example.demo.entidad;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -280,11 +283,21 @@ public class DatabaseInit implements ApplicationRunner {
         clienteRepository.save(new Cliente("2610987654", "Monica Salazar", "monica@gmail.com", "ijkl"));
 
 
-        //Asociando todas las mascotas al cliente con id 1
-        Cliente cliente = clienteRepository.findById(1L).get();
-        for (Mascota mascota : mascotaRepository.findAll()) {
-          mascota.setCliente(cliente);
-          mascotaRepository.save(mascota);
+        // Obtener todas las mascotas y clientes
+        List<Mascota> mascotas = mascotaRepository.findAll();
+        List<Cliente> clientes = clienteRepository.findAll();
+
+        // Mezclar las listas para asegurar la aleatoriedad
+        Collections.shuffle(mascotas);
+        Collections.shuffle(clientes);
+
+        // Asignar mascotas a clientes de forma cíclica
+        int numClientes = clientes.size();
+        for (int i = 0; i < mascotas.size(); i++) {
+            Mascota mascota = mascotas.get(i);
+            Cliente cliente = clientes.get(i % numClientes);
+            mascota.setCliente(cliente);
+            mascotaRepository.save(mascota);
         }
     }
 
