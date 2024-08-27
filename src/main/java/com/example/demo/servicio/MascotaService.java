@@ -26,7 +26,7 @@ public class MascotaService implements MascotaServiceInterface {
 
     @Override
     public void deleteById(Long id) {
-        repo.deleteById(id);;
+        repo.deleteById(id);
     }
 
     @Override
