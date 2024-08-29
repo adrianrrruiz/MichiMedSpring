@@ -160,51 +160,16 @@
           </table>
         </container>
       </main>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById('toggleSidebar').addEventListener('click', function () {
-            document.getElementById('sidebar').classList.toggle('collapsed');
-            document.getElementById('content').classList.toggle('collapsed');
-        });
-        const cells = document.querySelectorAll("table tbody td");
-        cells.forEach((cell) => {
-          if (
-            !cell.querySelector("img") &&
-            (cell.textContent.trim() === "" ||
-              cell.textContent.trim().toLowerCase() === "null")
-          ) {
-            cell.textContent = "N/A";
-          }
-        });
-
-        const estadoCells = document.querySelectorAll(
-          "table tbody td:nth-child(6)"
-        );
-        estadoCells.forEach((cell) => {
-          const text = cell.textContent.trim();
-          cell.innerHTML = `<span>${text}</span>`;
-          const span = cell.querySelector("span");
-          if (text === "En tratamiento") {
-            span.style.backgroundColor = "#B3261E";
-            span.style.color = "#ffffff";
-            span.style.padding = "1px 4px";
-            span.style.borderRadius = "10px";
-          } else {
-            span.style.backgroundColor = "#f0f2f5";
-            span.style.padding = "1px 4px";
-            span.style.borderRadius = "10px";
-          }
-        });
-      });
-    </script>
+      
+      <!-- jQuery y Bootstrap JS -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <!-- jQuery y Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/mascotas.js"></script>
   </body>
 </html>
