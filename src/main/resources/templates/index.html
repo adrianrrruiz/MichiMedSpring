@@ -20,11 +20,13 @@
           <img src="../assets/img/michimedpng.png" alt="MichiMed Logo" />
         </div>
         <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#online-services">Services</a></li>
-          <li><a href="#contact-email">Email</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <a th:href="@{/sign-in}" ><button class="sign-in-btn">Sign in</button></a>
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#online-services">Servicios</a></li>
+          <li><a href="#contact-email">Correo Electrónico</a></li>
+          <li><a href="#contact">Contacto</a></li>
+          <a th:href="@{/sign-in}"
+            ><button class="sign-in-btn">Iniciar sesión</button></a
+          >
         </ul>
       </nav>
     </header>
@@ -34,105 +36,109 @@
       <div class="carousel">
         <div
           class="slide"
-          style="background-image: url('../assets/img/bg_hero.jpg')"
+          style="background-image: url('../assets/img/carrusel.jpg')"
         ></div>
         <div
           class="slide"
-          style="background-image: url('../assets/img/bg_hero2.jpg')"
+          style="background-image: url('../assets/img/carrusel2.jpg')"
         ></div>
         <div
           class="slide"
-          style="background-image: url('../assets/img/bg_hero3.jpg')"
+          style="background-image: url('../assets/img/carrusel3.jpg')"
         ></div>
       </div>
       <div class="content">
-        <h1>Welcome to MichiMed Cat Clinic</h1>
+        <h1>Bienvenido a la Clínica de Gatos MichiMed</h1>
         <p>
           <mark
-            >A full-service veterinary hospital for cats and their care
-            needs</mark
+            >Un hospital veterinario de servicio completo para gatos y sus
+            necesidades de cuidado</mark
           >
         </p>
-        <button class="action-btn">Schedule your appointment</button>
+        <button class="action-btn">Programa tu cita</button>
       </div>
     </section>
-
     <main>
       <section id="online-services">
-        <h2>Online Services</h2>
+        <h2>Servicios en Línea</h2>
         <p>
-          We offer a variety of online services to help you manage your pet's
-          health. You can use these services to check the status of your
-          hospitalized pet, view your pet's medical record, create an account to
-          manage your pet's health, or view and manage hospitalized pets if you
-          are a veterinarian.
+          Ofrecemos una variedad de servicios en línea para ayudarte a gestionar
+          la salud de tu mascota. Puedes usar estos servicios para revisar el
+          estado de tu mascota hospitalizada, ver el historial médico de tu
+          mascota, crear una cuenta para gestionar la salud de tu mascota, o ver
+          y gestionar mascotas hospitalizadas si eres veterinario.
         </p>
-        <button>Get Started</button>
+        <button>Comenzar</button>
       </section>
-
       <section class="service-grid">
         <div class="service-item">
-          <img src="../assets/icons/search.svg" alt="Pet Status Tracking" />
-          <h3>Pet Status Tracking</h3>
-          <p>Check the status of your hospitalized pet</p>
+          <img
+            src="../assets/icons/search.svg"
+            alt="Seguimiento del Estado de la Mascota"
+          />
+          <h3>Seguimiento del Estado de la Mascota</h3>
+          <p>Revisa el estado de tu mascota hospitalizada</p>
         </div>
         <div class="service-item">
-          <img src="../assets/icons/document.svg" alt="MedicalRecordsEntry" />
-          <h3>Medical Records Entry</h3>
-          <p>View your pet's medical record.</p>
+          <img
+            src="../assets/icons/document.svg"
+            alt="Ingreso de Registros Médicos"
+          />
+          <h3>Ingreso de Registros Médicos</h3>
+          <p>Consulta el historial médico de tu mascota.</p>
         </div>
         <div class="service-item">
-          <img src="../assets/icons/person.svg" alt="Client Registration" />
-          <h3>Client Registration</h3>
-          <p>Create an account to manage your pet's healt.</p>
+          <img src="../assets/icons/person.svg" alt="Registro de Clientes" />
+          <h3>Registro de Clientes</h3>
+          <p>Crea una cuenta para gestionar la salud de tu mascota.</p>
         </div>
         <div class="service-item">
           <img
             src="../assets/icons/person-2.svg"
-            alt="Veterinarian Managment"
-          />
-          <h3>Veterinarian Managment</h3>
-          <p>For veterinarians to view and manage hospitalized pets.</p>
+            alt="Gestión para Veterinarios"
+          /> 
+          <h3>Gestión de Veterinarios</h3>
+          <p>
+            Para veterinarios que gestionan mascotas hospitalizadas.
+          </p>
         </div>
       </section>
-
       <section id="additional-services">
         <div class="additional_service-item">
-          <img src="../assets/img/Logo2.png" alt="Nail Cutting" />
+          <img src="../assets/img/servicios.png" alt="Nail Cutting" />
 
-          <h3>Nail Cutting</h3>
+          <h3>Corte de Uñas</h3>
         </div>
 
         <div class="additional_service-item">
-          <img src="../assets/img/Logo3.png" alt="Hozpitalization" />
-          <h3>Hozpitalization</h3>
+          <img src="../assets/img/servicios2.png" alt="Hospitalización" />
+          <h3>Hospitalización</h3>
         </div>
 
         <div class="additional_service-item">
-          <img src="../assets/img/Logo4.png" alt="Cleanliness" />
-
-          <h3>Cleanliness</h3>
+          <img src="../assets/img/servicios3.png" alt="Limpieza" />
+          <h3>Limpieza</h3>
         </div>
       </section>
 
       <section id="contact-email">
-        <h2>Questions about the services we offer?</h2>
-        <p>Contact us at <strong>info@michimed.com</strong></p>
-        <button>Email Us</button>
+        <h2>¿Preguntas sobre los servicios que ofrecemos?</h2>
+        <p>Contáctanos en <strong>info@michimed.com</strong></p>
+        <button>Envíanos un Correo</button>
       </section>
 
       <section id="contact">
-        <h1>Contact Us</h1>
+        <h1>Contáctanos</h1>
         <form>
-          <h3>Name</h3>
-          <input type="text" placeholder="Your name" required />
-          <h3>Email</h3>
-          <input type="email" placeholder="Your email" required />
-          <h3>Subject</h3>
-          <input type="text" placeholder="Subject" required />
-          <h3>Message</h3>
-          <textarea class="Message" type="text" required></textarea>
-          <button type="submit">Submit</button>
+          <h3>Nombre</h3>
+          <input type="text" placeholder="Tu nombre" required />
+          <h3>Correo Electrónico</h3>
+          <input type="email" placeholder="Tu correo electrónico" required />
+          <h3>Asunto</h3>
+          <input type="text" placeholder="Asunto" required />
+          <h3>Mensaje</h3>
+          <textarea class="Mensaje" type="text" required></textarea>
+          <button type="submit">Enviar</button>
         </form>
       </section>
     </main>
@@ -168,10 +174,10 @@
         </a>
       </div>
       <div class="legal">
-        <a href="#">Privacy & policies</a>
-        <a href="#">Terms & conditions</a>
+        <a href="#">Privacidad y políticas</a>
+        <a href="#">Términos y condiciones</a>
       </div>
-      <p class="copy">&copy; 2024 MichiMed. All rights reserved.</p>
+      <p class="copy">&copy; 2024 MichiMed. Todos los derechos reservados.</p>
     </footer>
 
     <script src="./js/script.js"></script>
