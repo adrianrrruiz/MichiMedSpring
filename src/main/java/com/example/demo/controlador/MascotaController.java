@@ -17,6 +17,7 @@ import com.example.demo.servicio.MascotaServiceInterface;
 @Controller
 public class MascotaController {
 
+    String ruta = "mascotas/";
     @Autowired
     MascotaServiceInterface mascotaService;
 
@@ -24,7 +25,7 @@ public class MascotaController {
     @GetMapping("")
     public String Mascotas(Model model) {
         model.addAttribute("mascotas", mascotaService.SearchAll());
-        return "mascotas/mascotas";
+        return ruta +"mascotas";
     }
 
     // http://localhost:8090/mascotas/add
@@ -33,7 +34,7 @@ public class MascotaController {
 
         Mascota mascota = new Mascota( null, 0, null, 0, null, null, null, null, null, null);
         model.addAttribute("mascota", mascota);
-        return "mascotas/mascotasAdd";
+        return ruta +"mascotasAdd";
     }
 
     // http://localhost:8090/mascotas/add
@@ -47,7 +48,7 @@ public class MascotaController {
     @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("mascota", mascotaService.SearchById(id));
-        return "mascotas/updateMascota";
+        return ruta +"updateMascota";
     }
 
     // http://localhost:8090/mascotas/update/{id}
@@ -68,7 +69,7 @@ public class MascotaController {
     @GetMapping("/{id}")
     public String InfoMascota(Model model, @PathVariable("id") Long id) {
         model.addAttribute("mascota", mascotaService.SearchById(id));
-        return "mascotas/infoMascota";
+        return ruta +"infoMascota";
     }
 
 }

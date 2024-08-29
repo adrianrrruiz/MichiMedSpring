@@ -17,6 +17,7 @@ import com.example.demo.servicio.ClienteService;
 @Controller
 public class ClienteController {
 
+    String ruta = "clientes/";
     @Autowired
     ClienteService clienteService;
 
@@ -24,14 +25,14 @@ public class ClienteController {
     @GetMapping("")
     public String Clientes(Model model) {
         model.addAttribute("clientes", clienteService.SearchAll());
-        return "clientes/clientes";
+        return ruta + "clientes";
     }
 
     // http://localhost:8090/clientes/update/{id}
     @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("cliente", clienteService.SearchById(id));
-        return "clientes/updateCliente";
+        return ruta +"updateCliente";
     }
 
     // http://localhost:8090/clientes/update/{id}
@@ -61,7 +62,7 @@ public class ClienteController {
 
         Cliente cliente = new Cliente( null, null, null, null);
         model.addAttribute("cliente", cliente);
-        return "clientes/clientesAdd";
+        return ruta +"clientesAdd";
     }
 
     // http://localhost:8090/clientes/add
@@ -75,7 +76,7 @@ public class ClienteController {
     @GetMapping("/{id}")
     public String InfoCliente(Model model, @PathVariable("id") Long id) {
         model.addAttribute("cliente", clienteService.SearchById(id));
-        return "clientes/infoClientes";
+        return ruta +"infoClientes";
     }
 
 
