@@ -30,10 +30,11 @@
           <!-- Card 1 -->
           <article th:each="mascota : ${mascotas}" class="col-12 col-sm-8 col-md-4">
             <div class="card text-center mb-4">
-              <img th:src="${mascota.foto}" class="card-img-top" alt="Kayn">
+              <img th:src="${mascota.foto}" class="card-img-top" alt="Kayn" style="object-fit: cover; height: 200px; width: 100%;">
               <div class="card-body">
                 <h5 th:text="${mascota.nombre}" class="card-title"></h5>
-                <p th:text="${mascota.edad + ' años'}" class="card-text"></p>
+                <p th:text="${'Peso: ' + mascota.peso + ' kg'}" class="card-text"></p>
+                <p th:text="${mascota.enfermedad != null && !mascota.enfermedad.isEmpty() ? 'Enfermedad: ' + mascota.enfermedad : 'Enfermedad: N/A'}" class="card-text"></p>
                 <button th:text="${mascota.estado}" class="btn btn-primary" style="--bs-btn-padding-x: 4rem;"></button>
               </div>
             </div>
