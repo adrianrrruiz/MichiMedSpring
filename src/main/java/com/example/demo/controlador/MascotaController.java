@@ -1,5 +1,7 @@
 package com.example.demo.controlador;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Mascota;
+import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.MascotaServiceInterface;
 
 // http://localhost:8090/mascotas
@@ -21,6 +24,9 @@ public class MascotaController {
     String ruta = "mascotas/";
     @Autowired
     MascotaServiceInterface mascotaService;
+
+    @Autowired
+    ClienteService clienteService;
 
     // http://localhost:8090/mascotas
     @GetMapping("")
@@ -34,7 +40,9 @@ public class MascotaController {
     public String mostrarFormularioCrear(Model model) {
 
         Mascota mascota = new Mascota( null, 0, null, 0, null, null, null, null, null, null);
+        Collection<Cliente> clientes = clienteService.SearchAll();
         model.addAttribute("mascota", mascota);
+        model.addAttribute("clientes", clientes);
         return ruta +"mascotasAdd";
     }
 
