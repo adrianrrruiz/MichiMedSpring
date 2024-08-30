@@ -11,14 +11,14 @@ nav {
     align-items: center;
 }
 
-.logo {
+.logo-landing {
     display: flex;
     align-items: center;
 }
 
-.logo img {height: 40px;}
+.logo-landing img {height: 40px;}
 
-.logo img:hover {cursor: pointer;}
+.logo-landing img:hover {cursor: pointer;}
 
 nav ul {
     display: flex;

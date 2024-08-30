@@ -15,7 +15,7 @@ setInterval(nextSlide, 5000);
 
 
 //Recargar al darle click en el logo
-const logo = document.querySelector('.logo');
+const logo = document.querySelector('.logo-landing');
 logo.addEventListener('click', () => {
     location.reload();
 });

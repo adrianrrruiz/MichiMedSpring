@@ -21,72 +21,20 @@
     <link rel="stylesheet" href="/css/mascotasStyle.css" />
     <title>Mascotas</title>
     <style>
-      body {
-            display: flex;
-            margin: 0;
-            height: 100vh;
-            overflow-x: hidden;
-        }
-        aside {
-            width: 250px;
-            transition: transform 0.3s ease;
-            position: fixed;
-            z-index: 1000;
-            height: 100%;
-            padding-top: 60px; /* Deja espacio para el logo */
-        }
-        aside.collapsed {
-            transform: translateX(-100%);
-        }
-        .nav-link {
-            color: #6c757d;
-        }
-        .nav-link:hover {
-            color: #495057;
-        }
-        .logo {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            cursor: pointer;
-            height: 40px;
-            z-index: 1100; /* Por encima del sidebar */
-        }
-        .user {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            height: 40px;
-            z-index: 1100; /* Por encima del sidebar */
-        }
-        main {
-            flex-grow: 1;
-            margin-left: 250px;
-            padding: 20px;
-            transition: margin-left 0.3s ease;
-        }
-        main.collapsed {
-            margin-left: 0;
-        }
-        footer {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-        }
+        
     </style>
   </head>
   <body>
+    <!-- Layout - Menu Lateral y header -->
     <img src="/assets/img/Michimed_Logo 1.png" class="logo" id="toggleSidebar" alt="Michimed Logo">
-    <img src="/assets/img/User.png" class="user" alt="User photo" />
     <aside id="sidebar">
-      <nav>
+      <nav class="h-100 d-flex flex-column justify-content-between align-items-start">
           <ul class="nav flex-column">
               <li class="nav-item">
                   <a href="#" class="nav-link active"><i class="bi bi-house me-3"></i>Panel</a>
               </li>
               <li class="nav-item">
-                  <a href="#" class="nav-link"><i class="bi bi-person-gear me-3"></i>Clientes</a>
+                  <a th:href="@{/clientes}" class="nav-link"><i class="bi bi-person-gear me-3"></i>Clientes</a>
               </li>
               <li class="nav-item">
                   <a href="#" class="nav-link"><i class="bi bi-person-gear me-3"></i>Veterinarios</a>
@@ -95,71 +43,77 @@
                   <a href="#" class="nav-link"><i class="bi bi-file-earmark-text me-3"></i>Historial Médico</a>
               </li>
               <li class="nav-item">
-                  <a href="#" class="nav-link"><i class="bi bi-activity me-3"></i>Mascotas</a>
+                  <a th:href="@{/mascotas}" class="nav-link"><i class="bi bi-activity me-3"></i>Mascotas</a>
               </li>
               <li class="nav-item">
                   <a href="#" class="nav-link"><i class="bi bi-plus-circle me-3"></i>Agregar tratamiento</a>
               </li>
           </ul>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a href="../" class="nav-link mb-2"><i class="bi bi-box-arrow-left me-3"></i>Logout</a>
+            </li>
+          </ul>
       </nav>
-      <footer>
-          <a href="#" class="nav-link"><i class="bi bi-box-arrow-left me-3"></i>Logout</a>
-      </footer>
     </aside>
-      <main id="content">
-        <div class="info">
-          <h1 class="mb-3">Todos nuestros gatitos</h1>
-          <div class="d-flex flex-row">
-            <input
-              type="text"
-              placeholder="Buscar por el nombre del gatito..."
-              required
-            />
-            <a class="btn btn-primary text-white ms-2 d-flex align-items-center" th:href="@{/mascotas/add}">Add</a>
-          </div>
+    <header class="header-2">
+      <img src="/assets/img/User.png" alt="User photo" />
+    </header>
+    <!-- // -->
+    <main id="content">
+      <div class="info">
+        <h1 class="mb-3">Todos nuestros gatitos</h1>
+        <div class="d-flex flex-row">
+          <input
+            type="text"
+            placeholder="Buscar por el nombre del gatito..."
+            required
+          />
+          <a class="btn btn-primary text-white ms-2 d-flex align-items-center" th:href="@{/mascotas/add}">Add</a>
         </div>
-        <container class="table-container">
-          <table class="table align-middle">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Raza</th>
-                <th>Edad</th>
-                <th>Peso</th>
-                <th>Enfermedad</th>
-                <th>Estado</th>
-                <th>Foto</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="mascota : ${mascotas}">
-                <td th:text="${mascota.nombre}"></td>
-                <td th:text="${mascota.raza}"></td>
-                <td th:text="${mascota.edad + ' años'}"></td>
-                <td th:text="${mascota.peso + ' kg'}"></td>
-                <td th:text="${mascota.enfermedad}"></td>
-                <td
-                  th:text="${mascota.estado}"
-                  th:classappend="${mascota.estado == 'En tratamiento'} ? 'estado-tratamiento' : 'estado-normal'"
-                ></td>
-                <td>
-                  <img
-                    th:src="${mascota.foto}"
-                    alt=""
-                    class="table-img img-fluid"
-                  />
-                </td>
-                <td>
-                  <a class="btn btn-primary rounded-5" th:href="@{/mascotas/{id}(id=${mascota.id})}"><i class="bi bi-eye-fill"></i></i></a>
-                  <a class="btn btn-primary rounded-5" th:href="@{/mascotas/update/{id}(id=${mascota.id})}"><i class="bi bi-pen"></i></a>
-                  <a class="btn btn-danger rounded-5" th:href="@{/mascotas/delete/{id}(id=${mascota.id})}">X</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </container>
-      </main>
+      </div>
+      <container class="table-container">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Raza</th>
+              <th>Edad</th>
+              <th>Peso</th>
+              <th>Enfermedad</th>
+              <th>Estado</th>
+              <th>Foto</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="mascota : ${mascotas}">
+              <td th:text="${mascota.nombre}"></td>
+              <td th:text="${mascota.raza}"></td>
+              <td th:text="${mascota.edad + ' años'}"></td>
+              <td th:text="${mascota.peso + ' kg'}"></td>
+              <td th:text="${mascota.enfermedad}"></td>
+              <td
+                th:text="${mascota.estado}"
+                th:classappend="${mascota.estado == 'En tratamiento'} ? 'estado-tratamiento' : 'estado-normal'"
+              ></td>
+              <td>
+                <img
+                  th:src="${mascota.foto}"
+                  alt=""
+                  class="table-img img-fluid"
+                />
+              </td>
+              <td>
+                <a class="btn btn-primary rounded-5" th:href="@{/mascotas/{id}(id=${mascota.id})}"><i class="bi bi-eye-fill"></i></i></a>
+                <a class="btn btn-primary rounded-5" th:href="@{/mascotas/update/{id}(id=${mascota.id})}"><i class="bi bi-pen"></i></a>
+                <a class="btn btn-danger rounded-5" th:href="@{/mascotas/delete/{id}(id=${mascota.id})}">X</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </container>
+    </main>
       
       <!-- jQuery y Bootstrap JS -->
     <script
@@ -171,5 +125,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/js/mascotas.js"></script>
+    <script src="/js/panelMenu.js"></script>
   </body>
 </html>

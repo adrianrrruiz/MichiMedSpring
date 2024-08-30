@@ -1,9 +1,5 @@
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById('toggleSidebar').addEventListener('click', function () {
-      document.getElementById('sidebar').classList.toggle('collapsed');
-      document.getElementById('content').classList.toggle('collapsed');
-  });
   const cells = document.querySelectorAll("table tbody td");
   cells.forEach((cell) => {
     if (

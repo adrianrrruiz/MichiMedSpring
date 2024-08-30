@@ -22,18 +22,43 @@
     <title>Clientes</title>
   </head>
   <body>
-    <header>
-      <nav>
-        <div class="logo">
-          <img src="/assets/img/Michimed_Logo 1.png" alt="MichiMed Logo" />
-        </div>
-        <div class="user">
-          <img src="/assets/img/User.png" alt="" />
-        </div>
+    <!-- Layout - Menu Lateral y header -->
+    <img src="/assets/img/Michimed_Logo 1.png" class="logo" id="toggleSidebar" alt="Michimed Logo">
+    <aside id="sidebar">
+      <nav class="h-100 d-flex flex-column justify-content-between align-items-start">
+          <ul class="nav flex-column">
+              <li class="nav-item">
+                  <a href="#" class="nav-link active"><i class="bi bi-house me-3"></i>Panel</a>
+              </li>
+              <li class="nav-item">
+                  <a th:href="@{/clientes}" class="nav-link"><i class="bi bi-person-gear me-3"></i>Clientes</a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link"><i class="bi bi-person-gear me-3"></i>Veterinarios</a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link"><i class="bi bi-file-earmark-text me-3"></i>Historial Médico</a>
+              </li>
+              <li class="nav-item">
+                  <a th:href="@{/mascotas}" class="nav-link"><i class="bi bi-activity me-3"></i>Mascotas</a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link"><i class="bi bi-plus-circle me-3"></i>Agregar tratamiento</a>
+              </li>
+          </ul>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a href="../" class="nav-link mb-2"><i class="bi bi-box-arrow-left me-3"></i>Logout</a>
+            </li>
+          </ul>
       </nav>
+    </aside>
+    <header class="header-2">
+      <img src="/assets/img/User.png" alt="User photo" />
     </header>
+    <!-- // -->
 
-    <main>
+    <main id="content">
       <div class="info">
         <h1>Todos nuestros Clientes</h1>
         <div class="d-flex flex-row">
@@ -117,5 +142,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/panelMenu.js"></script>
   </body>
 </html>
