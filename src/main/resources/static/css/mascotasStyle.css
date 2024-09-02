@@ -59,7 +59,23 @@ input {
     margin-bottom: 10px;
 }
 
-input:focus {
+
+select {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 100%;
+    color: #757575;
+    border: 0;
+    background-color: #f0f2f5;
+    padding: 10px;
+    border-radius: 10px;
+    appearance: none; /* Elimina el estilo predeterminado del navegador */
+    -webkit-appearance: none; /* Para Safari y Chrome */
+    -moz-appearance: none; /* Para Firefox */
+}
+
+input:focus, select:focus {
     outline-color: var(--text-secondary);
     background-color: var(--white);
     color: var(--text-secondary);

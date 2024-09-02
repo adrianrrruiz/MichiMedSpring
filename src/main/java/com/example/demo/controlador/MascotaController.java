@@ -1,6 +1,5 @@
 package com.example.demo.controlador;
 
-import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,9 +39,8 @@ public class MascotaController {
     public String mostrarFormularioCrear(Model model) {
 
         Mascota mascota = new Mascota( null, 0, null, 0, null, null, null, null, null, null);
-        Collection<Cliente> clientes = clienteService.SearchAll();
         model.addAttribute("mascota", mascota);
-        model.addAttribute("clientes", clientes);
+        model.addAttribute("clientes", clienteService.SearchAll());
         return ruta +"mascotasAdd";
     }
 
@@ -57,6 +55,7 @@ public class MascotaController {
     @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("mascota", mascotaService.SearchById(id));
+        model.addAttribute("clientes", clienteService.SearchAll());
         return ruta +"updateMascota";
     }
 
