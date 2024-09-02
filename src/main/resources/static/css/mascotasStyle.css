@@ -53,9 +53,16 @@ input {
     padding: 10px;
     width: 100%;
     background-color: var(--input-color);
+    color: var(--text-secondary);
     border-radius: 10px;
     border: 0;
     margin-bottom: 10px;
+}
+
+input:focus {
+    outline-color: var(--text-secondary);
+    background-color: var(--white);
+    color: var(--text-secondary);
 }
 
 .table-container {
