@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entidad.Cliente;
 import com.example.demo.servicio.ClienteService;
@@ -51,9 +52,12 @@ public class ClienteController {
 
     // http://localhost:8090/clientes/mascotas/{id}
     @GetMapping("/mascotas/{id}")
-    public String findMascotasCliente(Model model, @PathVariable("id") Long id) {
+    public String findMascotasCliente(Model model, @PathVariable("id") Long id, @RequestParam(required = false)String admin) {
         model.addAttribute("mascotas", clienteService.getMascotas(id));
-        return "mascotas/mascotasCliente";
+        if (admin != null) {
+            return "mascotas/mascotasCliente";
+        }
+        return "clientes/mascotasCliente";
     }
 
     // http://localhost:8090/clientes/add
