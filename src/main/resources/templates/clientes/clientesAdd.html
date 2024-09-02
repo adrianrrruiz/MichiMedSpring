@@ -32,6 +32,7 @@
               id="nombreAdd"
               class="form-control"
               placeholder="Ingresa el nombre del cliente"
+              required
             />
 
             <label for="correo">Correo</label>
@@ -40,7 +41,8 @@
               id="correoAdd"
               class="form-control"
               placeholder="Ingresa el correo"
-              type="text"
+              type="email"
+              required
             />
 
             <label for="cedula">Cedula</label>
@@ -50,10 +52,20 @@
               id="cedulaAdd"
               class="form-control"
               placeholder="Ingresa la cedula"
+              required
+            />
+
+            <label for="contrasena">Contraseña</label>
+            <input
+              th:field="*{contrasena}"
+              type="password"
+              id="contrasenaAdd"
+              class="form-control"
+              placeholder="Ingresa la contraseña"
+              required
             />
           </div>
         </div>
-        <input type="hidden" th:field="*{contrasena}" />
         <button class="add">Add</button>
       </form>
     </main>
