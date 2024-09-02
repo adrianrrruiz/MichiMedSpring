@@ -17,7 +17,7 @@
       <img src="/assets/img/User.png" alt="User Photo" />
     </header>
     <main>
-      <h1 class="text-center">Tus gatitos</h1>
+      <h1 class="text-center" th:text="'Los gatitos de: ' + ${nombreCliente}"></h1>
       <section class="container my-4">
         <div class="row justify-content-center">
           <!-- Mensaje si no hay mascotas registradas -->

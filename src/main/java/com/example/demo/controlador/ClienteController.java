@@ -52,9 +52,10 @@ public class ClienteController {
 
     // http://localhost:8090/clientes/mascotas/{id}
     @GetMapping("/mascotas/{id}")
-    public String findMascotasCliente(Model model, @PathVariable("id") Long id, @RequestParam(required = false)String admin) {
+    public String findMascotasCliente(Model model, @PathVariable("id") Long id, @RequestParam(required = false)String nombre) {
         model.addAttribute("mascotas", clienteService.getMascotas(id));
-        if (admin != null) {
+        if (nombre != null) {
+            model.addAttribute("nombreCliente", nombre);
             return "mascotas/mascotasCliente";
         }
         return "clientes/mascotasCliente";
