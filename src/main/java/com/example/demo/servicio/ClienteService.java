@@ -1,10 +1,11 @@
 package com.example.demo.servicio;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.List;
 
 import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Mascota;
@@ -48,13 +49,24 @@ public class ClienteService implements ClienteServiceInterface {
 
     @Override
     public void update(Cliente cliente) {
+        Cliente existingCliente = findByCedula(cliente.getCedula());
+        if (existingCliente != null && !existingCliente.getId().equals(cliente.getId())) {
+            throw new IllegalArgumentException("Ya existe un cliente con esta cédula");
+        }
         repository.save(cliente);
     }
 
     @Override
     public void add(Cliente cliente) {
+        Cliente existingCliente = findByCedula(cliente.getCedula());
+        if (existingCliente != null) {
+            throw new IllegalArgumentException("Ya existe un cliente con esta cédula");
+        }
         repository.save(cliente);
     }
 
-
+    @Override
+    public Cliente findByCedula(String cedula) {
+        return repository.findByCedula(cedula).orElse(null);
+    }
 }

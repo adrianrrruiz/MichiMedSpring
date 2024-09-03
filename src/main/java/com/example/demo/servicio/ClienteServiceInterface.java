@@ -1,10 +1,11 @@
 package com.example.demo.servicio;
 
+import java.util.Collection;
+import java.util.List;
+
 import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.User;
-import java.util.Collection;
-import java.util.List;
 
 public interface ClienteServiceInterface {
 
@@ -21,4 +22,6 @@ public interface ClienteServiceInterface {
     public void update(Cliente cliente);
 
     public void add(Cliente cliente);
+
+    Cliente findByCedula(String cedula);
 }

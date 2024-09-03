@@ -15,10 +15,15 @@ public class Cliente {
     @Id
     @GeneratedValue
     private Long id;
+    
+    @Column(unique = true, nullable = false)
     private String cedula;
+    
     private String nombre;
+    
     @Column(name = "email", unique = true, nullable = false)
     private String email;
+    
     private String contrasena;
 
     @OneToMany(mappedBy = "cliente", cascade=CascadeType.ALL, orphanRemoval=true)
@@ -32,8 +37,8 @@ public class Cliente {
         this.contrasena = contrasena;
     }
 
-    //Constructor sin id
-    public Cliente( String cedula, String nombre, String email, String contrasena) {
+    // Constructor sin id
+    public Cliente(String cedula, String nombre, String email, String contrasena) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.email = email;
@@ -42,6 +47,8 @@ public class Cliente {
 
     public Cliente() {
     }
+
+    // Getters y Setters
 
     public String getCedula() {
         return cedula;
