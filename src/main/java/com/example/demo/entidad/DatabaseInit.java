@@ -2,6 +2,7 @@ package com.example.demo.entidad;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -9,7 +10,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.repositorio.ClienteRepository;
+import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
@@ -25,7 +28,13 @@ public class DatabaseInit implements ApplicationRunner {
     ClienteRepository clienteRepository;
 
     @Autowired
-    private VeterinarioRepository veterinarioRepository;
+    VeterinarioRepository veterinarioRepository;
+
+    @Autowired
+    DrogaRepository drogaRepository;
+
+    @Autowired
+    TratamientoRepository tratamientoRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -311,6 +320,23 @@ public class DatabaseInit implements ApplicationRunner {
         veterinarioRepository.save(new Veterinario("753864159", "Paola Medina", "5612", "Geriatría", "http://foto.url/paola_medina", 13));
 
 
+        // Tratamientos
+        tratamientoRepository.save(new Tratamiento("05/08/26"));
+        tratamientoRepository.save(new Tratamiento("06/08/26"));
+        tratamientoRepository.save(new Tratamiento("07/08/26"));
+        tratamientoRepository.save(new Tratamiento("08/08/26"));
+        tratamientoRepository.save(new Tratamiento("09/08/26"));
+        tratamientoRepository.save(new Tratamiento("10/08/26"));
+        tratamientoRepository.save(new Tratamiento("11/08/26"));
+        tratamientoRepository.save(new Tratamiento("12/08/26"));
+
+        // Drogas
+        drogaRepository.save(new Droga("esomeprazol", 12.0, 15.0, 8, 6));
+        drogaRepository.save(new Droga("paracetamol", 10.0, 13.0, 7, 5));
+        drogaRepository.save(new Droga("ibuprofeno", 8.0, 11.0, 6, 4));
+        drogaRepository.save(new Droga("amoxicilina", 6.0, 9.0, 5, 3));
+        drogaRepository.save(new Droga("dexametasona", 4.0, 7.0, 4, 2));
+
         // Obtener todas las mascotas y clientes
         List<Mascota> mascotas = mascotaRepository.findAll();
         List<Cliente> clientes = clienteRepository.findAll();
@@ -322,11 +348,44 @@ public class DatabaseInit implements ApplicationRunner {
         // Asignar mascotas a clientes de forma cíclica
         int numClientes = clientes.size();
         for (int i = 0; i < mascotas.size(); i++) {
-            Mascota mascota = mascotas.get(i);
-            Cliente cliente = clientes.get(i % numClientes);
-            mascota.setCliente(cliente);
-            mascotaRepository.save(mascota);
+                Mascota mascota = mascotas.get(i);
+                Cliente cliente = clientes.get(i % numClientes);
+                mascota.setCliente(cliente);
+                mascotaRepository.save(mascota);
         }
-    }
+
+        // Asignar tratamientos a veterinarios y mascotas
+        int CANTIDAD_VETERINARIOS = veterinarioRepository.findAll().size();
+        int CANTIDAD_MASCOTAS = mascotaRepository.findAll().size();
+
+        for(Tratamiento tratamiento : tratamientoRepository.findAll()) {
+                int id_veterinario = ThreadLocalRandom.current().nextInt(CANTIDAD_VETERINARIOS);
+                int id_mascota = ThreadLocalRandom.current().nextInt(CANTIDAD_MASCOTAS);
+
+                Veterinario veterinario = veterinarioRepository.findById(Long.valueOf(id_veterinario)).get();
+                Mascota mascota = mascotaRepository.findById(Long.valueOf(id_mascota)).get();
+
+                tratamiento.setVeterinario(veterinario);
+                tratamiento.setMascota(mascota);
+        }
+
+        // Obtener todas las drogas y tratamientos
+        List<Tratamiento> tratamientos = tratamientoRepository.findAll();
+        List<Droga> drogas = drogaRepository.findAll();
+
+        // Mezclar las listas para asegurar la aleatoriedad
+        Collections.shuffle(tratamientos);
+        Collections.shuffle(drogas);
+
+        // Asignar drogas a tratamientos
+        int CANTIDAD_TRATAMIENTOS = tratamientos.size(); 
+        for (int i = 0; i < drogas.size(); i++) {
+                Droga droga = drogas.get(i);
+                Tratamiento tratamiento = tratamientos.get(i % CANTIDAD_TRATAMIENTOS);
+                droga.setTratamiento(tratamiento);
+                drogaRepository.save(droga);
+        }
+
+        }
 
 }
