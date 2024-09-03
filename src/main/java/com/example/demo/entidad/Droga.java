@@ -1,61 +1,43 @@
 package com.example.demo.entidad;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Droga {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idDroga;  // Clave primaria (PK)
+    @GeneratedValue
+    private Long id; 
 
-    @Column(nullable = false)
     private String nombre;  
+    private double precioCompra;  
+    private double precioVenta; 
+    private int uniDisp;  
+    private int uniVend; 
+    
+    @ManyToOne
+    private Tratamiento tratamiento;
 
-    @Column(nullable = false, unique = true)
-    private String clave;  
-
-    @Column(nullable = false)
-    private String tipo;  
-
-    @Column(nullable = false, precision = 10, scale = 2)
-    private double prComp;  
-
-    @Column(nullable = false, precision = 10, scale = 2)
-    private double prVend; 
-
-    @Column(nullable = false)
-    private Integer uniDisp;  
-
-    @Column(nullable = false)
-    private Integer uniVend;  
-
-    // Constructor vacío
     public Droga() {
     }
 
-    // Constructor con parámetros
-    public Droga(String nombre, String clave, String tipo, double prComp, double prVend, Integer uniDisp, Integer uniVend) {
+    public Droga(String nombre, double precioCompra, double precioVenta, int uniDisp, int uniVend) {
         this.nombre = nombre;
-        this.clave = clave;
-        this.tipo = tipo;
-        this.prComp = prComp;
-        this.prVend = prVend;
+        this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
         this.uniDisp = uniDisp;
         this.uniVend = uniVend;
     }
 
-    // Getters y Setters
-    public Integer getIdDroga() {
-        return idDroga;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdDroga(Integer idDroga) {
-        this.idDroga = idDroga;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -66,52 +48,46 @@ public class Droga {
         this.nombre = nombre;
     }
 
-    public String getClave() {
-        return clave;
+    public double getPrecioCompra() {
+        return precioCompra;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setPrecioCompra(double precioCompra) {
+        this.precioCompra = precioCompra;
     }
 
-    public String getTipo() {
-        return tipo;
+    public double getPrecioVenta() {
+        return precioVenta;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = precioVenta;
     }
 
-    public double getPrComp() {
-        return prComp;
-    }
-
-    public void setPrComp(double prComp) {
-        this.prComp = prComp;
-    }
-
-    public double getPrVend() {
-        return prVend;
-    }
-
-    public void setPrVend(double prVend) {
-        this.prVend = prVend;
-    }
-
-    public Integer getUniDisp() {
+    public int getUniDisp() {
         return uniDisp;
     }
 
-    public void setUniDisp(Integer uniDisp) {
+    public void setUniDisp(int uniDisp) {
         this.uniDisp = uniDisp;
     }
 
-    public Integer getUniVend() {
+    public int getUniVend() {
         return uniVend;
     }
 
-    public void setUniVend(Integer uniVend) {
+    public void setUniVend(int uniVend) {
         this.uniVend = uniVend;
     }
 
+    public Tratamiento getTratamiento() {
+        return tratamiento;
+    }
+
+    public void setTratamiento(Tratamiento tratamiento) {
+        this.tratamiento = tratamiento;
+    }
+    
+
+    
 }
