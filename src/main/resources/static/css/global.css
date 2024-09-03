@@ -56,6 +56,15 @@ button {
     border-color: #4d617e;
 }
 
+.btn-secondary {
+    background-color: var(--text-secondary);
+    color: var(--white)
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+}
+
 /* HEADER */
 .header-2 {
     padding: 10px;

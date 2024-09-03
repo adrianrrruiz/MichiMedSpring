@@ -241,17 +241,18 @@ button:hover {
 
 
 #contact {
-    background-color: var(--primary-color);
+    background-image: url('../assets/img/paw.jpg');
     padding: 4rem 0;
     text-align: center;
     align-self: center;
     margin-top: 40px;
+    border: 4px solid var(--primary-color);
     border-radius: 40px;
     width: 100%;
     margin-bottom: 50px;
 }
 
-#contact h1 {color:var(--white)}
+#contact h1 {color:var(--primary-color)}
 
 form {
     max-width: 500px;
@@ -264,7 +265,7 @@ form h3 {
     align-self: flex-start;
     font-size: 15px;
     font-weight: 400;
-    color: var(--white);
+    color: var(--primary-color);
     margin-bottom: 5px;
 }
 
