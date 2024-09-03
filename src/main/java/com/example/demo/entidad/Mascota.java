@@ -1,9 +1,15 @@
 package com.example.demo.entidad;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -25,6 +31,10 @@ public class Mascota {
 
     @ManyToOne
     private Cliente cliente;
+
+    @ManyToMany
+    @JoinTable(name = "tratamiento", joinColumns = @JoinColumn(name = "mascota_id"), inverseJoinColumns = @JoinColumn(name = "veterinario_id"))
+    private List<Veterinario> veterinarios = new ArrayList<>();
 
     public Mascota(Long id, String nombre, int edad, String raza, float peso, String enfermedad, String estado,
             String fechaEntrada, String fechaSalida, String medicamento, String foto) {
