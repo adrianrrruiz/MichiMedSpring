@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -22,6 +23,9 @@ public class DatabaseInit implements ApplicationRunner {
 
     @Autowired
     ClienteRepository clienteRepository;
+
+    @Autowired
+    private VeterinarioRepository veterinarioRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -281,6 +285,30 @@ public class DatabaseInit implements ApplicationRunner {
         clienteRepository.save(new Cliente("2410987654", "Lorena Fuentes", "lorena@gmail.com", "abcd"));
         clienteRepository.save(new Cliente("2510987654", "Hugo Rojas", "hugo@gmail.com", "efgh"));
         clienteRepository.save(new Cliente("2610987654", "Monica Salazar", "monica@gmail.com", "ijkl"));
+
+
+        // Veterinarios
+        veterinarioRepository.save(new Veterinario("123456789", "Juan Pérez", "1234", "Cirugía", "http://foto.url/juan_perez", 10));
+        veterinarioRepository.save(new Veterinario("987654321", "María Gómez", "4321", "Dermatología", "http://foto.url/maria_gomez", 15));
+        veterinarioRepository.save(new Veterinario("456789123", "Carlos Díaz", "5678", "Oncología", "http://foto.url/carlos_diaz", 8));
+        veterinarioRepository.save(new Veterinario("789123456", "Laura Sánchez", "8765", "Cardiología", "http://foto.url/laura_sanchez", 12));
+        veterinarioRepository.save(new Veterinario("654321987", "Pedro Ramírez", "3456", "Neurología", "http://foto.url/pedro_ramirez", 20));
+        veterinarioRepository.save(new Veterinario("321654987", "Lucía Martínez", "6789", "Gastroenterología", "http://foto.url/lucia_martinez", 14));
+        veterinarioRepository.save(new Veterinario("456123789", "Andrés Torres", "7890", "Oftalmología", "http://foto.url/andres_torres", 9));
+        veterinarioRepository.save(new Veterinario("789654123", "Elena González", "8901", "Ortopedia", "http://foto.url/elena_gonzalez", 11));
+        veterinarioRepository.save(new Veterinario("147852369", "Sofía Ruiz", "9012", "Pediatría", "http://foto.url/sofia_ruiz", 18));
+        veterinarioRepository.save(new Veterinario("963852741", "Roberto Morales", "2345", "Urología", "http://foto.url/roberto_morales", 7));
+        veterinarioRepository.save(new Veterinario("258369147", "Adriana Castro", "3456", "Endocrinología", "http://foto.url/adriana_castro", 16));
+        veterinarioRepository.save(new Veterinario("147963258", "Gabriel Fernández", "4567", "Neumología", "http://foto.url/gabriel_fernandez", 13));
+        veterinarioRepository.save(new Veterinario("852741963", "Patricia Herrera", "5678", "Hematología", "http://foto.url/patricia_herrera", 10));
+        veterinarioRepository.save(new Veterinario("369258147", "Ricardo Silva", "6789", "Dermatología", "http://foto.url/ricardo_silva", 19));
+        veterinarioRepository.save(new Veterinario("753159852", "Martín López", "7890", "Reumatología", "http://foto.url/martin_lopez", 8));
+        veterinarioRepository.save(new Veterinario("951753258", "Alicia Vega", "8901", "Oncología", "http://foto.url/alicia_vega", 12));
+        veterinarioRepository.save(new Veterinario("159753486", "Natalia Ramos", "9123", "Nefrología", "http://foto.url/natalia_ramos", 22));
+        veterinarioRepository.save(new Veterinario("753486159", "Eduardo Pérez", "1239", "Psiquiatría", "http://foto.url/eduardo_perez", 17));
+        veterinarioRepository.save(new Veterinario("486159753", "Isabel Morales", "1345", "Inmunología", "http://foto.url/isabel_morales", 14));
+        veterinarioRepository.save(new Veterinario("975318642", "Fernando Castro", "4561", "Infectología", "http://foto.url/fernando_castro", 25));
+        veterinarioRepository.save(new Veterinario("753864159", "Paola Medina", "5612", "Geriatría", "http://foto.url/paola_medina", 13));
 
 
         // Obtener todas las mascotas y clientes
