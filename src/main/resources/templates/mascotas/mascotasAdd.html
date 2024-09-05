@@ -6,19 +6,16 @@
     <title>Añadir Mascota</title>
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/mascotasStyle.css" />
+    <link rel="icon" href="../../assets/icons/FaviconMichiMed.ico" type="image/x-icon" />
   </head>
   <body>
-    <header>
-      <nav>
-        <div class="logo">
-          <img src="/assets/img/Michimed_Logo 1.png" alt="MichiMed Logo" />
-        </div>
-        <div class="user">
-          <img src="/assets/img/User.png" alt="" />
-        </div>
-      </nav>
+    <header class="header-3">
+      <a href="http://localhost:8090/mascotas">
+        <img src="/assets/img/Michimed_Logo 1.png" alt="MichiMed Logo" />
+      </a>
+      <img src="/assets/img/User.png" alt="User Photo" />
     </header>
-    <main style="width: 60%">
+    <main style="width: 60%; margin-bottom: 30px;">
       <a href="http://localhost:8090/mascotas" class="volver"
         ><img src="/assets/icons/arrow_back.png" />Volver</a
       >
@@ -35,6 +32,7 @@
               id="nombreUpdate"
               class="form-control"
               placeholder="Ingresa el nombre del gatito"
+              required
             />
 
             <label for="enfermedad">Enfermedad</label>
@@ -53,6 +51,7 @@
               class="form-control"
               placeholder="Ingresa la raza del gatito"
               type="text"
+              required
             />
 
             <label for="peso">Peso (kg)</label>
@@ -62,6 +61,8 @@
               class="form-control"
               placeholder="Ingresa el peso del gatito"
               type="number"
+              step="0.01"
+              required
             />
           </div>
 
@@ -70,7 +71,7 @@
               <label for="foto">Upload image</label>
               <input
                 th:field="*{foto}"
-                type="text"
+                type="url"
                 id="foto"
                 placeholder="Ingresa la URL de la foto de tu mascota"
               />
@@ -78,21 +79,10 @@
 
             <label for="estado">Estado</label>
             <select
-              style="
-                display: flex;
-                flex-direction: column;
-                margin-bottom: 10px;
-                width: 100%;
-                height: 30px;
-                color: #757575;
-                border: 0;
-                background-color: #f0f2f5;
-                padding: 5px;
-                border-radius: 10px;
-              "
               th:field="*{estado}"
               id="estadoUpdate"
               class="form-control"
+              required
             >
               <option value="">Seleccione un estado</option>
               <option value="En tratamiento">En tratamiento</option>
@@ -105,7 +95,19 @@
               id="edadUpdate"
               class="form-control"
               type="number"
+              placeholder="Ingresa la edad del gatito"
+              required
             />
+            <label for="cliente">Cliente</label>
+            <select
+              th:field="*{cliente.id}"
+              id="clienteSelect"
+              class="form-control"
+              required
+            >
+              <option value="" selected>Seleccione un cliente</option>
+              <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
+            </select>
           </div>
         </div>
         <input type="hidden" th:field="*{medicamento}" />

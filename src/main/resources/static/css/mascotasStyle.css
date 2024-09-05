@@ -33,48 +33,9 @@ html {
     scroll-behavior: smooth;
 }
 
-
-/* HEADER */
-
-
-header {
-    height: 10px;
-    margin-bottom: 60px;
-    padding: 10px;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo img {
-    height: 40px;
-}
-
-.user {
-    display: flex;
-    align-items: center;
-}
-
-.user img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-
 /* MAIN */
 
 main {
-    margin-top: 40px;
     align-self: center;
     display: flex;
     flex-direction: column;
@@ -88,19 +49,36 @@ main {
     margin-bottom: 20px;
 }
 
-h1 {
-    color: var(--text-secondary);
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
 input {
     padding: 10px;
     width: 100%;
     background-color: var(--input-color);
+    color: var(--text-secondary);
     border-radius: 10px;
     border: 0;
     margin-bottom: 10px;
+}
+
+
+select {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 100%;
+    color: #757575;
+    border: 0;
+    background-color: #f0f2f5;
+    padding: 10px;
+    border-radius: 10px;
+    appearance: none; /* Elimina el estilo predeterminado del navegador */
+    -webkit-appearance: none; /* Para Safari y Chrome */
+    -moz-appearance: none; /* Para Firefox */
+}
+
+input:focus, select:focus {
+    outline-color: var(--text-secondary);
+    background-color: var(--white);
+    color: var(--text-secondary);
 }
 
 .table-container {
@@ -155,17 +133,6 @@ input {
     height: 40px;
     border-radius: 50%;
     object-fit:cover;
-}
-
-.modal-content {
-    background-color: var(--terciary-color);
-}
-
-.modal-body{
-    background-color: var(--white);
-    width: 80%;
-    align-self: center;
-    border-radius: 20px;
 }
 
 

@@ -34,9 +34,9 @@ public class SignInController {
     // http://localhost:8090/sign-in
     @PostMapping
     public String verifyCredentials(@ModelAttribute("user") User user, Model model) {
-        
-        if(clienteService.verifyCredentials(user)){
-            return "redirect:/mascotas";
+        Long id = clienteService.verifyCredentials(user);
+        if(id != -1L) {
+            return "redirect:/clientes/mascotas/" + id;
         }
         model.addAttribute("error", "Usuario o contraseña incorrectos");
         return "signIn";

@@ -88,6 +88,6 @@ footer .copy {
 
 .logo img {
     margin-top: 20px; /* Margen superior para el logo */
-    margin-left: -100px; /* Margen izquierdo para pegarlo a la izquierda */
+    margin-left: -50px; /* Margen izquierdo para pegarlo a la izquierda */
     max-width: 1000%; /* Ajusta el tamaño máximo del logo si es necesario */
 }

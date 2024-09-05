@@ -11,14 +11,14 @@ nav {
     align-items: center;
 }
 
-.logo {
+.logo-landing {
     display: flex;
     align-items: center;
 }
 
-.logo img {height: 40px;}
+.logo-landing img {height: 40px;}
 
-.logo img:hover {cursor: pointer;}
+.logo-landing img:hover {cursor: pointer;}
 
 nav ul {
     display: flex;
@@ -93,6 +93,8 @@ main {
     position: relative;
     z-index: 2;
 }
+
+#hero .content h1 { color: white; }
 
 #hero h1, #hero p, #hero button {
     position: relative;
@@ -239,17 +241,18 @@ button:hover {
 
 
 #contact {
-    background-color: var(--primary-color);
+    background-image: url('../assets/img/paw.jpg');
     padding: 4rem 0;
     text-align: center;
     align-self: center;
     margin-top: 40px;
+    border: 4px solid var(--primary-color);
     border-radius: 40px;
     width: 100%;
     margin-bottom: 50px;
 }
 
-#contact h1 {color:var(--white)}
+#contact h1 {color:var(--primary-color)}
 
 form {
     max-width: 500px;
@@ -262,7 +265,7 @@ form h3 {
     align-self: flex-start;
     font-size: 15px;
     font-weight: 400;
-    color: var(--white);
+    color: var(--primary-color);
     margin-bottom: 5px;
 }
 

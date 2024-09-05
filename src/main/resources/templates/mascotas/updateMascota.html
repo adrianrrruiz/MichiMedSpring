@@ -6,19 +6,16 @@
     <title>Editar Mascota</title>
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/mascotasStyle.css" />
+    <link rel="icon" href="../../assets/icons/FaviconMichiMed.ico" type="image/x-icon" />
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="/assets/img/Michimed_Logo 1.png" alt="MichiMed Logo" />
-            </div>
-            <div class="user">
-                <img src="/assets/img/User.png" alt="" />
-            </div>
-        </nav>
-    </header>
-    <main style="width: 60%;">
+  <header class="header-3">
+    <a href="http://localhost:8090/mascotas">
+      <img src="/assets/img/Michimed_Logo 1.png" alt="MichiMed Logo" />
+    </a>
+    <img src="/assets/img/User.png" alt="User Photo" />
+  </header>
+    <main style="width: 60%; margin-bottom: 30px;">
         <a href="http://localhost:8090/mascotas" class="volver"><img src="/assets/icons/arrow_back.png"/>Volver</a>
         <div class="info">
             <h1>Editar Mascota</h1>
@@ -77,26 +74,14 @@
                     </div>
                 <label for="estado">Estado</label>
                 <select
-              style="
-                display: flex;
-                flex-direction: column;
-                margin-bottom: 10px;
-                width: 100%;
-                height: 30px;
-                color: #757575;
-                border: 0;
-                background-color: #f0f2f5;
-                padding: 5px;
-                border-radius: 10px;
-              "
-              th:field="*{estado}"
-              id="estadoUpdate"
-              class="form-control"
-            >
-              <option value="">Seleccione un estado</option>
-              <option value="En tratamiento">En tratamiento</option>
-              <option value="Tratado">Tratado</option>
-            </select>
+                  th:field="*{estado}"
+                  id="estadoUpdate"
+                  class="form-control"
+                >
+                  <option value="">Seleccione un estado</option>
+                  <option value="En tratamiento">En tratamiento</option>
+                  <option value="Tratado">Tratado</option>
+                </select>
     
                 <label for="edadUpdate">Edad(años)</label>
                 <input
@@ -105,13 +90,22 @@
                     class="form-control"
                     type="number"
                 />
+                <label for="cliente">Cliente</label>
+                <select
+                  th:field="*{cliente.id}"
+                  id="clienteSelect"
+                  class="form-control"
+                  required
+                >
+                  <option value="" selected>Seleccione un cliente</option>
+                  <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nombre}"></option>
+                </select>
               </div>
             </div>
             <button type="submit"  class="add">Update</button>
             <input type="hidden" th:field="*{medicamento}" />
             <input type="hidden" th:field="*{fechaEntrada}" />
             <input type="hidden" th:field="*{fechaSalida}" />
-            <input type="hidden" th:field="*{foto}" />
         </form>
     </main>
 </body>

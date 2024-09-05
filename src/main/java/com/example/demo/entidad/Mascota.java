@@ -1,10 +1,26 @@
 package com.example.demo.entidad;
 
-import javax.validation.constraints.Null;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.hibernate.annotations.Where;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+
+@Entity
+@Where(clause = "estado <> 'Eliminada'")  // Filtrar automáticamente mascotas eliminadas
 public class Mascota {
-    @Null
-    private int id;
+
+    @Id
+    @GeneratedValue
+    private Long id;
     private String nombre;
     private int edad;
     private String raza;
@@ -14,9 +30,18 @@ public class Mascota {
     private String fechaEntrada;
     private String fechaSalida;
     private String medicamento;
+
+    @Column(length = 500)
     private String foto;
 
-    public Mascota(int id, String nombre, int edad, String raza, float peso, String enfermedad, String estado,
+    @ManyToOne
+    private Cliente cliente;
+
+    @ManyToMany
+    @JoinTable(name = "tratamiento", joinColumns = @JoinColumn(name = "mascota_id"), inverseJoinColumns = @JoinColumn(name = "veterinario_id"))
+    private List<Veterinario> veterinarios = new ArrayList<>();
+
+    public Mascota(Long id, String nombre, int edad, String raza, float peso, String enfermedad, String estado,
             String fechaEntrada, String fechaSalida, String medicamento, String foto) {
         this.id = id;
         this.nombre = nombre;
@@ -29,6 +54,24 @@ public class Mascota {
         this.fechaSalida = fechaSalida;
         this.medicamento = medicamento;
         this.foto = foto;
+    }
+
+    // Constructor sin id
+    public Mascota(String nombre, int edad, String raza, float peso, String enfermedad, String estado,
+            String fechaEntrada, String fechaSalida, String medicamento, String foto) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.raza = raza;
+        this.peso = peso;
+        this.enfermedad = enfermedad;
+        this.estado = estado;
+        this.fechaEntrada = fechaEntrada;
+        this.fechaSalida = fechaSalida;
+        this.medicamento = medicamento;
+        this.foto = foto;
+    }
+
+    public Mascota() {
     }
 
     public String getNombre() {
@@ -111,12 +154,30 @@ public class Mascota {
         this.foto = foto;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<Veterinario> getVeterinarios() {
+        return veterinarios;
+    }
+    
+    public void setVeterinarios(List<Veterinario> veterinarios) {
+        this.veterinarios = veterinarios;
+    }
+    
+
 
 }
