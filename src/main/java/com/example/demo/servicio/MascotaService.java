@@ -1,6 +1,8 @@
 package com.example.demo.servicio;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,17 +18,25 @@ public class MascotaService implements MascotaServiceInterface {
 
     @Override
     public Mascota SearchById(Long id) {
-        return repo.findById(id).get();
+        return repo.findById(id).orElseThrow(() -> new RuntimeException("Mascota no encontrada con id: " + id));
     }
 
     @Override
     public Collection<Mascota> SearchAll() {
-        return repo.findAll();
+        List<Mascota> todasLasMascotas = repo.findAll();
+        // Filtrar mascotas eliminadas antes de devolverlas
+        List<Mascota> mascotasActivas = todasLasMascotas.stream()
+            .filter(mascota -> !"Eliminada".equalsIgnoreCase(mascota.getEstado()))
+            .collect(Collectors.toList());
+
+        return mascotasActivas;
     }
 
     @Override
     public void deleteById(Long id) {
-        repo.deleteById(id);
+        Mascota mascota = repo.findById(id).orElseThrow(() -> new RuntimeException("Mascota no encontrada con id: " + id));
+        mascota.setEstado("Eliminada");
+        repo.save(mascota);
     }
 
     @Override

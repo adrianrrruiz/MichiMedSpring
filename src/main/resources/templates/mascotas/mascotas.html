@@ -81,7 +81,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:each="mascota : ${mascotas}">
+            <!-- Filtro para no mostrar mascotas con estado "Eliminada" -->
+            <tr th:each="mascota : ${mascotas}" th:if="${mascota.estado != 'Eliminada'}">
               <td th:text="${mascota.nombre}"></td>
               <td th:text="${mascota.raza}"></td>
               <td th:text="${mascota.edad + ' años'}"></td>
@@ -99,12 +100,12 @@
                 />
               </td>
               <td>
-                <a class="btn btn-primary rounded-5" th:href="@{/mascotas/{id}(id=${mascota.id})}"><i class="bi bi-eye-fill"></i></i></a>
+                <a class="btn btn-primary rounded-5" th:href="@{/mascotas/{id}(id=${mascota.id})}"><i class="bi bi-eye-fill"></i></a>
                 <a class="btn btn-primary rounded-5" th:href="@{/mascotas/update/{id}(id=${mascota.id})}"><i class="bi bi-pen"></i></a>
                 <a class="btn btn-danger rounded-5" th:href="@{/mascotas/delete/{id}(id=${mascota.id})}">X</a>
               </td>
             </tr>
-          </tbody>
+          </tbody>          
         </table>
       </container>
     </main>

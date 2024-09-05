@@ -21,12 +21,20 @@ public class ClienteService implements ClienteServiceInterface {
     @Override
     public Long verifyCredentials(User user) {
         Optional<Cliente> cliente = repository.findByEmail(user.getEmail());
+        
         if (cliente.isPresent()) {
-            return cliente.get().getContrasena().equals(user.getPassword()) ? cliente.get().getId() : -1L;
+            String clienteContrasena = cliente.get().getContrasena();
+            String userPassword = user.getPassword();
+            
+            // Verificar que ambas contraseñas no sean null antes de la comparación
+            if (clienteContrasena != null && clienteContrasena.equals(userPassword)) {
+                return cliente.get().getId();
+            }
         }
+        
         return -1L;
     }
-
+    
     @Override
     public List<Mascota> getMascotas(Long id) {
         return repository.findById(id).get().getMascotas();

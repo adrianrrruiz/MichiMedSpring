@@ -3,6 +3,8 @@ package com.example.demo.entidad;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.Where;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +15,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
+@Where(clause = "estado <> 'Eliminada'")  // Filtrar automáticamente mascotas eliminadas
 public class Mascota {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -26,6 +30,7 @@ public class Mascota {
     private String fechaEntrada;
     private String fechaSalida;
     private String medicamento;
+
     @Column(length = 500)
     private String foto;
 
@@ -164,5 +169,15 @@ public class Mascota {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public List<Veterinario> getVeterinarios() {
+        return veterinarios;
+    }
+    
+    public void setVeterinarios(List<Veterinario> veterinarios) {
+        this.veterinarios = veterinarios;
+    }
+    
+
 
 }

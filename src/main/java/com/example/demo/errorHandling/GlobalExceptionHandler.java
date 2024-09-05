@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleException(Model model, Exception ex) {
-        model.addAttribute("errorCode", 404);
+        model.addAttribute("errorCode", 500);
         model.addAttribute("message", "Ocurrió un error en el servidor. Por favor, intenta de nuevo más tarde.");
         return "error";
     }
