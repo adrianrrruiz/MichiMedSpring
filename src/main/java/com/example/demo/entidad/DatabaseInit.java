@@ -458,47 +458,47 @@ public class DatabaseInit implements ApplicationRunner {
 
                 // Veterinarios
                 veterinarioRepository.save(new Veterinario("123456789", "Juan Pérez", "1234", "Cirugía",
-                                "http://foto.url/juan_perez", 10));
+                                "http://foto.url/juan_perez"));
                 veterinarioRepository.save(new Veterinario("987654321", "María Gómez", "4321", "Dermatología",
-                                "http://foto.url/maria_gomez", 15));
+                                "http://foto.url/maria_gomez"));
                 veterinarioRepository.save(new Veterinario("456789123", "Carlos Díaz", "5678", "Oncología",
-                                "http://foto.url/carlos_diaz", 8));
+                                "http://foto.url/carlos_diaz"));
                 veterinarioRepository.save(new Veterinario("789123456", "Laura Sánchez", "8765", "Cardiología",
-                                "http://foto.url/laura_sanchez", 12));
+                                "http://foto.url/laura_sanchez"));
                 veterinarioRepository.save(new Veterinario("654321987", "Pedro Ramírez", "3456", "Neurología",
-                                "http://foto.url/pedro_ramirez", 20));
+                                "http://foto.url/pedro_ramirez"));
                 veterinarioRepository.save(new Veterinario("321654987", "Lucía Martínez", "6789", "Gastroenterología",
-                                "http://foto.url/lucia_martinez", 14));
+                                "http://foto.url/lucia_martinez"));
                 veterinarioRepository.save(new Veterinario("456123789", "Andrés Torres", "7890", "Oftalmología",
-                                "http://foto.url/andres_torres", 9));
+                                "http://foto.url/andres_torres"));
                 veterinarioRepository.save(new Veterinario("789654123", "Elena González", "8901", "Ortopedia",
-                                "http://foto.url/elena_gonzalez", 11));
+                                "http://foto.url/elena_gonzalez"));
                 veterinarioRepository.save(new Veterinario("147852369", "Sofía Ruiz", "9012", "Pediatría",
-                                "http://foto.url/sofia_ruiz", 18));
+                                "http://foto.url/sofia_ruiz"));
                 veterinarioRepository.save(new Veterinario("963852741", "Roberto Morales", "2345", "Urología",
-                                "http://foto.url/roberto_morales", 7));
+                                "http://foto.url/roberto_morales"));
                 veterinarioRepository.save(new Veterinario("258369147", "Adriana Castro", "3456", "Endocrinología",
-                                "http://foto.url/adriana_castro", 16));
+                                "http://foto.url/adriana_castro"));
                 veterinarioRepository.save(new Veterinario("147963258", "Gabriel Fernández", "4567", "Neumología",
-                                "http://foto.url/gabriel_fernandez", 13));
+                                "http://foto.url/gabriel_fernandez"));
                 veterinarioRepository.save(new Veterinario("852741963", "Patricia Herrera", "5678", "Hematología",
-                                "http://foto.url/patricia_herrera", 10));
+                                "http://foto.url/patricia_herrera"));
                 veterinarioRepository.save(new Veterinario("369258147", "Ricardo Silva", "6789", "Dermatología",
-                                "http://foto.url/ricardo_silva", 19));
+                                "http://foto.url/ricardo_silva"));
                 veterinarioRepository.save(new Veterinario("753159852", "Martín López", "7890", "Reumatología",
-                                "http://foto.url/martin_lopez", 8));
+                                "http://foto.url/martin_lopez"));
                 veterinarioRepository.save(new Veterinario("951753258", "Alicia Vega", "8901", "Oncología",
-                                "http://foto.url/alicia_vega", 12));
+                                "http://foto.url/alicia_vega"));
                 veterinarioRepository.save(new Veterinario("159753486", "Natalia Ramos", "9123", "Nefrología",
-                                "http://foto.url/natalia_ramos", 22));
+                                "http://foto.url/natalia_ramos"));
                 veterinarioRepository.save(new Veterinario("753486159", "Eduardo Pérez", "1239", "Psiquiatría",
-                                "http://foto.url/eduardo_perez", 17));
+                                "http://foto.url/eduardo_perez"));
                 veterinarioRepository.save(new Veterinario("486159753", "Isabel Morales", "1345", "Inmunología",
-                                "http://foto.url/isabel_morales", 14));
+                                "http://foto.url/isabel_morales"));
                 veterinarioRepository.save(new Veterinario("975318642", "Fernando Castro", "4561", "Infectología",
-                                "http://foto.url/fernando_castro", 25));
+                                "http://foto.url/fernando_castro"));
                 veterinarioRepository.save(new Veterinario("753864159", "Paola Medina", "5612", "Geriatría",
-                                "http://foto.url/paola_medina", 13));
+                                "http://foto.url/paola_medina"));
 
                 // Tratamientos
                 tratamientoRepository.save(new Tratamiento("05/08/26"));

@@ -6,8 +6,8 @@ import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
@@ -26,18 +26,16 @@ public class Veterinario {
     private String contrasena;
     private String especialidad;
     private String urlFoto;
-    private int numAtenciones;
 
     public Veterinario() {
     }
 
-    public Veterinario(String cedula, String nombre, String contrasena, String especialidad, String urlFoto, int numAtenciones) {
+    public Veterinario(String cedula, String nombre, String contrasena, String especialidad, String urlFoto) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.contrasena = contrasena;
         this.especialidad = especialidad;
         this.urlFoto = urlFoto;
-        this.numAtenciones = numAtenciones;
     }
 
     public Long getId() {
@@ -95,14 +93,5 @@ public class Veterinario {
     public void setUrlFoto(String urlFoto) {
         this.urlFoto = urlFoto;
     }
-
-    public int getNumAtenciones() {
-        return numAtenciones;
-    }
-
-    public void setNumAtenciones(int numAtenciones) {
-        this.numAtenciones = numAtenciones;
-    }
-
     
 }
