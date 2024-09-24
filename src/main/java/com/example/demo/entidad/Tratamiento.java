@@ -35,6 +35,12 @@ public class Tratamiento {
         this.fecha = fecha;
     }
 
+    public Tratamiento(String fecha, Mascota mascota, Veterinario veterinario) {
+        this.fecha = fecha;
+        this.mascota = mascota;
+        this.veterinario = veterinario;
+    }
+
     public Long getId() {
         return id;
     }

@@ -2,7 +2,6 @@ package com.example.demo.entidad;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,8 @@ public class DatabaseInit implements ApplicationRunner {
 
         @Autowired
         TratamientoRepository tratamientoRepository;
+
+
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
@@ -500,7 +501,7 @@ public class DatabaseInit implements ApplicationRunner {
                 veterinarioRepository.save(new Veterinario("753864159", "Paola Medina", "5612", "Geriatría",
                                 "http://foto.url/paola_medina"));
 
-                // Tratamientos
+                 // Crear y guardar Tratamientos con relaciones
                 tratamientoRepository.save(new Tratamiento("05/08/26"));
                 tratamientoRepository.save(new Tratamiento("06/08/26"));
                 tratamientoRepository.save(new Tratamiento("07/08/26"));
@@ -509,6 +510,8 @@ public class DatabaseInit implements ApplicationRunner {
                 tratamientoRepository.save(new Tratamiento("10/08/26"));
                 tratamientoRepository.save(new Tratamiento("11/08/26"));
                 tratamientoRepository.save(new Tratamiento("12/08/26"));
+                tratamientoRepository.save(new Tratamiento("13/08/26"));
+                tratamientoRepository.save(new Tratamiento("14/08/26"));
 
                 // Drogas
                 drogaRepository.save(new Droga("esomeprazol", 12.0, 15.0, 8, 6));
@@ -520,60 +523,82 @@ public class DatabaseInit implements ApplicationRunner {
                 // Obtener todas las mascotas y clientes
                 List<Mascota> mascotas = mascotaRepository.findAll();
                 List<Cliente> clientes = clienteRepository.findAll();
-
+                
+                // Verificar que las listas no estén vacías
+                if (mascotas.isEmpty() || clientes.isEmpty()) {
+                    throw new RuntimeException("No se encontraron mascotas o clientes en la base de datos");
+                }
+                
                 // Mezclar las listas para asegurar la aleatoriedad
                 Collections.shuffle(mascotas);
                 Collections.shuffle(clientes);
-
+                
                 // Asignar mascotas a clientes de forma cíclica
                 int numClientes = clientes.size();
                 for (int i = 0; i < mascotas.size(); i++) {
-                        Mascota mascota = mascotas.get(i);
-                        Cliente cliente = clientes.get(i % numClientes);
-                        mascota.setCliente(cliente);
-                        mascotaRepository.save(mascota);
+                    Mascota mascota = mascotas.get(i);
+                    Cliente cliente = clientes.get(i % numClientes);
+                    mascota.setCliente(cliente);
+                    mascotaRepository.save(mascota);
                 }
-                int CANTIDAD_VETERINARIOS = veterinarioRepository.findAll().size();
-                int CANTIDAD_MASCOTAS = mascotaRepository.findAll().size();
-
-                // Asignar tratamientos a veterinarios y mascotas
-                for (Tratamiento tratamiento : tratamientoRepository.findAll()) {
-                        int id_veterinario = ThreadLocalRandom.current().nextInt(CANTIDAD_VETERINARIOS);
-                        int id_mascota = ThreadLocalRandom.current().nextInt(CANTIDAD_MASCOTAS);
-
-                        Optional<Veterinario> optionalVeterinario = veterinarioRepository
-                                        .findById(Long.valueOf(id_veterinario));
-                        Optional<Mascota> optionalMascota = mascotaRepository.findById(Long.valueOf(id_mascota));
-
-                        if (optionalVeterinario.isPresent() && optionalMascota.isPresent()) {
-                                Veterinario veterinario = optionalVeterinario.get();
-                                Mascota mascota = optionalMascota.get();
-
-                                tratamiento.setVeterinario(veterinario);
-                                tratamiento.setMascota(mascota);
-                        } else {
-                                // Manejo en caso de que no se encuentre un veterinario o una mascota
-                                System.out.println("Veterinario o mascota no encontrado. Tratamiento no asignado.");
-                        }
-                }
-
-                // Obtener todas las drogas y tratamientos
+                
+                // Obtener todas las veterinarios y tratamientos
+                List<Veterinario> veterinarios = veterinarioRepository.findAll();
                 List<Tratamiento> tratamientos = tratamientoRepository.findAll();
+                
+                // Verificar que las listas no estén vacías
+                if (veterinarios.isEmpty() || tratamientos.isEmpty()) {
+                    throw new RuntimeException("No se encontraron veterinarios o tratamientos en la base de datos");
+                }
+                
+                int CANTIDAD_VETERINARIOS = veterinarios.size();
+                int CANTIDAD_MASCOTAS = mascotas.size();
+                
+                // Asignar tratamientos a veterinarios y mascotas
+                for (Tratamiento tratamiento : tratamientos) {
+                    int id_veterinario = ThreadLocalRandom.current().nextInt(CANTIDAD_VETERINARIOS);
+                    int id_mascota = ThreadLocalRandom.current().nextInt(CANTIDAD_MASCOTAS);
+                
+                    Veterinario veterinario = veterinarios.get(id_veterinario);
+                    Mascota mascota = mascotas.get(id_mascota);
+                
+                    tratamiento.setVeterinario(veterinario);
+                    tratamiento.setMascota(mascota);
+                    tratamientoRepository.save(tratamiento); // Guardar el tratamiento actualizado
+                }
+                
+                // Obtener todas las drogas
                 List<Droga> drogas = drogaRepository.findAll();
-
+                
+                // Verificar que la lista no esté vacía
+                if (drogas.isEmpty()) {
+                    throw new RuntimeException("No se encontraron drogas en la base de datos");
+                }
+                
                 // Mezclar las listas para asegurar la aleatoriedad
                 Collections.shuffle(tratamientos);
                 Collections.shuffle(drogas);
-
+                
                 // Asignar drogas a tratamientos
                 int CANTIDAD_TRATAMIENTOS = tratamientos.size();
                 for (int i = 0; i < drogas.size(); i++) {
-                        Droga droga = drogas.get(i);
-                        Tratamiento tratamiento = tratamientos.get(i % CANTIDAD_TRATAMIENTOS);
-                        droga.setTratamiento(tratamiento);
-                        drogaRepository.save(droga);
+                    Droga droga = drogas.get(i);
+                    Tratamiento tratamiento = tratamientos.get(i % CANTIDAD_TRATAMIENTOS);
+                    droga.setTratamiento(tratamiento);
+                    drogaRepository.save(droga);
                 }
 
+                Long mascotaId = 1L; // El id de la mascota que quieres asociar
+                Long veterinarioId = 2L; // El id del veterinario que quieres asociar
+                
+                // Ahora los usas para obtener la mascota y el veterinario desde la base de datos
+                Mascota mascota = mascotaRepository.findById(mascotaId).orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+                Veterinario veterinario = veterinarioRepository.findById(veterinarioId).orElseThrow(() -> new RuntimeException("Veterinario no encontrado"));
+                
+                // Crear un tratamiento y asignar la mascota y el veterinario
+                Tratamiento tratamiento = new Tratamiento("05/08/26", mascota, veterinario);
+                tratamientoRepository.save(tratamiento);
+                
         }
 
 }
