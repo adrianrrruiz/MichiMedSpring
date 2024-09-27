@@ -1,6 +1,5 @@
 package com.example.demo.servicio;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +21,7 @@ public class MascotaService implements MascotaServiceInterface {
     }
 
     @Override
-    public Collection<Mascota> SearchAll() {
+    public List<Mascota> SearchAll() {
         List<Mascota> todasLasMascotas = repo.findAll();
         // Filtrar mascotas eliminadas antes de devolverlas
         List<Mascota> mascotasActivas = todasLasMascotas.stream()

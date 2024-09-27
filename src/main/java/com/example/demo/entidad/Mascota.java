@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,9 +36,11 @@ public class Mascota {
     @Column(length = 500)
     private String foto;
 
+    @JsonIgnore
     @ManyToOne
     private Cliente cliente;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "tratamiento", joinColumns = @JoinColumn(name = "mascota_id"), inverseJoinColumns = @JoinColumn(name = "veterinario_id"))
     private List<Veterinario> veterinarios = new ArrayList<>();
