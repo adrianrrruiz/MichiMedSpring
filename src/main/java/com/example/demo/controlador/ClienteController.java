@@ -2,6 +2,7 @@ package com.example.demo.controlador;
 
 import java.util.Collection;
 import java.util.List;
+import com.example.demo.entidad.Mascota;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entidad.Cliente;
 import com.example.demo.servicio.ClienteService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RequestMapping("/clientes")
 @RestController
@@ -35,6 +38,12 @@ public class ClienteController {
     public Collection<Cliente> getAllClientes() {
         return clienteService.SearchAll();
     }
+
+    @GetMapping("/mascotas/{id}")    
+    public List<Mascota> getMascotasCliente(@PathVariable("id") Long id) {
+        return clienteService.getMascotas(id);
+    }
+    
 
     // http://localhost:8090/clientes/{id}
     @GetMapping("/{id}")
