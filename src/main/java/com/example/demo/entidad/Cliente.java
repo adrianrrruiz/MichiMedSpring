@@ -3,6 +3,8 @@ package com.example.demo.entidad;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,6 +28,7 @@ public class Cliente {
     
     private String contrasena;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<Mascota> mascotas = new ArrayList<>();
 

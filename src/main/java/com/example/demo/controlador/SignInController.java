@@ -8,6 +8,7 @@ import com.example.demo.entidad.User;
 import com.example.demo.servicio.ClienteServiceInterface;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/sign-in")
 public class SignInController {
 
