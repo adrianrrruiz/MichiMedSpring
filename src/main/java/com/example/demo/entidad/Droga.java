@@ -2,6 +2,7 @@ package com.example.demo.entidad;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
@@ -9,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 public class Droga {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
 
     private String nombre;  
@@ -31,6 +32,8 @@ public class Droga {
         this.uniDisp = uniDisp;
         this.uniVend = uniVend;
     }
+
+    // Getters y Setters
 
     public Long getId() {
         return id;
@@ -87,7 +90,4 @@ public class Droga {
     public void setTratamiento(Tratamiento tratamiento) {
         this.tratamiento = tratamiento;
     }
-    
-
-    
 }
