@@ -64,18 +64,6 @@ public class ClienteService implements ClienteServiceInterface {
         repository.save(cliente);
     }
 
-    @Override
-    public Cliente addMascotaToCliente(Long id, Mascota mascota) {
-        Optional<Cliente> clienteOpt = repository.findById(id);
-        if (clienteOpt.isPresent()) {
-            Cliente cliente = clienteOpt.get();
-            mascota.setCliente(cliente);
-            cliente.getMascotas().add(mascota);
-            return repository.save(cliente);
-        } else {
-            throw new IllegalArgumentException("Cliente no encontrado");
-        }
-    }
 
     @Override
     public void add(Cliente cliente) {

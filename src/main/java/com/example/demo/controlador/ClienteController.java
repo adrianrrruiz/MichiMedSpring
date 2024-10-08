@@ -93,8 +93,6 @@ public class ClienteController {
         clienteService.deleteById(id);
     }
 
-    @PostMapping("/{id}/mascotas")
-    public Cliente addMascotaToCliente(@PathVariable Long id, @RequestBody Mascota mascota) {
-        return clienteService.addMascotaToCliente(id, mascota);
-    }
+    
+    
 }
