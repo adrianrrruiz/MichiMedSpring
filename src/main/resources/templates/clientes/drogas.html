@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Medicamentos Veterinarios</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h3 class="mb-4">Listado de Medicamentos Veterinarios</h3>
+
+        <!-- Formulario para subir archivo -->
+        <form id="uploadForm" action="/cargarMedicamentos" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="file" class="form-label">Subir archivo de Medicamentos (Excel)</label>
+                <input type="file" class="form-control" id="file" name="file" accept=".xlsx">
+            </div>
+            <button type="submit" class="btn btn-primary">Subir y Mostrar Medicamentos</button>
+        </form>
+
+        <!-- Campo de búsqueda general -->
+        <div class="row mt-4">
+            <div class="col">
+                <input type="text" class="form-control" id="buscarInput" placeholder="Buscar en la tabla..." oninput="buscarMedicamento()">
+            </div>
+        </div>
+
+        <!-- Tabla de Medicamentos -->
+        <h4 class="mt-5">Medicamentos Cargados</h4>
+        <table class="table table-bordered table-striped" id="medicamentosTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio Compra</th>
+                    <th>Precio Venta</th>
+                    <th>Unidades Disponibles</th>
+                    <th>Unidades Vendidas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="droga, stat : ${drogas}">
+                    <td th:text="${stat.count}"></td>
+                    <td th:text="${droga.nombre}"></td>
+                    <td th:text="${droga.precioCompra}"></td>
+                    <td th:text="${droga.precioVenta}"></td>
+                    <td th:text="${droga.uniDisp}"></td>
+                    <td th:text="${droga.uniVend}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}"></div>
+    </div>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script para buscar en la tabla -->
+    <script>
+        function buscarMedicamento() {
+            // Obtener el valor del campo de búsqueda
+            var input = document.getElementById("buscarInput").value.toLowerCase();
+            var table = document.getElementById("medicamentosTable");
+            var tr = table.getElementsByTagName("tr");
+
+            // Iterar sobre todas las filas de la tabla
+            for (var i = 1; i < tr.length; i++) {
+                var rowVisible = false;
+                var td = tr[i].getElementsByTagName("td");
+
+                // Verificar si alguna celda de la fila contiene el texto buscado
+                for (var j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        var cellText = td[j].textContent || td[j].innerText;
+                        if (cellText.toLowerCase().indexOf(input) > -1) {
+                            rowVisible = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Mostrar u ocultar la fila según si contiene el texto buscado
+                if (rowVisible) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
