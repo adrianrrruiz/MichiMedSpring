@@ -24,4 +24,6 @@ public interface ClienteServiceInterface {
     public void add(Cliente cliente);
 
     Cliente findByCedula(String cedula);
+
+    public Cliente addMascotaToCliente(Long id, Mascota mascota);
 }
