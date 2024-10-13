@@ -53,8 +53,9 @@ public class MascotaController {
     }
 
     // http://localhost:8090/mascotas/add
-    @PostMapping("/add")
-    public void addMascota(@RequestBody Mascota mascota) {
+    @PostMapping("/add/{idCliente}")
+    public void addMascota(@RequestBody Mascota mascota, @PathVariable("idCliente") Long idCliente) {
+        mascota.setCliente(clienteService.SearchById(idCliente));
         mascotaService.add(mascota);
     }
 
