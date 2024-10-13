@@ -13,7 +13,7 @@ public interface ClienteServiceInterface {
 
     public List<Mascota> getMascotas(Long id);
 
-    public Cliente SearchById(Long id );
+    public Cliente SearchById(Long id);
 
     public Collection<Cliente> SearchAll();
 
@@ -24,4 +24,5 @@ public interface ClienteServiceInterface {
     public void add(Cliente cliente);
 
     Cliente findByCedula(String cedula);
+
 }

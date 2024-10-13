@@ -3,6 +3,8 @@ package com.example.demo.entidad;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -18,6 +20,7 @@ public class Veterinario {
     Long id;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "tratamiento", joinColumns = @JoinColumn (name = "veterinario_id"), inverseJoinColumns = @JoinColumn(name = "mascota_id"))
     private List<Mascota> mascotas = new ArrayList<>();
 

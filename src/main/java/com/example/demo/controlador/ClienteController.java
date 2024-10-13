@@ -2,6 +2,7 @@ package com.example.demo.controlador;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import com.example.demo.entidad.Mascota;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entidad.Cliente;
 import com.example.demo.servicio.ClienteService;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RequestMapping("/clientes")
 @RestController
@@ -92,4 +92,7 @@ public class ClienteController {
     public void deleteCliente(@PathVariable("id") Long id) {
         clienteService.deleteById(id);
     }
+
+    
+    
 }
