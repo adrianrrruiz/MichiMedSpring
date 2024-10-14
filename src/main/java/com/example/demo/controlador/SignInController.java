@@ -18,12 +18,6 @@ public class SignInController {
     @Autowired
     ClienteServiceInterface clienteService;
 
-    @GetMapping
-    public ResponseEntity<User> signIn() {
-        User user = new User("", "");
-        return ResponseEntity.ok(user);
-    }
-
     @PostMapping
     public ResponseEntity<Map<String, Object>> verifyCredentials(@RequestBody User user) {
         Long id = clienteService.verifyCredentials(user);

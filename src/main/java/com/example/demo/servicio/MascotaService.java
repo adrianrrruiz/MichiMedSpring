@@ -11,40 +11,41 @@ import com.example.demo.repositorio.MascotaRepository;
 
 @Service
 public class MascotaService implements MascotaServiceInterface {
-    
+
     @Autowired
-    MascotaRepository repo;
+    MascotaRepository repository;
 
     @Override
     public Mascota SearchById(Long id) {
-        return repo.findById(id).orElseThrow(() -> new RuntimeException("Mascota no encontrada con id: " + id));
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Mascota no encontrada con id: " + id));
     }
 
     @Override
     public List<Mascota> SearchAll() {
-        List<Mascota> todasLasMascotas = repo.findAll();
+        List<Mascota> todasLasMascotas = repository.findAll();
         // Filtrar mascotas eliminadas antes de devolverlas
         List<Mascota> mascotasActivas = todasLasMascotas.stream()
-            .filter(mascota -> !"Eliminada".equalsIgnoreCase(mascota.getEstado()))
-            .collect(Collectors.toList());
+                .filter(mascota -> !"Eliminada".equalsIgnoreCase(mascota.getEstado()))
+                .collect(Collectors.toList());
 
         return mascotasActivas;
     }
 
     @Override
     public void deleteById(Long id) {
-        Mascota mascota = repo.findById(id).orElseThrow(() -> new RuntimeException("Mascota no encontrada con id: " + id));
+        Mascota mascota = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada con id: " + id));
         mascota.setEstado("Eliminada");
-        repo.save(mascota);
+        repository.save(mascota);
     }
 
     @Override
     public void update(Mascota mascota) {
-        repo.save(mascota);
+        repository.save(mascota);
     }
 
     @Override
     public void add(Mascota mascota) {
-        repo.save(mascota);
+        repository.save(mascota);
     }
 }

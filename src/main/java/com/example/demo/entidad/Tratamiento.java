@@ -3,6 +3,8 @@ package com.example.demo.entidad;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,18 +14,21 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Tratamiento {
-    
+
     @Id
     @GeneratedValue
     Long id;
 
+    @JsonIgnore
     @ManyToOne
     private Mascota mascota;
 
+    @JsonIgnore
     @ManyToOne
     private Veterinario veterinario;
 
-    @OneToMany(mappedBy = "tratamiento", cascade=CascadeType.ALL, orphanRemoval=true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "tratamiento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Droga> drogas = new ArrayList<>();
 
     private String fecha;
@@ -80,5 +85,5 @@ public class Tratamiento {
     public void setDrogas(List<Droga> drogas) {
         this.drogas = drogas;
     }
-    
+
 }

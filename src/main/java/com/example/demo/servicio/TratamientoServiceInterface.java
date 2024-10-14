@@ -10,7 +10,7 @@ public interface TratamientoServiceInterface {
 
     public Tratamiento searchById(Long id);
 
-    public List<Tratamiento> searchAll();
+    public List<Tratamiento> SearchAll();
 
     public void deleteById(Long id);
 

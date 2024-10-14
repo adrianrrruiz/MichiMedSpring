@@ -1,8 +1,9 @@
 package com.example.demo.entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
@@ -10,15 +11,16 @@ import jakarta.persistence.ManyToOne;
 public class Droga {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
+    @GeneratedValue
+    private Long id;
 
-    private String nombre;  
-    private double precioCompra;  
-    private double precioVenta; 
-    private int uniDisp;  
-    private int uniVend; 
-    
+    private String nombre;
+    private double precioCompra;
+    private double precioVenta;
+    private int uniDisp;
+    private int uniVend;
+
+    @JsonIgnore
     @ManyToOne
     private Tratamiento tratamiento;
 

@@ -1,6 +1,5 @@
 package com.example.demo.servicio;
 
-import java.util.Collection;
 import java.util.List;
 
 import com.example.demo.entidad.Cliente;
@@ -15,7 +14,7 @@ public interface ClienteServiceInterface {
 
     public Cliente SearchById(Long id);
 
-    public Collection<Cliente> SearchAll();
+    public List<Cliente> SearchAll();
 
     public void deleteById(Long id);
 

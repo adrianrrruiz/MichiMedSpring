@@ -1,6 +1,5 @@
 package com.example.demo.servicio;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,27 +13,27 @@ import com.example.demo.repositorio.ClienteRepository;
 
 @Service
 public class ClienteService implements ClienteServiceInterface {
-    
+
     @Autowired
     ClienteRepository repository;
 
     @Override
     public Long verifyCredentials(User user) {
         Optional<Cliente> cliente = repository.findByEmail(user.getEmail());
-        
+
         if (cliente.isPresent()) {
             String clienteContrasena = cliente.get().getContrasena();
             String userPassword = user.getPassword();
-            
+
             // Verificar que ambas contraseñas no sean null antes de la comparación
             if (clienteContrasena != null && clienteContrasena.equals(userPassword)) {
                 return cliente.get().getId();
             }
         }
-        
+
         return -1L;
     }
-    
+
     @Override
     public List<Mascota> getMascotas(Long id) {
         return repository.findById(id).get().getMascotas();
@@ -46,7 +45,7 @@ public class ClienteService implements ClienteServiceInterface {
     }
 
     @Override
-    public Collection<Cliente> SearchAll() {
+    public List<Cliente> SearchAll() {
         return repository.findAll();
     }
 
@@ -63,7 +62,6 @@ public class ClienteService implements ClienteServiceInterface {
         }
         repository.save(cliente);
     }
-
 
     @Override
     public void add(Cliente cliente) {

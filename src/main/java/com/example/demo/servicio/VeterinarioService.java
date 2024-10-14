@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.Veterinario;
 import com.example.demo.repositorio.VeterinarioRepository;
@@ -39,7 +38,7 @@ public class VeterinarioService implements VeterinarioServiceInterface {
     @Override
     public void update(Veterinario veterinario) {
         Veterinario existingVeterinario = findByCedula(veterinario.getCedula());
-        if (existingVeterinario != null && !existingVeterinario.getId().equals(veterinario.getId())){
+        if (existingVeterinario != null && !existingVeterinario.getId().equals(veterinario.getId())) {
             throw new IllegalArgumentException("Ya existe un veterinario con esta cédula");
         }
         repository.save(veterinario);
@@ -48,16 +47,15 @@ public class VeterinarioService implements VeterinarioServiceInterface {
     @Override
     public void add(Veterinario veterinario) {
         Veterinario existingVeterinario = findByCedula(veterinario.getCedula());
-        if (existingVeterinario != null && !existingVeterinario.getId().equals(veterinario.getId())){
+        if (existingVeterinario != null && !existingVeterinario.getId().equals(veterinario.getId())) {
             throw new IllegalArgumentException("Ya existe un veterinario con esta cédula");
         }
         repository.save(veterinario);
     }
 
-      @Override
+    @Override
     public Veterinario findByCedula(String cedula) {
         return repository.findByCedula(cedula).orElse(null);
     }
-
 
 }
