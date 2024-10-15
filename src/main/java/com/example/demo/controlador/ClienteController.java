@@ -55,6 +55,8 @@ public class ClienteController {
     // http://localhost:8090/clientes/update
     @PutMapping("/update")
     public void updateCliente(@RequestBody Cliente cliente) {
+        List<Mascota> mascotas = clienteService.SearchById(cliente.getId()).getMascotas();
+        cliente.setMascotas(mascotas);
         clienteService.update(cliente);
     }
 

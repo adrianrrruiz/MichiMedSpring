@@ -18,4 +18,11 @@ public class DrogaService implements DrogaServiceInterface {
     public List<Droga> SearchAll() {
         return drogaRepository.findAll();
     }
+
+    @Override
+    public void add(Droga[] drogas) {
+        for (Droga droga : drogas) {
+            drogaRepository.save(droga);
+        }
+    }
 }

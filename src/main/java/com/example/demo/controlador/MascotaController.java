@@ -62,6 +62,8 @@ public class MascotaController {
     // http://localhost:8090/mascotas/update/{id}
     @PutMapping("/update")
     public void updateMascota(@RequestBody Mascota mascota) {
+        Cliente cliente = mascotaService.SearchById(mascota.getId()).getCliente();
+        mascota.setCliente(cliente);
         mascotaService.update(mascota);
     }
 

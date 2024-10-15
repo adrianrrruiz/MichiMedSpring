@@ -7,4 +7,6 @@ import com.example.demo.entidad.Droga;
 public interface DrogaServiceInterface {
 
     public List<Droga> SearchAll();
+
+    public void add(Droga[] drogas);
 }

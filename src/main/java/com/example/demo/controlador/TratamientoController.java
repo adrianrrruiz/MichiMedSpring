@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entidad.Tratamiento;
 import com.example.demo.servicio.TratamientoServiceInterface;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RequestMapping("/tratamientos")
 @RestController
@@ -24,4 +26,10 @@ public class TratamientoController {
     public List<Tratamiento> getAllTratamientos() {
         return tratamientoService.SearchAll();
     }
+
+    @PostMapping("/add")
+    public void addTratamiento(@RequestBody Tratamiento tratamiento) {
+        tratamientoService.add(tratamiento);
+    }
+
 }

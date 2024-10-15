@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entidad.Droga;
 import com.example.demo.servicio.DrogaServiceInterface;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RequestMapping("/drogas")
 @RestController
@@ -23,6 +25,11 @@ public class DrogaController {
     @GetMapping("")
     public List<Droga> getAllDrogas() {
         return drogaService.SearchAll();
+    }
+
+    @PostMapping("/add")
+    public void addDrogas(@RequestBody Droga[] drogas) {
+        drogaService.add(drogas);
     }
 
 }
