@@ -1,6 +1,9 @@
 package com.example.demo.controlador;
 
 import java.util.List;
+import java.util.HashMap;
+
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -66,5 +69,18 @@ public class MascotaController {
     @DeleteMapping("/delete/{id}")
     public void deleteMascota(@PathVariable("id") Long id) {
         mascotaService.deleteById(id);
+    }
+
+    // http://localhost:8090/mascotas/estado
+    @GetMapping("/estado")
+    public Map<String, Integer> obtenerEstadoMascotas() {
+        int enTratamiento = mascotaService.obtenerCantidadMascotasEnTratamiento();
+        int tratadas = mascotaService.obtenerCantidadMascotasTratadas();
+
+        Map<String, Integer> response = new HashMap<>();
+        response.put("enTratamiento", enTratamiento);
+        response.put("tratadas", tratadas);
+
+        return response;
     }
 }

@@ -48,4 +48,20 @@ public class MascotaService implements MascotaServiceInterface {
     public void add(Mascota mascota) {
         repository.save(mascota);
     }
+
+    @Override
+    public int obtenerCantidadMascotasEnTratamiento() {
+        List<Mascota> todasLasMascotas = repository.findAll();
+        return (int) todasLasMascotas.stream()
+                .filter(mascota -> "En Tratamiento".equalsIgnoreCase(mascota.getEstado()))
+                .count();
+    }
+
+    @Override
+    public int obtenerCantidadMascotasTratadas() {
+        List<Mascota> todasLasMascotas = repository.findAll();
+        return (int) todasLasMascotas.stream()
+                .filter(mascota -> "Tratado".equalsIgnoreCase(mascota.getEstado()))
+                .count();
+    }
 }

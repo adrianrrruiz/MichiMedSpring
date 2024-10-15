@@ -15,5 +15,9 @@ public interface MascotaServiceInterface {
     public void update(Mascota mascota);
 
     public void add(Mascota mascota);
+
+    public int obtenerCantidadMascotasEnTratamiento();
+
+    public int obtenerCantidadMascotasTratadas();
     
 }
