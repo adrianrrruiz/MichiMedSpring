@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entidad.Droga;
+import com.example.demo.entidad.HistorialMedicoDTO;
 import com.example.demo.entidad.Tratamiento;
 import com.example.demo.entidad.TratamientoDTO;
 import com.example.demo.servicio.DrogaServiceInterface;
@@ -45,6 +47,11 @@ public class TratamientoController {
             droga.setTratamiento(tratamiento);
             drogaService.update(droga);
         }
+    }
+
+    @GetMapping("/historial-medico/{id}")
+    public List<HistorialMedicoDTO> findHistorialMedicoByMascotaId(@PathVariable("id") Long id) {
+        return tratamientoService.findHistorialMedicoByMascotaId(id);
     }
 
 }

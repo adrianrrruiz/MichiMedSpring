@@ -2,11 +2,13 @@ package com.example.demo.servicio;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entidad.Droga;
+import com.example.demo.entidad.HistorialMedicoDTO;
 import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.Tratamiento;
 import com.example.demo.entidad.Veterinario;
@@ -87,5 +89,22 @@ public class TratamientoService implements TratamientoServiceInterface {
     @Override
     public void add(Tratamiento tratamiento) {
         tratamientoRepository.save(tratamiento);
+    }
+
+    @Override
+    public List<HistorialMedicoDTO> findHistorialMedicoByMascotaId(Long id) {
+        List<HistorialMedicoDTO> tratamientos = new ArrayList<>();
+        for (Tratamiento tratamiento : SearchAll()) {
+            if (tratamiento.getMascota().getId() == id) {
+                // Obtener la lista de nombres de drogas
+                List<String> nombresDrogas = tratamiento.getDrogas().stream()
+                        .map(Droga::getNombre) // Convertir las drogas a sus nombres
+                        .collect(Collectors.toList());
+                tratamientos
+                        .add(new HistorialMedicoDTO(tratamiento.getFecha(), tratamiento.getVeterinario().getNombre(),
+                                tratamiento.getVeterinario().getUrlFoto(), nombresDrogas));
+            }
+        }
+        return tratamientos;
     }
 }
