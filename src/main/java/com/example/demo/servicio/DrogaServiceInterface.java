@@ -9,4 +9,6 @@ public interface DrogaServiceInterface {
     public List<Droga> SearchAll();
 
     public void add(Droga[] drogas);
+
+    public void update(Droga droga);
 }

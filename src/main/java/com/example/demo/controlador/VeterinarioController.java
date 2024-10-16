@@ -57,6 +57,8 @@ public class VeterinarioController {
     // localhost:8090/veterinarios/update
     @PutMapping("/update")
     public void updateVeterinario(@RequestBody Veterinario veterinario) {
+        List<Mascota> mascotas = veterinarioService.SearchById(veterinario.getId()).getMascotas();
+        veterinario.setMascotas(mascotas);
         veterinarioService.update(veterinario);
     }
 

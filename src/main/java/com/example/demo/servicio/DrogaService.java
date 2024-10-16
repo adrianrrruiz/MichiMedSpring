@@ -25,4 +25,9 @@ public class DrogaService implements DrogaServiceInterface {
             drogaRepository.save(droga);
         }
     }
+
+    @Override
+    public void update(Droga droga) {
+        drogaRepository.save(droga);
+    }
 }

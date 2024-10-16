@@ -21,7 +21,7 @@ public class Veterinario {
 
     @ManyToMany
     @JsonIgnore
-    @JoinTable(name = "tratamiento", joinColumns = @JoinColumn (name = "veterinario_id"), inverseJoinColumns = @JoinColumn(name = "mascota_id"))
+    @JoinTable(name = "tratamiento", joinColumns = @JoinColumn(name = "veterinario_id", nullable = true), inverseJoinColumns = @JoinColumn(name = "mascota_id", nullable = true))
     private List<Mascota> mascotas = new ArrayList<>();
 
     private String cedula;
@@ -96,5 +96,5 @@ public class Veterinario {
     public void setUrlFoto(String urlFoto) {
         this.urlFoto = urlFoto;
     }
-    
+
 }

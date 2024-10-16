@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entidad.Droga;
 import com.example.demo.entidad.Tratamiento;
+import com.example.demo.entidad.TratamientoDTO;
+import com.example.demo.servicio.DrogaServiceInterface;
 import com.example.demo.servicio.TratamientoServiceInterface;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +24,9 @@ public class TratamientoController {
     @Autowired
     private TratamientoServiceInterface tratamientoService;
 
+    @Autowired
+    private DrogaServiceInterface drogaService;
+
     // localhost:8090/tratamientos
     @GetMapping("")
     public List<Tratamiento> getAllTratamientos() {
@@ -28,8 +34,17 @@ public class TratamientoController {
     }
 
     @PostMapping("/add")
-    public void addTratamiento(@RequestBody Tratamiento tratamiento) {
+    public void addTratamiento(@RequestBody TratamientoDTO tratamientoDTO) {
+        Tratamiento tratamiento = new Tratamiento(tratamientoDTO.getFecha());
+        tratamiento.setMascota(tratamientoDTO.getMascota());
+        tratamiento.setVeterinario(tratamientoDTO.getVeterinario());
+
         tratamientoService.add(tratamiento);
+
+        for (Droga droga : tratamientoDTO.getDrogas()) {
+            droga.setTratamiento(tratamiento);
+            drogaService.update(droga);
+        }
     }
 
 }
