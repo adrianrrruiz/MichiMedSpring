@@ -1,25 +1,31 @@
 package com.example.demo.entidad;
 
+import java.util.List;
+import java.util.ArrayList;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Droga {
 
     @Id
     @GeneratedValue
-    private Long id; 
+    private Long id;
 
-    private String nombre;  
-    private double precioCompra;  
-    private double precioVenta; 
-    private int uniDisp;  
-    private int uniVend; 
-    
-    @ManyToOne
-    private Tratamiento tratamiento;
+    private String nombre;
+    private double precioCompra;
+    private double precioVenta;
+    private int uniDisp;
+    private int uniVend;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "droga")
+    private List<Tratamiento> tratamientos = new ArrayList<>();
 
     public Droga() {
     }
@@ -31,6 +37,8 @@ public class Droga {
         this.uniDisp = uniDisp;
         this.uniVend = uniVend;
     }
+
+    // Getters y Setters
 
     public Long getId() {
         return id;
@@ -80,14 +88,11 @@ public class Droga {
         this.uniVend = uniVend;
     }
 
-    public Tratamiento getTratamiento() {
-        return tratamiento;
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
     }
 
-    public void setTratamiento(Tratamiento tratamiento) {
-        this.tratamiento = tratamiento;
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
     }
-    
-
-    
 }

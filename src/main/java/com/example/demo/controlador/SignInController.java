@@ -1,45 +1,46 @@
 package com.example.demo.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entidad.User;
-import com.example.demo.servicio.ClienteServiceInterface;
+import com.example.demo.servicio.AdministradorServiceInterface;
+import com.example.demo.servicio.VeterinarioServiceInterface;
 
+import java.util.HashMap;
+import java.util.Map;
 
-// http://localhost:8090/sign-in
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/sign-in")
-@Controller
 public class SignInController {
 
     @Autowired
-    ClienteServiceInterface clienteService;
+    AdministradorServiceInterface administradorService;
 
-    // http://localhost:8090/sign-in
-    @GetMapping
-    public String SignIn(Model model) {
-        User user = new User("", "");
+    @Autowired
+    VeterinarioServiceInterface veterinarioService;
 
-        model.addAttribute("user", user);
-        model.addAttribute("error", "");
-
-        return "signIn";
-    }
-
-    // http://localhost:8090/sign-in
     @PostMapping
-    public String verifyCredentials(@ModelAttribute("user") User user, Model model) {
-        Long id = clienteService.verifyCredentials(user);
-        if(id != -1L) {
-            return "redirect:/clientes/mascotas/" + id;
+    public ResponseEntity<Map<String, Object>> verifyCredentials(@RequestBody User user) {
+        Long id = veterinarioService.verifyCredentials(user);
+        Long idAdmin = administradorService.verifyCredentials(user);
+        Map<String, Object> response = new HashMap<>();
+        if (idAdmin != -1L) {
+            response.put("status", "ok");
+            response.put("id", idAdmin);
+            response.put("admin", true);
+            return ResponseEntity.ok(response);
         }
-        model.addAttribute("error", "Usuario o contraseña incorrectos");
-        return "signIn";
+        if (id != -1L) {
+            response.put("status", "ok");
+            response.put("id", id);
+            response.put("admin", false);
+            return ResponseEntity.ok(response);
+        }
+        response.put("status", "error");
+        response.put("message", "Usuario o contraseña incorrectos");
+        return ResponseEntity.status(401).body(response);
     }
-    
 }

@@ -1,30 +1,30 @@
 package com.example.demo.entidad;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Tratamiento {
-    
+
     @Id
     @GeneratedValue
     Long id;
 
+    @JsonIgnore
     @ManyToOne
     private Mascota mascota;
 
+    @JsonIgnore
     @ManyToOne
     private Veterinario veterinario;
 
-    @OneToMany(mappedBy = "tratamiento", cascade=CascadeType.ALL, orphanRemoval=true)
-    private List<Droga> drogas = new ArrayList<>();
+    @JsonIgnore
+    @ManyToOne
+    private Droga droga;
 
     private String fecha;
 
@@ -33,6 +33,12 @@ public class Tratamiento {
 
     public Tratamiento(String fecha) {
         this.fecha = fecha;
+    }
+
+    public Tratamiento(String fecha, Mascota mascota, Veterinario veterinario) {
+        this.fecha = fecha;
+        this.mascota = mascota;
+        this.veterinario = veterinario;
     }
 
     public Long getId() {
@@ -67,12 +73,12 @@ public class Tratamiento {
         this.fecha = fecha;
     }
 
-    public List<Droga> getDrogas() {
-        return drogas;
+    public Droga getDroga() {
+        return droga;
     }
 
-    public void setDrogas(List<Droga> drogas) {
-        this.drogas = drogas;
+    public void setDroga(Droga droga) {
+        this.droga = droga;
     }
-    
+
 }

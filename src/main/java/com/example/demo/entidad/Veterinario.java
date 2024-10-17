@@ -3,11 +3,13 @@ package com.example.demo.entidad;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
 @Entity
@@ -18,7 +20,8 @@ public class Veterinario {
     Long id;
 
     @ManyToMany
-    @JoinTable(name = "tratamiento", joinColumns = @JoinColumn (name = "veterinario_id"), inverseJoinColumns = @JoinColumn(name = "mascota_id"))
+    @JsonIgnore
+    @JoinTable(name = "tratamiento", joinColumns = @JoinColumn(name = "veterinario_id", nullable = true), inverseJoinColumns = @JoinColumn(name = "mascota_id", nullable = true))
     private List<Mascota> mascotas = new ArrayList<>();
 
     private String cedula;
@@ -26,18 +29,16 @@ public class Veterinario {
     private String contrasena;
     private String especialidad;
     private String urlFoto;
-    private int numAtenciones;
 
     public Veterinario() {
     }
 
-    public Veterinario(String cedula, String nombre, String contrasena, String especialidad, String urlFoto, int numAtenciones) {
+    public Veterinario(String cedula, String nombre, String contrasena, String especialidad, String urlFoto) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.contrasena = contrasena;
         this.especialidad = especialidad;
         this.urlFoto = urlFoto;
-        this.numAtenciones = numAtenciones;
     }
 
     public Long getId() {
@@ -96,13 +97,4 @@ public class Veterinario {
         this.urlFoto = urlFoto;
     }
 
-    public int getNumAtenciones() {
-        return numAtenciones;
-    }
-
-    public void setNumAtenciones(int numAtenciones) {
-        this.numAtenciones = numAtenciones;
-    }
-
-    
 }

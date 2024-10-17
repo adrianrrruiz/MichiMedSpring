@@ -2,7 +2,6 @@ package com.example.demo.entidad;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
+import com.example.demo.repositorio.AdministradorRepository;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
@@ -21,6 +21,9 @@ import jakarta.transaction.Transactional;
 @Controller
 @Transactional
 public class DatabaseInit implements ApplicationRunner {
+
+        @Autowired
+        AdministradorRepository administradorRepository;
 
         @Autowired
         MascotaRepository mascotaRepository;
@@ -39,6 +42,12 @@ public class DatabaseInit implements ApplicationRunner {
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
+
+                administradorRepository.save(new Administrador("1014977178", "Adrian Ruiz", "1234"));
+                administradorRepository.save(new Administrador("1052380081", "Carlos Mejía", "1234"));
+                administradorRepository.save(new Administrador("1010961264", "Juan Pablo", "1234"));
+                administradorRepository.save(new Administrador("123", "Juan Angarita", "1234"));
+
                 mascotaRepository.save(new Mascota("Michito", 3, "angola", 5.3f, "", "En tratamiento", "20/09/18",
                                 "20/09/18",
                                 "esomeprazol",
@@ -458,68 +467,84 @@ public class DatabaseInit implements ApplicationRunner {
 
                 // Veterinarios
                 veterinarioRepository.save(new Veterinario("123456789", "Juan Pérez", "1234", "Cirugía",
-                                "http://foto.url/juan_perez", 10));
+                                "https://randomuser.me/api/portraits/men/1.jpg"));
                 veterinarioRepository.save(new Veterinario("987654321", "María Gómez", "4321", "Dermatología",
-                                "http://foto.url/maria_gomez", 15));
+                                "https://randomuser.me/api/portraits/women/2.jpg"));
                 veterinarioRepository.save(new Veterinario("456789123", "Carlos Díaz", "5678", "Oncología",
-                                "http://foto.url/carlos_diaz", 8));
+                                "https://randomuser.me/api/portraits/men/3.jpg"));
                 veterinarioRepository.save(new Veterinario("789123456", "Laura Sánchez", "8765", "Cardiología",
-                                "http://foto.url/laura_sanchez", 12));
+                                "https://randomuser.me/api/portraits/women/4.jpg"));
                 veterinarioRepository.save(new Veterinario("654321987", "Pedro Ramírez", "3456", "Neurología",
-                                "http://foto.url/pedro_ramirez", 20));
+                                "https://randomuser.me/api/portraits/men/5.jpg"));
                 veterinarioRepository.save(new Veterinario("321654987", "Lucía Martínez", "6789", "Gastroenterología",
-                                "http://foto.url/lucia_martinez", 14));
+                                "https://randomuser.me/api/portraits/women/6.jpg"));
                 veterinarioRepository.save(new Veterinario("456123789", "Andrés Torres", "7890", "Oftalmología",
-                                "http://foto.url/andres_torres", 9));
+                                "https://randomuser.me/api/portraits/men/7.jpg"));
                 veterinarioRepository.save(new Veterinario("789654123", "Elena González", "8901", "Ortopedia",
-                                "http://foto.url/elena_gonzalez", 11));
+                                "https://randomuser.me/api/portraits/women/8.jpg"));
                 veterinarioRepository.save(new Veterinario("147852369", "Sofía Ruiz", "9012", "Pediatría",
-                                "http://foto.url/sofia_ruiz", 18));
+                                "https://randomuser.me/api/portraits/women/9.jpg"));
                 veterinarioRepository.save(new Veterinario("963852741", "Roberto Morales", "2345", "Urología",
-                                "http://foto.url/roberto_morales", 7));
+                                "https://randomuser.me/api/portraits/men/10.jpg"));
                 veterinarioRepository.save(new Veterinario("258369147", "Adriana Castro", "3456", "Endocrinología",
-                                "http://foto.url/adriana_castro", 16));
+                                "https://randomuser.me/api/portraits/women/11.jpg"));
                 veterinarioRepository.save(new Veterinario("147963258", "Gabriel Fernández", "4567", "Neumología",
-                                "http://foto.url/gabriel_fernandez", 13));
+                                "https://randomuser.me/api/portraits/men/12.jpg"));
                 veterinarioRepository.save(new Veterinario("852741963", "Patricia Herrera", "5678", "Hematología",
-                                "http://foto.url/patricia_herrera", 10));
+                                "https://randomuser.me/api/portraits/women/13.jpg"));
                 veterinarioRepository.save(new Veterinario("369258147", "Ricardo Silva", "6789", "Dermatología",
-                                "http://foto.url/ricardo_silva", 19));
+                                "https://randomuser.me/api/portraits/men/14.jpg"));
                 veterinarioRepository.save(new Veterinario("753159852", "Martín López", "7890", "Reumatología",
-                                "http://foto.url/martin_lopez", 8));
+                                "https://randomuser.me/api/portraits/men/15.jpg"));
                 veterinarioRepository.save(new Veterinario("951753258", "Alicia Vega", "8901", "Oncología",
-                                "http://foto.url/alicia_vega", 12));
+                                "https://randomuser.me/api/portraits/women/16.jpg"));
                 veterinarioRepository.save(new Veterinario("159753486", "Natalia Ramos", "9123", "Nefrología",
-                                "http://foto.url/natalia_ramos", 22));
+                                "https://randomuser.me/api/portraits/women/17.jpg"));
                 veterinarioRepository.save(new Veterinario("753486159", "Eduardo Pérez", "1239", "Psiquiatría",
-                                "http://foto.url/eduardo_perez", 17));
+                                "https://randomuser.me/api/portraits/men/18.jpg"));
                 veterinarioRepository.save(new Veterinario("486159753", "Isabel Morales", "1345", "Inmunología",
-                                "http://foto.url/isabel_morales", 14));
+                                "https://randomuser.me/api/portraits/women/19.jpg"));
                 veterinarioRepository.save(new Veterinario("975318642", "Fernando Castro", "4561", "Infectología",
-                                "http://foto.url/fernando_castro", 25));
+                                "https://randomuser.me/api/portraits/men/20.jpg"));
                 veterinarioRepository.save(new Veterinario("753864159", "Paola Medina", "5612", "Geriatría",
-                                "http://foto.url/paola_medina", 13));
+                                "https://randomuser.me/api/portraits/women/21.jpg"));
 
-                // Tratamientos
-                tratamientoRepository.save(new Tratamiento("05/08/26"));
-                tratamientoRepository.save(new Tratamiento("06/08/26"));
-                tratamientoRepository.save(new Tratamiento("07/08/26"));
-                tratamientoRepository.save(new Tratamiento("08/08/26"));
-                tratamientoRepository.save(new Tratamiento("09/08/26"));
-                tratamientoRepository.save(new Tratamiento("10/08/26"));
-                tratamientoRepository.save(new Tratamiento("11/08/26"));
-                tratamientoRepository.save(new Tratamiento("12/08/26"));
+                // Crear y guardar Tratamientos con relaciones
+                tratamientoRepository.save(new Tratamiento("05/08/24"));
+                tratamientoRepository.save(new Tratamiento("06/08/24"));
+                tratamientoRepository.save(new Tratamiento("07/08/24"));
+                tratamientoRepository.save(new Tratamiento("08/08/24"));
+                tratamientoRepository.save(new Tratamiento("09/08/24"));
+                tratamientoRepository.save(new Tratamiento("10/08/24"));
+                tratamientoRepository.save(new Tratamiento("11/08/24"));
+                tratamientoRepository.save(new Tratamiento("12/08/24"));
+                tratamientoRepository.save(new Tratamiento("13/08/24"));
+                tratamientoRepository.save(new Tratamiento("14/08/24"));
+                tratamientoRepository.save(new Tratamiento("14/06/24"));
+                tratamientoRepository.save(new Tratamiento("12/06/24"));
+                tratamientoRepository.save(new Tratamiento("12/06/24"));
+                tratamientoRepository.save(new Tratamiento("12/06/24"));
+                tratamientoRepository.save(new Tratamiento("12/06/24"));
+                tratamientoRepository.save(new Tratamiento("12/05/24"));
+                tratamientoRepository.save(new Tratamiento("12/05/24"));
+                tratamientoRepository.save(new Tratamiento("12/05/24"));
+                tratamientoRepository.save(new Tratamiento("12/05/24"));
 
                 // Drogas
-                drogaRepository.save(new Droga("esomeprazol", 12.0, 15.0, 8, 6));
-                drogaRepository.save(new Droga("paracetamol", 10.0, 13.0, 7, 5));
-                drogaRepository.save(new Droga("ibuprofeno", 8.0, 11.0, 6, 4));
-                drogaRepository.save(new Droga("amoxicilina", 6.0, 9.0, 5, 3));
-                drogaRepository.save(new Droga("dexametasona", 4.0, 7.0, 4, 2));
+                drogaRepository.save(new Droga("esomeprazol", 120000.0, 150000.0, 8, 0));
+                drogaRepository.save(new Droga("paracetamol", 100000.0, 130000.0, 7, 0));
+                drogaRepository.save(new Droga("ibuprofeno", 80000.0, 110000.0, 6, 0));
+                drogaRepository.save(new Droga("amoxicilina", 60000.0, 90000.0, 5, 0));
+                drogaRepository.save(new Droga("dexametasona", 40000.0, 70000.0, 4, 0));
 
                 // Obtener todas las mascotas y clientes
                 List<Mascota> mascotas = mascotaRepository.findAll();
                 List<Cliente> clientes = clienteRepository.findAll();
+
+                // Verificar que las listas no estén vacías
+                if (mascotas.isEmpty() || clientes.isEmpty()) {
+                        throw new RuntimeException("No se encontraron mascotas o clientes en la base de datos");
+                }
 
                 // Mezclar las listas para asegurar la aleatoriedad
                 Collections.shuffle(mascotas);
@@ -533,45 +558,57 @@ public class DatabaseInit implements ApplicationRunner {
                         mascota.setCliente(cliente);
                         mascotaRepository.save(mascota);
                 }
-                int CANTIDAD_VETERINARIOS = veterinarioRepository.findAll().size();
-                int CANTIDAD_MASCOTAS = mascotaRepository.findAll().size();
+
+                // Obtener todas las veterinarios y tratamientos
+                List<Veterinario> veterinarios = veterinarioRepository.findAll();
+                List<Tratamiento> tratamientos = tratamientoRepository.findAll();
+
+                // Verificar que las listas no estén vacías
+                if (veterinarios.isEmpty() || tratamientos.isEmpty()) {
+                        throw new RuntimeException("No se encontraron veterinarios o tratamientos en la base de datos");
+                }
+
+                int CANTIDAD_VETERINARIOS = veterinarios.size();
+                int CANTIDAD_MASCOTAS = mascotas.size();
 
                 // Asignar tratamientos a veterinarios y mascotas
-                for (Tratamiento tratamiento : tratamientoRepository.findAll()) {
+                for (Tratamiento tratamiento : tratamientos) {
                         int id_veterinario = ThreadLocalRandom.current().nextInt(CANTIDAD_VETERINARIOS);
                         int id_mascota = ThreadLocalRandom.current().nextInt(CANTIDAD_MASCOTAS);
 
-                        Optional<Veterinario> optionalVeterinario = veterinarioRepository
-                                        .findById(Long.valueOf(id_veterinario));
-                        Optional<Mascota> optionalMascota = mascotaRepository.findById(Long.valueOf(id_mascota));
+                        Veterinario veterinario = veterinarios.get(id_veterinario);
+                        Mascota mascota = mascotas.get(id_mascota);
 
-                        if (optionalVeterinario.isPresent() && optionalMascota.isPresent()) {
-                                Veterinario veterinario = optionalVeterinario.get();
-                                Mascota mascota = optionalMascota.get();
-
-                                tratamiento.setVeterinario(veterinario);
-                                tratamiento.setMascota(mascota);
-                        } else {
-                                // Manejo en caso de que no se encuentre un veterinario o una mascota
-                                System.out.println("Veterinario o mascota no encontrado. Tratamiento no asignado.");
-                        }
+                        tratamiento.setVeterinario(veterinario);
+                        tratamiento.setMascota(mascota);
+                        tratamientoRepository.save(tratamiento); // Guardar el tratamiento actualizado
                 }
 
-                // Obtener todas las drogas y tratamientos
-                List<Tratamiento> tratamientos = tratamientoRepository.findAll();
+                // Obtener todas las drogas
                 List<Droga> drogas = drogaRepository.findAll();
+
+                // Verificar que la lista no esté vacía
+                if (drogas.isEmpty()) {
+                        throw new RuntimeException("No se encontraron drogas en la base de datos");
+                }
 
                 // Mezclar las listas para asegurar la aleatoriedad
                 Collections.shuffle(tratamientos);
                 Collections.shuffle(drogas);
 
-                // Asignar drogas a tratamientos
-                int CANTIDAD_TRATAMIENTOS = tratamientos.size();
-                for (int i = 0; i < drogas.size(); i++) {
-                        Droga droga = drogas.get(i);
-                        Tratamiento tratamiento = tratamientos.get(i % CANTIDAD_TRATAMIENTOS);
-                        droga.setTratamiento(tratamiento);
-                        drogaRepository.save(droga);
+                // Asignar tratamientos a drogas de forma cíclica
+                int CANTIDAD_DROGAS = drogas.size();
+                for (int i = 0; i < tratamientos.size(); i++) {
+                        Tratamiento tratamiento = tratamientos.get(i);
+                        Droga droga = drogas.get(i % CANTIDAD_DROGAS);
+                        if (droga.getUniDisp() == 0) {
+                                i--;
+                                continue;
+                        }
+                        droga.setUniDisp(droga.getUniDisp() - 1);
+                        droga.setUniVend(droga.getUniVend() + 1);
+                        tratamiento.setDroga(droga);
+                        tratamientoRepository.save(tratamiento);
                 }
 
         }
