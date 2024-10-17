@@ -44,7 +44,7 @@ public class DatabaseInit implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         administradorRepository.save(new Administrador("1014977178", "Adrian Ruiz", "1234"));
-        administradorRepository.save(new Administrador("1234", "Carlos Mejía", "1234"));
+        administradorRepository.save(new Administrador("1052380081", "Carlos Mejía", "1234"));
         administradorRepository.save(new Administrador("1010961264", "Juan Pablo", "1234"));
         administradorRepository.save(new Administrador("123", "Juan Angarita", "1234"));
 
