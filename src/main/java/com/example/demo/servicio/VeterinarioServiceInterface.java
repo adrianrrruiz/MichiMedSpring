@@ -23,4 +23,6 @@ public interface VeterinarioServiceInterface {
 
     public Veterinario findByCedula(String cedula);
 
+    public Long veterinariosActivos();
+
 }
