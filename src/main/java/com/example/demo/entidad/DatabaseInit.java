@@ -510,25 +510,25 @@ public class DatabaseInit implements ApplicationRunner {
                                 "https://randomuser.me/api/portraits/women/21.jpg"));
 
                 // Crear y guardar Tratamientos con relaciones
-                tratamientoRepository.save(new Tratamiento("05/08/26"));
-                tratamientoRepository.save(new Tratamiento("06/08/26"));
-                tratamientoRepository.save(new Tratamiento("07/08/26"));
-                tratamientoRepository.save(new Tratamiento("08/08/26"));
-                tratamientoRepository.save(new Tratamiento("09/08/26"));
-                tratamientoRepository.save(new Tratamiento("10/08/26"));
-                tratamientoRepository.save(new Tratamiento("11/08/26"));
-                tratamientoRepository.save(new Tratamiento("12/08/26"));
-                tratamientoRepository.save(new Tratamiento("13/08/26"));
-                tratamientoRepository.save(new Tratamiento("14/08/26"));
-                tratamientoRepository.save(new Tratamiento("14/06/26"));
-                tratamientoRepository.save(new Tratamiento("12/06/26"));
-                tratamientoRepository.save(new Tratamiento("12/06/26"));
-                tratamientoRepository.save(new Tratamiento("12/06/26"));
-                tratamientoRepository.save(new Tratamiento("12/06/26"));
-                tratamientoRepository.save(new Tratamiento("12/05/26"));
-                tratamientoRepository.save(new Tratamiento("12/05/26"));
-                tratamientoRepository.save(new Tratamiento("12/05/26"));
-                tratamientoRepository.save(new Tratamiento("12/05/26"));
+                tratamientoRepository.save(new Tratamiento("05/08/24"));
+                tratamientoRepository.save(new Tratamiento("06/08/24"));
+                tratamientoRepository.save(new Tratamiento("07/08/24"));
+                tratamientoRepository.save(new Tratamiento("08/08/24"));
+                tratamientoRepository.save(new Tratamiento("09/08/24"));
+                tratamientoRepository.save(new Tratamiento("10/08/24"));
+                tratamientoRepository.save(new Tratamiento("11/08/24"));
+                tratamientoRepository.save(new Tratamiento("12/08/24"));
+                tratamientoRepository.save(new Tratamiento("13/08/24"));
+                tratamientoRepository.save(new Tratamiento("14/08/24"));
+                tratamientoRepository.save(new Tratamiento("14/06/24"));
+                tratamientoRepository.save(new Tratamiento("12/06/24"));
+                tratamientoRepository.save(new Tratamiento("12/06/24"));
+                tratamientoRepository.save(new Tratamiento("12/06/24"));
+                tratamientoRepository.save(new Tratamiento("12/06/24"));
+                tratamientoRepository.save(new Tratamiento("12/05/24"));
+                tratamientoRepository.save(new Tratamiento("12/05/24"));
+                tratamientoRepository.save(new Tratamiento("12/05/24"));
+                tratamientoRepository.save(new Tratamiento("12/05/24"));
 
                 // Drogas
                 drogaRepository.save(new Droga("esomeprazol", 120000.0, 150000.0, 8, 0));
@@ -622,7 +622,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 .orElseThrow(() -> new RuntimeException("Veterinario no encontrado"));
 
                 // Crear un tratamiento y asignar la mascota y el veterinario
-                Tratamiento tratamiento = new Tratamiento("05/08/26", mascota, veterinario);
+                Tratamiento tratamiento = new Tratamiento("05/08/24", mascota, veterinario);
                 tratamientoRepository.save(tratamiento);
 
         }
