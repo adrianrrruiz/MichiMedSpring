@@ -531,11 +531,11 @@ public class DatabaseInit implements ApplicationRunner {
         tratamientoRepository.save(new Tratamiento("12/05/26"));
 
         // Drogas
-        drogaRepository.save(new Droga("esomeprazol", 120000.0, 150000.0, 8, 6));
-        drogaRepository.save(new Droga("paracetamol", 100000.0, 130000.0, 7, 5));
-        drogaRepository.save(new Droga("ibuprofeno", 80000.0, 110000.0, 6, 4));
-        drogaRepository.save(new Droga("amoxicilina", 60000.0, 90000.0, 5, 3));
-        drogaRepository.save(new Droga("dexametasona", 40000.0, 70000.0, 4, 2));
+        drogaRepository.save(new Droga("esomeprazol", 100000.0, 150000.0, 8, 22));
+        drogaRepository.save(new Droga("paracetamol", 100000.0, 130000.0, 1, 9));
+        drogaRepository.save(new Droga("ibuprofeno", 80000.0, 110000.0, 6, 10));
+        drogaRepository.save(new Droga("amoxicilina", 60000.0, 90000.0, 3, 8));
+        drogaRepository.save(new Droga("dexametasona", 40000.0, 70000.0, 4, 6));
 
         // Obtener todas las mascotas y clientes
         List<Mascota> mascotas = mascotaRepository.findAll();
