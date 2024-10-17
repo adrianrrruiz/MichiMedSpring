@@ -1,6 +1,7 @@
 package com.example.demo.servicio;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.User;
@@ -23,6 +24,6 @@ public interface VeterinarioServiceInterface {
 
     public Veterinario findByCedula(String cedula);
 
-    public Long veterinariosActivos();
+    public Map<String, Long> obtenerEstadisticasVeterinarios();
 
 }

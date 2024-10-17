@@ -21,4 +21,6 @@ public interface TratamientoServiceInterface {
     public List<HistorialMedicoDTO> findHistorialMedicoByMascotaId(Long id);
 
     public Map<String, Long> contarTratamientosPorMes();
+
+    public List<Map<String, Object>> findTopVeterinariosByDroga();
 }

@@ -58,4 +58,9 @@ public class TratamientoController {
         return tratamientoService.findHistorialMedicoByMascotaId(id);
     }
 
+    @GetMapping("/top-3")
+    public List<Map<String, Object>> findTopVeterinariosByDroga() {
+        return tratamientoService.findTopVeterinariosByDroga();
+    }
+
 }

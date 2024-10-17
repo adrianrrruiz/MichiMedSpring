@@ -3,6 +3,7 @@ package com.example.demo.controlador;
 import java.util.List;
 import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.Veterinario;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +20,6 @@ import com.example.demo.servicio.VeterinarioServiceInterface;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RequestMapping("/veterinarios")
 
@@ -50,11 +50,11 @@ public class VeterinarioController {
         return veterinarioService.getMascotas(id);
     }
 
-    @GetMapping("activos")
-    public Long cantidadVeterinariosActivos() {
-        return veterinarioService.veterinariosActivos();
+    // localhost:8090/veterinarios/estadisticas
+    @GetMapping("estadisticas")
+    public Map<String, Long> obtenerEstadisticasVeterinarios() {
+        return veterinarioService.obtenerEstadisticasVeterinarios();
     }
-    
 
     // localhost:8090/veterinarios/add
     @PostMapping("/add")

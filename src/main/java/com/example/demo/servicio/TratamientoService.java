@@ -119,4 +119,9 @@ public class TratamientoService implements TratamientoServiceInterface {
         }
         return tratamientos;
     }
+
+    @Override
+    public List<Map<String, Object>> findTopVeterinariosByDroga() {
+        return tratamientoRepository.findTopVeterinariosByDroga();
+    }
 }

@@ -2,6 +2,7 @@ package com.example.demo.servicio;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,11 @@ public class VeterinarioService implements VeterinarioServiceInterface {
     }
 
     @Override
+    public Map<String, Long> obtenerEstadisticasVeterinarios() {
+        return repository.obtenerEstadisticasVeterinarios();
+    }
+
+    @Override
     public Veterinario SearchById(Long id) {
         return repository.findById(id).get();
     }
@@ -75,11 +81,6 @@ public class VeterinarioService implements VeterinarioServiceInterface {
     @Override
     public Veterinario findByCedula(String cedula) {
         return repository.findByCedula(cedula).orElse(null);
-    }
-
-    @Override
-    public Long veterinariosActivos() {
-        return repository.obtenerCantidadVeterinarios();
     }
 
 }
