@@ -17,19 +17,19 @@ public class Cliente {
     @Id
     @GeneratedValue
     private Long id;
-    
+
     @Column(unique = true, nullable = false)
     private String cedula;
-    
+
     private String nombre;
-    
+
     @Column(name = "email", unique = true, nullable = false)
     private String email;
-    
+
     private String contrasena;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "cliente", cascade=CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mascota> mascotas = new ArrayList<>();
 
     public Cliente(Long id, String cedula, String nombre, String email, String contrasena) {

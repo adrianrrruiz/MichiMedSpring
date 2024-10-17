@@ -30,6 +30,7 @@ import io.swagger.v3.oas.annotations.Operation;
 @CrossOrigin(origins = "http://localhost:4200")
 public class MascotaController {
 
+    String ruta = "mascotas/";
     @Autowired
     MascotaServiceInterface mascotaService;
 
@@ -76,7 +77,7 @@ public class MascotaController {
     }
 
     // http://localhost:8090/mascotas/estado
-   @GetMapping("/estado")
+    @GetMapping("/estado")
     public Map<String, Integer> obtenerEstadoMascotas() {
         Map<String, Long> estadoMascotas = mascotaService.contarMascotasPorEstado();
 
@@ -84,7 +85,6 @@ public class MascotaController {
         return estadoMascotas.entrySet().stream()
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
-                        entry -> entry.getValue().intValue()
-                ));
+                        entry -> entry.getValue().intValue()));
     }
 }

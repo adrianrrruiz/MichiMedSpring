@@ -7,7 +7,7 @@ import com.example.demo.entidad.Mascota;
 
 public interface MascotaServiceInterface {
 
-    public Mascota SearchById(Long id );
+    public Mascota SearchById(Long id);
 
     public List<Mascota> SearchAll();
 
@@ -20,5 +20,5 @@ public interface MascotaServiceInterface {
     public Map<String, Long> contarMascotasPorEstado();
 
     public int obtenerCantidadMascotasTratadas();
-    
+
 }

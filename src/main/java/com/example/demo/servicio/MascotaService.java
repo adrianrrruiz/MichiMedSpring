@@ -59,8 +59,7 @@ public class MascotaService implements MascotaServiceInterface {
                         resultado -> (String) resultado.get("estado"),
                         resultado -> ((Number) resultado.get("cantidad")).longValue(),
                         (e1, e2) -> e1,
-                        LinkedHashMap::new
-                ));
+                        LinkedHashMap::new));
     }
 
     @Override

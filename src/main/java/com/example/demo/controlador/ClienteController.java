@@ -24,6 +24,8 @@ import io.swagger.v3.oas.annotations.Operation;
 @CrossOrigin(origins = "http://localhost:4200")
 public class ClienteController {
 
+    String ruta = "clientes/";
+
     @Autowired
     ClienteServiceInterface clienteService;
 
