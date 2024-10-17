@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.servicio.VeterinarioServiceInterface;
 
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RequestMapping("/veterinarios")
 
@@ -47,6 +49,12 @@ public class VeterinarioController {
     public List<Mascota> getMascotasVeterinario(@PathVariable("id") Long id) {
         return veterinarioService.getMascotas(id);
     }
+
+    @GetMapping("activos")
+    public Long cantidadVeterinariosActivos() {
+        return veterinarioService.veterinariosActivos();
+    }
+    
 
     // localhost:8090/veterinarios/add
     @PostMapping("/add")
