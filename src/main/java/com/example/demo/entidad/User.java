@@ -1,20 +1,20 @@
 package com.example.demo.entidad;
 
 public class User {
-    private String email;
+    private String cedula;
     private String password;
 
-    public User(String email, String password) {
-        this.email = email;
+    public User(String cedula, String password) {
+        this.cedula = cedula;
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCedula() {
+        return cedula;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public String getPassword() {

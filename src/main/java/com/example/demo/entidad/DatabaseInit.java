@@ -9,6 +9,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
+import com.example.demo.repositorio.AdministradorRepository;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
@@ -20,6 +21,9 @@ import jakarta.transaction.Transactional;
 @Controller
 @Transactional
 public class DatabaseInit implements ApplicationRunner {
+
+    @Autowired
+    AdministradorRepository administradorRepository;
 
     @Autowired
     MascotaRepository mascotaRepository;
@@ -38,6 +42,12 @@ public class DatabaseInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        administradorRepository.save(new Administrador("1014977178", "Adrian Ruiz", "1234"));
+        administradorRepository.save(new Administrador("1234", "Carlos Mejía", "1234"));
+        administradorRepository.save(new Administrador("1010961264", "Juan Pablo", "1234"));
+        administradorRepository.save(new Administrador("123", "Juan Angarita", "1234"));
+
         mascotaRepository.save(new Mascota("Michito", 3, "angola", 5.3f, "", "En tratamiento", "20/09/18",
                 "20/09/18",
                 "esomeprazol",

@@ -5,7 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entidad.User;
-import com.example.demo.servicio.ClienteServiceInterface;
+import com.example.demo.servicio.AdministradorServiceInterface;
+import com.example.demo.servicio.VeterinarioServiceInterface;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,15 +17,26 @@ import java.util.Map;
 public class SignInController {
 
     @Autowired
-    ClienteServiceInterface clienteService;
+    AdministradorServiceInterface administradorService;
+
+    @Autowired
+    VeterinarioServiceInterface veterinarioService;
 
     @PostMapping
     public ResponseEntity<Map<String, Object>> verifyCredentials(@RequestBody User user) {
-        Long id = clienteService.verifyCredentials(user);
+        Long id = veterinarioService.verifyCredentials(user);
+        Long idAdmin = administradorService.verifyCredentials(user);
         Map<String, Object> response = new HashMap<>();
+        if (idAdmin != -1L) {
+            response.put("status", "ok");
+            response.put("id", idAdmin);
+            response.put("admin", true);
+            return ResponseEntity.ok(response);
+        }
         if (id != -1L) {
             response.put("status", "ok");
             response.put("id", id);
+            response.put("admin", false);
             return ResponseEntity.ok(response);
         }
         response.put("status", "error");

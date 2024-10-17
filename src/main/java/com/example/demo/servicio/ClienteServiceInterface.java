@@ -4,11 +4,8 @@ import java.util.List;
 
 import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Mascota;
-import com.example.demo.entidad.User;
 
 public interface ClienteServiceInterface {
-
-    public Long verifyCredentials(User user);
 
     public List<Mascota> getMascotas(Long id);
 

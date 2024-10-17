@@ -1,11 +1,13 @@
 package com.example.demo.servicio;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entidad.Mascota;
+import com.example.demo.entidad.User;
 import com.example.demo.entidad.Veterinario;
 import com.example.demo.repositorio.VeterinarioRepository;
 
@@ -14,6 +16,23 @@ public class VeterinarioService implements VeterinarioServiceInterface {
 
     @Autowired
     VeterinarioRepository repository;
+
+    @Override
+    public Long verifyCredentials(User user) {
+        Optional<Veterinario> veterinario = repository.findByCedula(user.getCedula());
+
+        if (veterinario.isPresent()) {
+            String veterinarioContrasena = veterinario.get().getContrasena();
+            String userPassword = user.getPassword();
+
+            // Verificar que ambas contraseñas no sean null antes de la comparación
+            if (veterinarioContrasena != null && veterinarioContrasena.equals(userPassword)) {
+                return veterinario.get().getId();
+            }
+        }
+
+        return -1L;
+    }
 
     @Override
     public List<Mascota> getMascotas(Long id) {

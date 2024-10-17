@@ -1,14 +1,12 @@
 package com.example.demo.servicio;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Mascota;
-import com.example.demo.entidad.User;
 import com.example.demo.repositorio.ClienteRepository;
 
 @Service
@@ -16,23 +14,6 @@ public class ClienteService implements ClienteServiceInterface {
 
     @Autowired
     ClienteRepository repository;
-
-    @Override
-    public Long verifyCredentials(User user) {
-        Optional<Cliente> cliente = repository.findByEmail(user.getEmail());
-
-        if (cliente.isPresent()) {
-            String clienteContrasena = cliente.get().getContrasena();
-            String userPassword = user.getPassword();
-
-            // Verificar que ambas contraseñas no sean null antes de la comparación
-            if (clienteContrasena != null && clienteContrasena.equals(userPassword)) {
-                return cliente.get().getId();
-            }
-        }
-
-        return -1L;
-    }
 
     @Override
     public List<Mascota> getMascotas(Long id) {

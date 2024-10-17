@@ -3,9 +3,12 @@ package com.example.demo.servicio;
 import java.util.List;
 
 import com.example.demo.entidad.Mascota;
+import com.example.demo.entidad.User;
 import com.example.demo.entidad.Veterinario;
 
 public interface VeterinarioServiceInterface {
+    public Long verifyCredentials(User user);
+
     public List<Mascota> getMascotas(Long id);
 
     public Veterinario SearchById(Long id);
