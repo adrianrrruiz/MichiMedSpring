@@ -93,24 +93,15 @@ public class TratamientoService implements TratamientoServiceInterface {
 
     @Override
     public Map<String, Long> contarTratamientosPorMes() {
-        List<Tratamiento> tratamientos = tratamientoRepository.findAll();
+        List<Map<String, Object>> resultados = tratamientoRepository.contarTratamientosPorMes();
 
-        Map<String, Long> tratamientosPorMes = tratamientos.stream()
-                .collect(Collectors.groupingBy(
-                        tratamiento -> {
-                            LocalDate fecha = LocalDate.parse(tratamiento.getFecha(), DATE_FORMATTER);
-                            return fecha.getMonth().getDisplayName(TextStyle.FULL, new Locale("es"));
-                        },
-                        Collectors.counting()));
-
-        // Ordenar el mapa por el mes
-        return tratamientosPorMes.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey(Comparator.comparingInt(this::mesAEntero)))
+        return resultados.stream()
                 .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
+                        resultado -> (String) resultado.get("mes"),
+                        resultado -> ((Number) resultado.get("cantidad")).longValue(),
                         (e1, e2) -> e1,
-                        LinkedHashMap::new));
+                        LinkedHashMap::new
+                ));
     }
 
     private int mesAEntero(String mes) {

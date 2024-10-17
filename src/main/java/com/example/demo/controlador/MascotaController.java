@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.HashMap;
 
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -74,15 +76,15 @@ public class MascotaController {
     }
 
     // http://localhost:8090/mascotas/estado
-    @GetMapping("/estado")
+   @GetMapping("/estado")
     public Map<String, Integer> obtenerEstadoMascotas() {
-        int enTratamiento = mascotaService.obtenerCantidadMascotasEnTratamiento();
-        int tratadas = mascotaService.obtenerCantidadMascotasTratadas();
+        Map<String, Long> estadoMascotas = mascotaService.contarMascotasPorEstado();
 
-        Map<String, Integer> response = new HashMap<>();
-        response.put("enTratamiento", enTratamiento);
-        response.put("tratadas", tratadas);
-
-        return response;
+        // Convertir los valores de Long a Integer
+        return estadoMascotas.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().intValue()
+                ));
     }
 }

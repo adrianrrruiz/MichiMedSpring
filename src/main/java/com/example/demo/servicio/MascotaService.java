@@ -1,6 +1,8 @@
 package com.example.demo.servicio;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,12 +51,16 @@ public class MascotaService implements MascotaServiceInterface {
         repository.save(mascota);
     }
 
-    @Override
-    public int obtenerCantidadMascotasEnTratamiento() {
-        List<Mascota> todasLasMascotas = repository.findAll();
-        return (int) todasLasMascotas.stream()
-                .filter(mascota -> "En Tratamiento".equalsIgnoreCase(mascota.getEstado()))
-                .count();
+    public Map<String, Long> contarMascotasPorEstado() {
+        List<Map<String, Object>> resultados = repository.contarMascotasPorEstado();
+
+        return resultados.stream()
+                .collect(Collectors.toMap(
+                        resultado -> (String) resultado.get("estado"),
+                        resultado -> ((Number) resultado.get("cantidad")).longValue(),
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
     }
 
     @Override
