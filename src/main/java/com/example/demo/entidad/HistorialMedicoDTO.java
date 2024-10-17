@@ -1,22 +1,19 @@
 package com.example.demo.entidad;
 
-import java.util.List;
-
 public class HistorialMedicoDTO {
   private String fecha;
   private String nombreVeterinario;
   private String urlFotoVeterinario;
-  private List<String> nombresDrogas;
+  private String nombreDroga;
 
   public HistorialMedicoDTO() {
   }
 
-  public HistorialMedicoDTO(String fecha, String nombreVeterinario, String urlFotoVeterinario,
-      List<String> nombresDrogas) {
+  public HistorialMedicoDTO(String fecha, String nombreVeterinario, String urlFotoVeterinario, String nombreDroga) {
     this.fecha = fecha;
     this.nombreVeterinario = nombreVeterinario;
     this.urlFotoVeterinario = urlFotoVeterinario;
-    this.nombresDrogas = nombresDrogas;
+    this.nombreDroga = nombreDroga;
   }
 
   public String getFecha() {
@@ -31,7 +28,7 @@ public class HistorialMedicoDTO {
     return urlFotoVeterinario;
   }
 
-  public List<String> getNombresDrogas() {
-    return nombresDrogas;
+  public String getNombreDroga() {
+    return nombreDroga;
   }
 }

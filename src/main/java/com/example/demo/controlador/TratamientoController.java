@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entidad.Droga;
 import com.example.demo.entidad.HistorialMedicoDTO;
 import com.example.demo.entidad.Tratamiento;
 import com.example.demo.entidad.TratamientoDTO;
@@ -43,16 +42,15 @@ public class TratamientoController {
 
     @PostMapping("/add")
     public void addTratamiento(@RequestBody TratamientoDTO tratamientoDTO) {
+
         Tratamiento tratamiento = new Tratamiento(tratamientoDTO.getFecha());
         tratamiento.setMascota(tratamientoDTO.getMascota());
         tratamiento.setVeterinario(tratamientoDTO.getVeterinario());
+        tratamiento.setDroga(tratamientoDTO.getDroga());
+
+        drogaService.update(tratamientoDTO.getDroga());
 
         tratamientoService.add(tratamiento);
-
-        for (Droga droga : tratamientoDTO.getDrogas()) {
-            droga.setTratamiento(tratamiento);
-            drogaService.update(droga);
-        }
     }
 
     @GetMapping("/historial-medico/{id}")
