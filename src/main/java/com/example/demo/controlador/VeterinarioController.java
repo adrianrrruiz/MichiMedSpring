@@ -3,6 +3,7 @@ package com.example.demo.controlador;
 import java.util.List;
 import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.Veterinario;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -53,6 +54,11 @@ public class VeterinarioController {
     @GetMapping("activos")
     public Long cantidadVeterinariosActivos() {
         return veterinarioService.veterinariosActivos();
+    }
+
+    @GetMapping("estadisticas")
+    public Map<String, Long> obtenerEstadisticasVeterinarios() {
+        return veterinarioService.obtenerEstadisticasVeterinarios();
     }
     
 

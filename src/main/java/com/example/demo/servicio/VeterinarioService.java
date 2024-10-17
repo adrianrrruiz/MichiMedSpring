@@ -2,6 +2,7 @@ package com.example.demo.servicio;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,11 @@ public class VeterinarioService implements VeterinarioServiceInterface {
     @Override
     public List<Mascota> getMascotas(Long id) {
         return repository.findById(id).get().getMascotas();
+    }
+
+    @Override
+    public Map<String, Long> obtenerEstadisticasVeterinarios() {
+        return repository.obtenerEstadisticasVeterinarios();
     }
 
     @Override
