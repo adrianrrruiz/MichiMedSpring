@@ -1,6 +1,7 @@
 package com.example.demo.controlador;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,6 +34,11 @@ public class TratamientoController {
     @GetMapping("")
     public List<Tratamiento> getAllTratamientos() {
         return tratamientoService.SearchAll();
+    }
+
+    @GetMapping("/tratamientos-por-mes")
+    public Map<String, Long> obtenerTratamientosPorMes() {
+        return tratamientoService.contarTratamientosPorMes();
     }
 
     @PostMapping("/add")

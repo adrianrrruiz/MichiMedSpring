@@ -520,13 +520,22 @@ public class DatabaseInit implements ApplicationRunner {
         tratamientoRepository.save(new Tratamiento("12/08/26"));
         tratamientoRepository.save(new Tratamiento("13/08/26"));
         tratamientoRepository.save(new Tratamiento("14/08/26"));
+        tratamientoRepository.save(new Tratamiento("14/06/26"));
+        tratamientoRepository.save(new Tratamiento("12/06/26"));
+        tratamientoRepository.save(new Tratamiento("12/06/26"));
+        tratamientoRepository.save(new Tratamiento("12/06/26"));
+        tratamientoRepository.save(new Tratamiento("12/06/26"));
+        tratamientoRepository.save(new Tratamiento("12/05/26"));
+        tratamientoRepository.save(new Tratamiento("12/05/26"));
+        tratamientoRepository.save(new Tratamiento("12/05/26"));
+        tratamientoRepository.save(new Tratamiento("12/05/26"));
 
         // Drogas
-        drogaRepository.save(new Droga("esomeprazol", 12.0, 15.0, 8, 6));
-        drogaRepository.save(new Droga("paracetamol", 10.0, 13.0, 7, 5));
-        drogaRepository.save(new Droga("ibuprofeno", 8.0, 11.0, 6, 4));
-        drogaRepository.save(new Droga("amoxicilina", 6.0, 9.0, 5, 3));
-        drogaRepository.save(new Droga("dexametasona", 4.0, 7.0, 4, 2));
+        drogaRepository.save(new Droga("esomeprazol", 120000.0, 150000.0, 8, 6));
+        drogaRepository.save(new Droga("paracetamol", 100000.0, 130000.0, 7, 5));
+        drogaRepository.save(new Droga("ibuprofeno", 80000.0, 110000.0, 6, 4));
+        drogaRepository.save(new Droga("amoxicilina", 60000.0, 90000.0, 5, 3));
+        drogaRepository.save(new Droga("dexametasona", 40000.0, 70000.0, 4, 2));
 
         // Obtener todas las mascotas y clientes
         List<Mascota> mascotas = mascotaRepository.findAll();
