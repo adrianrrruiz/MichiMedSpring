@@ -611,20 +611,6 @@ public class DatabaseInit implements ApplicationRunner {
                         tratamientoRepository.save(tratamiento);
                 }
 
-                Long mascotaId = 1L; // El id de la mascota que quieres asociar
-                Long veterinarioId = 2L; // El id del veterinario que quieres asociar
-
-                // Ahora los usas para obtener la mascota y el veterinario desde la base de
-                // datos
-                Mascota mascota = mascotaRepository.findById(mascotaId)
-                                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
-                Veterinario veterinario = veterinarioRepository.findById(veterinarioId)
-                                .orElseThrow(() -> new RuntimeException("Veterinario no encontrado"));
-
-                // Crear un tratamiento y asignar la mascota y el veterinario
-                Tratamiento tratamiento = new Tratamiento("05/08/26", mascota, veterinario);
-                tratamientoRepository.save(tratamiento);
-
         }
 
 }
