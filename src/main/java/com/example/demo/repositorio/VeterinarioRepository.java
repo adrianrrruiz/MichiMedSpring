@@ -12,9 +12,6 @@ import com.example.demo.entidad.Veterinario;
 public interface VeterinarioRepository extends JpaRepository<Veterinario, Long>{
     Optional<Veterinario> findByCedula(String cedula);
 
-    @Query(value = "SELECT COUNT(*) AS cantidad  FROM VETERINARIO", nativeQuery = true)
-    Long obtenerCantidadVeterinarios();
-
     @Query(value = "SELECT (SELECT COUNT(*) FROM VETERINARIO) AS total_veterinarios, COUNT(DISTINCT v.ID) AS veterinarios_activos FROM VETERINARIO v LEFT JOIN TRATAMIENTO t ON v.ID = t.VETERINARIO_ID WHERE t.VETERINARIO_id IS NOT NULL", nativeQuery = true)
     Map<String, Long> obtenerEstadisticasVeterinarios();
 }

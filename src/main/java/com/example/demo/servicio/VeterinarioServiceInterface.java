@@ -24,9 +24,6 @@ public interface VeterinarioServiceInterface {
 
     public Veterinario findByCedula(String cedula);
 
-    public Long veterinariosActivos();
-
     public Map<String, Long> obtenerEstadisticasVeterinarios();
-    
 
 }

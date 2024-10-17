@@ -83,9 +83,4 @@ public class VeterinarioService implements VeterinarioServiceInterface {
         return repository.findByCedula(cedula).orElse(null);
     }
 
-    @Override
-    public Long veterinariosActivos() {
-        return repository.obtenerCantidadVeterinarios();
-    }
-
 }
