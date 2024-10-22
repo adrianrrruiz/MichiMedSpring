@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
@@ -116,5 +117,21 @@ public class MascotaRepositoryTest {
 
     Assertions.assertThat(mascotaRepository.findById(index)).isEmpty();
   }
+
+  @Test
+    public void testContarMascotasPorEstado() {
+        List<Map<String, Object>> resultado = mascotaRepository.contarMascotasPorEstado();
+        Assertions.assertThat(resultado).isNotNull();
+        Assertions.assertThat(resultado.size()).isEqualTo(2);
+
+        Map<String, Object> enTratamiento = resultado.stream().filter(map -> map.get("estado").equals("En tratamiento")).findFirst().orElse(null);
+        Map<String, Object> tratado = resultado.stream().filter(map -> map.get("estado").equals("Tratado")).findFirst().orElse(null);
+
+        Assertions.assertThat(enTratamiento).isNotNull();
+        Assertions.assertThat(enTratamiento.get("cantidad")).isEqualTo(4L);
+
+        Assertions.assertThat(tratado).isNotNull();
+        Assertions.assertThat(tratado.get("cantidad")).isEqualTo(1L);
+    }
 
 }
