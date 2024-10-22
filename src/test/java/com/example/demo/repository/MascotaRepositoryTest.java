@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.demo.entidad.Mascota;
@@ -17,6 +18,7 @@ import com.example.demo.repositorio.MascotaRepository;
 
 @DataJpaTest // Crea una base de datos h2 para pruebas
 @RunWith(SpringRunner.class) // Permite correr pruebas de Spring
+@ActiveProfiles("test")
 public class MascotaRepositoryTest {
 
   @Autowired
