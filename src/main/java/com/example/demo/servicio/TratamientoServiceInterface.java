@@ -14,9 +14,9 @@ public interface TratamientoServiceInterface {
 
     public void deleteById(Long id);
 
-    public void update(Tratamiento tratamiento);
+    public Tratamiento update(Tratamiento tratamiento);
 
-    public void add(Tratamiento tratamiento);
+    public Tratamiento add(Tratamiento tratamiento);
 
     public List<HistorialMedicoDTO> findHistorialMedicoByMascotaId(Long id);
 

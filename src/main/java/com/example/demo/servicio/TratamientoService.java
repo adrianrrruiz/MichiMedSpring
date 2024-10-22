@@ -54,8 +54,7 @@ public class TratamientoService implements TratamientoServiceInterface {
                         resultado -> (String) resultado.get("mes"),
                         resultado -> ((Number) resultado.get("cantidad")).longValue(),
                         (e1, e2) -> e1,
-                        LinkedHashMap::new
-                ));
+                        LinkedHashMap::new));
     }
 
     private int mesAEntero(String mes) {
@@ -97,13 +96,13 @@ public class TratamientoService implements TratamientoServiceInterface {
     }
 
     @Override
-    public void update(Tratamiento tratamiento) {
-        tratamientoRepository.save(tratamiento);
+    public Tratamiento update(Tratamiento tratamiento) {
+        return tratamientoRepository.save(tratamiento);
     }
 
     @Override
-    public void add(Tratamiento tratamiento) {
-        tratamientoRepository.save(tratamiento);
+    public Tratamiento add(Tratamiento tratamiento) {
+        return tratamientoRepository.save(tratamiento);
     }
 
     @Override
