@@ -213,4 +213,12 @@ public class TratamientoRepositoryTest {
         System.out.println("Top 2: " + top2);
         System.out.println("Top 3: " + top3);
     }
+
+    @Test
+    public void testObtenerEstadisticasVeterinarios() {
+        Map<String, Long> resultado = veterinarioRepository.obtenerEstadisticasVeterinarios();
+        Assertions.assertThat(resultado).isNotNull();
+        Assertions.assertThat(resultado.get("total_veterinarios")).isEqualTo(5L);
+        Assertions.assertThat(resultado.get("veterinarios_activos")).isEqualTo(3L);
+    }
 }
