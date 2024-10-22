@@ -214,11 +214,26 @@ public class TratamientoRepositoryTest {
         System.out.println("Top 3: " + top3);
     }
 
+    //Veterinarios
     @Test
     public void testObtenerEstadisticasVeterinarios() {
         Map<String, Long> resultado = veterinarioRepository.obtenerEstadisticasVeterinarios();
         Assertions.assertThat(resultado).isNotNull();
         Assertions.assertThat(resultado.get("total_veterinarios")).isEqualTo(5L);
         Assertions.assertThat(resultado.get("veterinarios_activos")).isEqualTo(3L);
+    }
+
+    @Test
+    public void testFindByCedula() {
+        Optional<Veterinario> veterinario = veterinarioRepository.findByCedula("123456789");
+        Assertions.assertThat(veterinario).isPresent();
+        Assertions.assertThat(veterinario.get().getNombre()).isEqualTo("Juan Pérez");
+
+        veterinario = veterinarioRepository.findByCedula("987654321");
+        Assertions.assertThat(veterinario).isPresent();
+        Assertions.assertThat(veterinario.get().getNombre()).isEqualTo("María Gómez");
+
+        veterinario = veterinarioRepository.findByCedula("000000000");
+        Assertions.assertThat(veterinario).isNotPresent();
     }
 }
