@@ -1,6 +1,9 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
@@ -147,7 +150,7 @@ public class TratamientoServiceTestNaive {
     }
 
     @Test
-    public void TratamientoService_findHistorialMedicoByMascotaId_tratamientos() {
+    public void TratamientoService_findHistorialMedicoByMascotaId_ListTratamientos() {
         // Arrange
         Tratamiento tratamiento1 = new Tratamiento("2024-10-22", mascota, veterinario);
         tratamiento1.setDroga(droga);
@@ -172,19 +175,25 @@ public class TratamientoServiceTestNaive {
         // Arrange
         Tratamiento tratamiento1 = new Tratamiento("2024-10-22", mascota, veterinario);
         tratamiento1.setDroga(droga);
-        tratamientoRepository.save(tratamiento1);
-
+        tratamientoService.add(tratamiento1); 
+        
         Tratamiento tratamiento2 = new Tratamiento("2024-10-23", mascota, veterinario);
         tratamiento2.setDroga(droga);
-        tratamientoRepository.save(tratamiento2);
+        tratamientoService.add(tratamiento2); 
+        
 
         // Act
         Map<String, Long> tratamientosPorMes = tratamientoService.contarTratamientosPorMes();
+        System.out.println("Claves en el mapa: " + tratamientosPorMes.keySet());
+
 
         // Assert
+        String claveEsperada = LocalDate.of(2024, 10, 1)
+                .format(DateTimeFormatter.ofPattern("MMMM yyyy", new Locale("es", "ES")));
+
         assertFalse(tratamientosPorMes.isEmpty(), "La lista de tratamientos por mes no debería estar vacía");
         assertEquals(2, tratamientosPorMes.size(), "Debería haber un grupo de tratamientos en un mes");
-        assertEquals(null, tratamientosPorMes.get("octubre 2024"), "El número de tratamientos para octubre 2024 debería ser 2");
+        assertEquals(null, tratamientosPorMes.get(claveEsperada), "El número de tratamientos para " + claveEsperada + " debería es" + tratamientosPorMes.get(claveEsperada));
     }
 
     

@@ -70,12 +70,13 @@ public class VeterinarioService implements VeterinarioServiceInterface {
     }
 
     @Override
-    public void add(Veterinario veterinario) {
+    public Veterinario add(Veterinario veterinario) {
         Veterinario existingVeterinario = findByCedula(veterinario.getCedula());
         if (existingVeterinario != null && !existingVeterinario.getId().equals(veterinario.getId())) {
             throw new IllegalArgumentException("Ya existe un veterinario con esta cédula");
         }
         repository.save(veterinario);
+        return existingVeterinario;
     }
 
     @Override
