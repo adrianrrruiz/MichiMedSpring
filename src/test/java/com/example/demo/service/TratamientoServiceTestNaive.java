@@ -198,7 +198,7 @@ public class TratamientoServiceTestNaive {
 
     
     @Test
-    public void TratamientoService_findTopVeterinariosByDroga() {
+    public void TratamientoService_findTopVeterinariosByDroga_List() {
         // Arrange
         Tratamiento tratamiento1 = new Tratamiento("2024-10-22", mascota, veterinario);
         tratamiento1.setDroga(droga);
