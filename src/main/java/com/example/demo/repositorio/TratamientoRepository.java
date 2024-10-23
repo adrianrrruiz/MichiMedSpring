@@ -11,7 +11,12 @@ import com.example.demo.entidad.Tratamiento;
 
 @Repository
 public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
-    @Query(value = "SELECT FORMATDATETIME(PARSEDATETIME(fecha, 'dd/MM/yy'), 'MMMM yyyy', 'es') AS mes, COUNT(*) AS cantidad FROM TRATAMIENTO GROUP BY FORMATDATETIME(PARSEDATETIME(fecha, 'dd/MM/yy'), 'MMMM yyyy', 'es') ORDER BY MIN(PARSEDATETIME(fecha, 'dd/MM/yy'));", nativeQuery = true)
+
+    @Query(value = "SELECT TO_CHAR(fecha, 'MMMM yyyy', 'es') AS mes, " +
+            "COUNT(*) AS cantidad " +
+            "FROM TRATAMIENTO " +
+            "GROUP BY TO_CHAR(fecha, 'MMMM yyyy', 'es') " +
+            "ORDER BY MIN(fecha);", nativeQuery = true)
     List<Map<String, Object>> contarTratamientosPorMes();
 
     @Query(value = "SELECT v.NOMBRE AS veterinario_nombre, " +
@@ -24,5 +29,6 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
             "ORDER BY total_unidades_vendidas DESC " +
             "LIMIT 3", nativeQuery = true)
     List<Map<String, Object>> findTopVeterinariosByDroga();
-
 }
+
+

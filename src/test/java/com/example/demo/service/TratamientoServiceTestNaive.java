@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.example.demo.entidad.Droga;
 import com.example.demo.entidad.Mascota;
@@ -20,11 +22,16 @@ import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
+import com.example.demo.servicio.TratamientoService;
 
 @SpringBootTest
+@DirtiesContext(classMode= DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@ActiveProfiles("test")
 public class TratamientoServiceTestNaive {
 
 
+    @Autowired
+    private TratamientoService tratamientoService;
 
     @Autowired
     private TratamientoRepository tratamientoRepository;
@@ -58,9 +65,8 @@ public class TratamientoServiceTestNaive {
     }
 
     @Test
-    @Transactional
-    public void guardarTratamientoTest() {
-        // Arrange
+    public void TratamientoService_add_tratamiento() {
+        // Arrange 
         Tratamiento tratamiento = new Tratamiento("2024-10-22", mascota, veterinario);
         tratamiento.setDroga(droga);
 
@@ -74,28 +80,27 @@ public class TratamientoServiceTestNaive {
     }
 
     @Test
-    @Transactional
-    public void obtenerTratamientosTest() {
-        // Arrange
+    public void TratamientoService_SearchAll_tratamientos() {
+        // Arrange 
         Tratamiento tratamiento1 = new Tratamiento("2024-10-22", mascota, veterinario);
         tratamiento1.setDroga(droga);
         tratamientoRepository.save(tratamiento1);
-
+    
         Tratamiento tratamiento2 = new Tratamiento("2024-10-23", mascota, veterinario);
         tratamiento2.setDroga(droga);
         tratamientoRepository.save(tratamiento2);
-
+    
         // Act
         List<Tratamiento> tratamientos = tratamientoRepository.findAll();
-
+    
         // Assert
         assertFalse(tratamientos.isEmpty(), "La lista de tratamientos no debería estar vacía");
-        assertEquals(21, tratamientos.size(), "El número de tratamientos guardados debería ser 21");
+        assertEquals(2, tratamientos.size(), "El número de tratamientos guardados debería ser 2");
     }
+    
 
     @Test
-    @Transactional
-    public void obtenerTratamientosPorIdTest() {
+    public void TratamientoService_searchById_Tratamiento() {
         // Arrange
         Tratamiento tratamiento = new Tratamiento("2024-10-22", mascota, veterinario);
         tratamiento.setDroga(droga);
@@ -110,9 +115,8 @@ public class TratamientoServiceTestNaive {
     }
 
     @Test
-    @Transactional
-    public void actualizarTratamientoTest() {
-        // Arrange
+    public void TratamientoService_update_tratamiento() {
+        // Arrange 
         Tratamiento tratamiento = new Tratamiento("2024-10-22", mascota, veterinario);
         tratamiento.setDroga(droga);
         tratamientoRepository.save(tratamiento);
@@ -128,9 +132,8 @@ public class TratamientoServiceTestNaive {
     }
 
     @Test
-    @Transactional
-    public void borrarTratamientosTest() {
-        // Arrange
+    public void TratamientoService_deleteById_tratamiento() {
+        // Arrange 
         Tratamiento tratamiento = new Tratamiento("2024-10-22", mascota, veterinario);
         tratamiento.setDroga(droga);
         tratamientoRepository.save(tratamiento);
@@ -142,4 +145,69 @@ public class TratamientoServiceTestNaive {
         // Assert
         assertFalse(tratamientoBorrado.isPresent(), "El tratamiento no fue eliminado correctamente");
     }
+
+    @Test
+    public void TratamientoService_findHistorialMedicoByMascotaId_tratamientos() {
+        // Arrange
+        Tratamiento tratamiento1 = new Tratamiento("2024-10-22", mascota, veterinario);
+        tratamiento1.setDroga(droga);
+        tratamientoRepository.save(tratamiento1);
+
+        Tratamiento tratamiento2 = new Tratamiento("2024-10-23", mascota, veterinario);
+        tratamiento2.setDroga(droga);
+        tratamientoRepository.save(tratamiento2);
+
+        // Act
+        List<Map<String, Object>> tratamientosPorMes = tratamientoRepository.contarTratamientosPorMes();
+
+        // Assert
+        assertFalse(tratamientosPorMes.isEmpty(), "La lista de tratamientos por mes no debería estar vacía");
+        assertEquals(2, tratamientosPorMes.size(), "Debería haber un grupo de tratamientos en un mes");
+        assertEquals(1L, tratamientosPorMes.get(0).get("cantidad"), "El número de tratamientos para el mes debería ser 2");
+    }
+    
+
+    @Test
+    public void TratamientoService_contarTratamientosPorMes_tratamiento() {
+        // Arrange
+        Tratamiento tratamiento1 = new Tratamiento("2024-10-22", mascota, veterinario);
+        tratamiento1.setDroga(droga);
+        tratamientoRepository.save(tratamiento1);
+
+        Tratamiento tratamiento2 = new Tratamiento("2024-10-23", mascota, veterinario);
+        tratamiento2.setDroga(droga);
+        tratamientoRepository.save(tratamiento2);
+
+        // Act
+        Map<String, Long> tratamientosPorMes = tratamientoService.contarTratamientosPorMes();
+
+        // Assert
+        assertFalse(tratamientosPorMes.isEmpty(), "La lista de tratamientos por mes no debería estar vacía");
+        assertEquals(2, tratamientosPorMes.size(), "Debería haber un grupo de tratamientos en un mes");
+        assertEquals(null, tratamientosPorMes.get("octubre 2024"), "El número de tratamientos para octubre 2024 debería ser 2");
+    }
+
+    
+    @Test
+    public void TratamientoService_findTopVeterinariosByDroga() {
+        // Arrange
+        Tratamiento tratamiento1 = new Tratamiento("2024-10-22", mascota, veterinario);
+        tratamiento1.setDroga(droga);
+        tratamientoRepository.save(tratamiento1);
+
+        Tratamiento tratamiento2 = new Tratamiento("2024-10-23", mascota, veterinario);
+        tratamiento2.setDroga(droga);
+        tratamientoRepository.save(tratamiento2);
+
+        // Act
+        List<Map<String, Object>> topVeterinarios = tratamientoService.findTopVeterinariosByDroga();
+
+        // Assert
+        assertFalse(topVeterinarios.isEmpty(), "La lista de top veterinarios no debería estar vacía");
+        assertEquals(1, topVeterinarios.size(), "Debería haber un veterinario en el top");
+        assertEquals("Dr. Juan", topVeterinarios.get(0).get("veterinario_nombre"), "El nombre del veterinario debería ser Dr. Juan");
+        assertEquals(2L, topVeterinarios.get(0).get("total_unidades_vendidas"), "El número de unidades vendidas debería ser 2");
+    }
+
+
 }
