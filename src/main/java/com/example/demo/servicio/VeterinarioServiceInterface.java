@@ -20,7 +20,7 @@ public interface VeterinarioServiceInterface {
 
     public void update(Veterinario veterinario);
 
-    public void add(Veterinario veterinario);
+    public Veterinario add(Veterinario veterinario);
 
     public Veterinario findByCedula(String cedula);
 

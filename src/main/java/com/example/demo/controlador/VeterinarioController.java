@@ -1,11 +1,14 @@
 package com.example.demo.controlador;
 
+import java.net.http.HttpResponse;
 import java.util.List;
 import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.Veterinario;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,47 +36,71 @@ public class VeterinarioController {
 
     // localhost:8090/veterinarios
     @GetMapping("")
-    public List<Veterinario> getAllVeterinarios() {
-        return veterinarioService.SearchAll();
+    public ResponseEntity<List<Veterinario>> getAllVeterinarios() {
+
+        List<Veterinario> lista = veterinarioService.SearchAll();
+        ResponseEntity<List<Veterinario>> response = new ResponseEntity<>(lista, HttpStatus.OK);
+        return response;
+
     }
 
     // localhost:8090/veterinarios/{id}
     @GetMapping("{id}")
-    public Veterinario getVeterinarioById(@PathVariable("id") Long id) {
-        return veterinarioService.SearchById(id);
-    }
-
-    // localhost:8090/veterinarios/mascotas/{id}
-    @GetMapping("mascotas/{id}")
-    @Operation(summary = "Obtener las mascotas de un veterinario")
-    public List<Mascota> getMascotasVeterinario(@PathVariable("id") Long id) {
-        return veterinarioService.getMascotas(id);
-    }
-
-    // localhost:8090/veterinarios/estadisticas
-    @GetMapping("estadisticas")
-    public Map<String, Long> obtenerEstadisticasVeterinarios() {
-        return veterinarioService.obtenerEstadisticasVeterinarios();
+    public ResponseEntity<Veterinario> getVeterinarioById(@PathVariable("id") Long id) {
+        Veterinario veterinario = veterinarioService.SearchById(id);
+        if (veterinario == null) {
+            return new ResponseEntity<Veterinario>(HttpStatus.NOT_FOUND);
+        }
+        ResponseEntity<Veterinario> response = new ResponseEntity<>(veterinario, HttpStatus.OK);
+        return response;
     }
 
     // localhost:8090/veterinarios/add
     @PostMapping("/add")
-    public void addVeterinario(@RequestBody Veterinario veterinario) {
-        veterinarioService.add(veterinario);
+    public ResponseEntity<Veterinario> addVeterinario(@RequestBody Veterinario veterinario) {
+        try {
+            Veterinario savedVeterinario = veterinarioService.add(veterinario);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+                    .body(savedVeterinario);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
-    // localhost:8090/veterinarios/update
     @PutMapping("/update")
-    public void updateVeterinario(@RequestBody Veterinario veterinario) {
-        List<Mascota> mascotas = veterinarioService.SearchById(veterinario.getId()).getMascotas();
-        veterinario.setMascotas(mascotas);
-        veterinarioService.update(veterinario);
+    public ResponseEntity<Veterinario> updateVeterinario(@RequestBody Veterinario veterinario) {
+        try {
+            veterinarioService.update(veterinario);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<Veterinario>(HttpStatus.BAD_REQUEST);
+        }
     }
 
-    // localhost:8090/veterinarios/delete/{id}
     @DeleteMapping("/delete/{id}")
-    public void deleteVeterinario(@PathVariable("id") Long id) {
-        veterinarioService.deleteById(id);
+    public ResponseEntity<Void> deleteVeterinario(@PathVariable("id") Long id) {
+        try {
+            veterinarioService.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/estadisticas")
+    public ResponseEntity<Map<String, Long>> obtenerEstadisticasVeterinarios() {
+        Map<String, Long> estadisticas = veterinarioService.obtenerEstadisticasVeterinarios();
+        if (estadisticas.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(estadisticas, HttpStatus.OK);
+    }
+
+    @GetMapping("mascotas/{id}")
+    @Operation(summary = "Obtener las mascotas de un veterinario")
+    public List<Mascota> getMascotasVeterinario(@PathVariable("id") Long id) {
+        return veterinarioService.getMascotas(id);
     }
 
 }
