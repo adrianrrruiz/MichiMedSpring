@@ -107,16 +107,13 @@ public class TratamientoService implements TratamientoServiceInterface {
 
     @Override
     public List<HistorialMedicoDTO> findHistorialMedicoByMascotaId(Long id) {
-        List<HistorialMedicoDTO> tratamientos = new ArrayList<>();
-        for (Tratamiento tratamiento : SearchAll()) {
-            if (tratamiento.getMascota().getId() == id) {
-                tratamientos
-                        .add(new HistorialMedicoDTO(tratamiento.getFecha(),
-                                tratamiento.getVeterinario().getNombre(),
-                                tratamiento.getVeterinario().getUrlFoto(), tratamiento.getDroga().getNombre()));
-            }
+        List<Tratamiento> tratamientos = tratamientoRepository.findHistorialMedicoByMascotaId(id);
+        List<HistorialMedicoDTO> historialMedico = new ArrayList<>();
+        for (Tratamiento t : tratamientos) {
+            historialMedico.add(new HistorialMedicoDTO(t.getFecha(), t.getVeterinario().getNombre(),
+                    t.getVeterinario().getUrlFoto(), t.getDroga().getNombre()));
         }
-        return tratamientos;
+        return historialMedico;
     }
 
     @Override
