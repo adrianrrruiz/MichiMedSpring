@@ -72,19 +72,19 @@ public class VeterinarioController {
     public ResponseEntity<Veterinario> updateVeterinario(@RequestBody Veterinario veterinario) {
         try {
             veterinarioService.update(veterinario);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<Veterinario>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<Veterinario>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteVeterinario(@PathVariable("id") Long id) {
+    public ResponseEntity<Veterinario> deleteVeterinario(@PathVariable("id") Long id) {
         try {
             veterinarioService.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<Veterinario>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Veterinario>(HttpStatus.NOT_FOUND);
         }
     }
 

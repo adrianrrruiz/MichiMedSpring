@@ -56,17 +56,24 @@ public class VeterinarioService implements VeterinarioServiceInterface {
     }
 
     @Override
-    public void deleteById(Long id) {
-        repository.deleteById(id);
+    public Veterinario deleteById(Long id) {
+        Optional<Veterinario> veterinario = repository.findById(id);
+        if (veterinario.isPresent()) {
+            repository.deleteById(id);
+            return veterinario.get();
+        } else {
+            throw new IllegalArgumentException("Veterinario not found with id: " + id);
+        }
     }
 
     @Override
-    public void update(Veterinario veterinario) {
+    public Veterinario update(Veterinario veterinario) {
         Veterinario existingVeterinario = findByCedula(veterinario.getCedula());
         if (existingVeterinario != null && !existingVeterinario.getId().equals(veterinario.getId())) {
             throw new IllegalArgumentException("Ya existe un veterinario con esta cédula");
         }
         repository.save(veterinario);
+        return existingVeterinario;
     }
 
     @Override

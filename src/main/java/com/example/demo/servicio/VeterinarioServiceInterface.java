@@ -16,9 +16,9 @@ public interface VeterinarioServiceInterface {
 
     public List<Veterinario> SearchAll();
 
-    public void deleteById(Long id);
+    public Veterinario deleteById(Long id);
 
-    public void update(Veterinario veterinario);
+    public Veterinario update(Veterinario veterinario);
 
     public Veterinario add(Veterinario veterinario);
 

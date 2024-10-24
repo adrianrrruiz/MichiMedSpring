@@ -1,20 +1,23 @@
 package com.example.demo.controller;
 
-import static org.mockito.Mockito.when;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -98,6 +101,36 @@ public class VeterinarioTestController {
                 get("/veterinarios/1")
                         .param("id", "1")
                         .contentType("application/json"));
+        response.andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void VeterinarioController_actualizarVeterinario_Veterinario() throws Exception {
+        Veterinario veterinario = new Veterinario(
+                "123456789",
+                "Juan Pérez",
+                "1234",
+                "Cirugía",
+                "https://randomuser.me/api/portraits/men/1.jpg");
+
+        when(veterinarioService.update(Mockito.any(Veterinario.class))).thenReturn(veterinario);
+
+        ResultActions response = mockMvc.perform(
+                put("/veterinarios/update")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(veterinario)));
+
+        response.andExpect(status().isOk());
+    }
+
+    @Test
+    public void VeterinarioController_eliminarVeterinario_NotFound() throws Exception {
+        doThrow(new RuntimeException()).when(veterinarioService).deleteById(anyLong());
+
+        ResultActions response = mockMvc.perform(
+                delete("/veterinarios/delete/1")
+                        .contentType("application/json"));
+
         response.andExpect(status().isNotFound());
     }
 }
