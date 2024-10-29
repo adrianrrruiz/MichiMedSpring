@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -46,11 +47,16 @@ public class UseCase1Test {
   public void SystemTest_Case1_Completed() {
     driver.get(BASE_URL + "/sign-in");
 
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedula")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password")));
+
     WebElement inputCedula = driver.findElement(By.id("cedula"));
     WebElement inputContrasena = driver.findElement(By.id("password"));
 
     inputCedula.sendKeys("987654");
     inputContrasena.sendKeys("4321");
+
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnIngresar")));
 
     WebElement btnIngresar = driver.findElement(By.id("btnIngresar"));
     btnIngresar.click();
@@ -62,6 +68,28 @@ public class UseCase1Test {
     inputContrasena.sendKeys("4321");
 
     btnIngresar.click();
+
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("clienteNavLink")));
+
+    WebElement clienteNavLink = driver.findElement(By.id("clienteNavLink"));
+    clienteNavLink.click();
+
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnNewCliente")));
+
+    WebElement btnNewCliente = driver.findElement(By.id("btnNewCliente"));
+    btnNewCliente.click();
+
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("nombre")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedula")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
+
+    WebElement inputNombre = driver.findElement(By.id("nombre"));
+    WebElement inputCedulaCliente = driver.findElement(By.id("cedula"));
+    WebElement inputEmail = driver.findElement(By.id("email"));
+
+    inputNombre.sendKeys("Cliente prueba");
+    inputCedulaCliente.sendKeys("456123");
+    inputEmail.sendKeys("cliente@gmail.com");
 
   }
 
