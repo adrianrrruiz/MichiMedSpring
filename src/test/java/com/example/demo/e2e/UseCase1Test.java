@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -89,7 +90,58 @@ public class UseCase1Test {
 
     inputNombre.sendKeys("Cliente prueba");
     inputCedulaCliente.sendKeys("456123");
+    inputEmail.sendKeys("");
+
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnSaveCliente")));
+
+    WebElement btnSaveCliente = driver.findElement(By.id("btnSaveCliente"));
+    btnSaveCliente.click();
+
+    inputEmail.clear();
     inputEmail.sendKeys("cliente@gmail.com");
+
+    btnSaveCliente.click();
+
+    WebElement mascotaNavLink = driver.findElement(By.id("mascotaNavLink"));
+    mascotaNavLink.click();
+
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnNewMascota")));
+
+    WebElement btnNewMascota = driver.findElement(By.id("btnNewMascota"));
+    btnNewMascota.click();
+
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("nombre")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("raza")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("edad")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("peso")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("enfermedad")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("estado")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("foto")));
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("clientes")));
+
+    WebElement inputNombreMascota = driver.findElement(By.id("nombre"));
+    WebElement inputRaza = driver.findElement(By.id("raza"));
+    WebElement inputEdad = driver.findElement(By.id("edad"));
+    WebElement inputPeso = driver.findElement(By.id("peso"));
+    WebElement inputEnfermedad = driver.findElement(By.id("enfermedad"));
+    WebElement inputEstado = driver.findElement(By.id("estado"));
+    WebElement inputFoto = driver.findElement(By.id("foto"));
+    WebElement selectCliente = driver.findElement(By.id("clientes"));
+
+    inputNombreMascota.sendKeys("Mascota Prueba");
+    inputRaza.sendKeys("Raza Prueba");
+    inputEdad.sendKeys("5");
+    inputPeso.sendKeys("10");
+    inputEnfermedad.sendKeys("");
+    inputEstado.sendKeys("");
+    inputFoto.sendKeys("");
+    selectCliente.sendKeys("Cliente prueba");
+    selectCliente.sendKeys(Keys.ENTER);
+
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnSaveMascota")));
+
+    WebElement btnSaveMascota = driver.findElement(By.id("btnSaveMascota"));
+    btnSaveMascota.click();
 
   }
 
