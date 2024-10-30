@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -132,7 +133,7 @@ public class UseCase1Test {
     inputRaza.sendKeys("Raza Prueba");
     inputEdad.sendKeys("5");
     inputPeso.sendKeys("10");
-    inputEnfermedad.sendKeys("");
+    inputEnfermedad.sendKeys("Enfermedad Prueba");
     inputEstado.sendKeys("");
     inputFoto.sendKeys("");
     selectCliente.sendKeys("Cliente prueba");
@@ -143,6 +144,16 @@ public class UseCase1Test {
     WebElement btnSaveMascota = driver.findElement(By.id("btnSaveMascota"));
     btnSaveMascota.click();
 
+    driver.navigate().to(BASE_URL + "/");
+
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnVerMisMascotas")));
+
+    WebElement btnVerMisMascotas = driver.findElement(By.id("btnVerMisMascotas"));
+
+    // Hacer scroll hasta que el elemento sea visible
+    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", btnVerMisMascotas);
+
+    btnVerMisMascotas.click();
   }
 
   @AfterEach
