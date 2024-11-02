@@ -1,6 +1,6 @@
 package com.example.demo.servicio;
 
-import com.example.demo.entidad.User;
+import com.example.demo.DTOs.User;
 
 public interface AdministradorServiceInterface {
   public Long verifyCredentials(User user);

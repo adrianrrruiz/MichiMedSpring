@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.entidad.User;
+import com.example.demo.DTOs.User;
 import com.example.demo.servicio.AdministradorServiceInterface;
 import com.example.demo.servicio.VeterinarioServiceInterface;
 

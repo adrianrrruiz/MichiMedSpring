@@ -1,8 +1,6 @@
 package com.example.demo.servicio;
 
-import java.time.format.TextStyle;
 import java.time.temporal.ChronoField;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.ResolverStyle;
@@ -11,13 +9,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Map;
-import java.util.Locale;
-import java.util.Comparator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entidad.HistorialMedicoDTO;
+import com.example.demo.DTOs.HistorialMedicoDTO;
 import com.example.demo.entidad.Tratamiento;
 import com.example.demo.repositorio.TratamientoRepository;
 

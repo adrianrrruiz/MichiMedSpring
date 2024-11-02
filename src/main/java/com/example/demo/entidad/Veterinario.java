@@ -11,8 +11,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Veterinario {
 
     @Id
@@ -30,9 +34,6 @@ public class Veterinario {
     private String especialidad;
     private String urlFoto;
 
-    public Veterinario() {
-    }
-
     public Veterinario(String cedula, String nombre, String contrasena, String especialidad, String urlFoto) {
         this.cedula = cedula;
         this.nombre = nombre;
@@ -40,61 +41,4 @@ public class Veterinario {
         this.especialidad = especialidad;
         this.urlFoto = urlFoto;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Mascota> getMascotas() {
-        return mascotas;
-    }
-
-    public void setMascotas(List<Mascota> mascotas) {
-        this.mascotas = mascotas;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
-
-    public String getUrlFoto() {
-        return urlFoto;
-    }
-
-    public void setUrlFoto(String urlFoto) {
-        this.urlFoto = urlFoto;
-    }
-
 }

@@ -7,8 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.DTOs.User;
 import com.example.demo.entidad.Mascota;
-import com.example.demo.entidad.User;
 import com.example.demo.entidad.Veterinario;
 import com.example.demo.repositorio.VeterinarioRepository;
 

@@ -15,8 +15,8 @@ import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.example.demo.DTOs.HistorialMedicoDTO;
 import com.example.demo.entidad.Droga;
-import com.example.demo.entidad.HistorialMedicoDTO;
 import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.Tratamiento;
 import com.example.demo.entidad.Veterinario;

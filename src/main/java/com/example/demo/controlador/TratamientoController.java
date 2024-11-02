@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entidad.HistorialMedicoDTO;
+import com.example.demo.DTOs.HistorialMedicoDTO;
+import com.example.demo.DTOs.TratamientoDTO;
 import com.example.demo.entidad.Tratamiento;
-import com.example.demo.entidad.TratamientoDTO;
 import com.example.demo.servicio.DrogaServiceInterface;
 import com.example.demo.servicio.TratamientoServiceInterface;
 import org.springframework.web.bind.annotation.PostMapping;

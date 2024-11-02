@@ -9,8 +9,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Droga {
 
     @Id
@@ -27,72 +31,11 @@ public class Droga {
     @OneToMany(mappedBy = "droga")
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
-    public Droga() {
-    }
-
     public Droga(String nombre, double precioCompra, double precioVenta, int uniDisp, int uniVend) {
         this.nombre = nombre;
         this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;
         this.uniDisp = uniDisp;
         this.uniVend = uniVend;
-    }
-
-    // Getters y Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public double getPrecioCompra() {
-        return precioCompra;
-    }
-
-    public void setPrecioCompra(double precioCompra) {
-        this.precioCompra = precioCompra;
-    }
-
-    public double getPrecioVenta() {
-        return precioVenta;
-    }
-
-    public void setPrecioVenta(double precioVenta) {
-        this.precioVenta = precioVenta;
-    }
-
-    public int getUniDisp() {
-        return uniDisp;
-    }
-
-    public void setUniDisp(int uniDisp) {
-        this.uniDisp = uniDisp;
-    }
-
-    public int getUniVend() {
-        return uniVend;
-    }
-
-    public void setUniVend(int uniVend) {
-        this.uniVend = uniVend;
-    }
-
-    public List<Tratamiento> getTratamientos() {
-        return tratamientos;
-    }
-
-    public void setTratamientos(List<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
     }
 }

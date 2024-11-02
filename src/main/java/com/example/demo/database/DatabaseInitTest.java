@@ -1,4 +1,4 @@
-package com.example.demo.entidad;
+package com.example.demo.database;
 
 import java.util.Collections;
 import java.util.List;
@@ -10,6 +10,12 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 
+import com.example.demo.entidad.Administrador;
+import com.example.demo.entidad.Cliente;
+import com.example.demo.entidad.Droga;
+import com.example.demo.entidad.Mascota;
+import com.example.demo.entidad.Tratamiento;
+import com.example.demo.entidad.Veterinario;
 import com.example.demo.repositorio.AdministradorRepository;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.DrogaRepository;
@@ -21,8 +27,8 @@ import jakarta.transaction.Transactional;
 
 @Controller
 @Transactional
-@Profile("default")
-public class DatabaseInit implements ApplicationRunner {
+@Profile("test")
+public class DatabaseInitTest implements ApplicationRunner {
 
         @Autowired
         AdministradorRepository administradorRepository;

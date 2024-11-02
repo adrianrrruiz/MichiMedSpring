@@ -3,7 +3,7 @@ package com.example.demo.servicio;
 import java.util.List;
 import java.util.Map;
 
-import com.example.demo.entidad.HistorialMedicoDTO;
+import com.example.demo.DTOs.HistorialMedicoDTO;
 import com.example.demo.entidad.Tratamiento;
 
 public interface TratamientoServiceInterface {

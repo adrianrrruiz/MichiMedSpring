@@ -3,8 +3,8 @@ package com.example.demo.servicio;
 import java.util.List;
 import java.util.Map;
 
+import com.example.demo.DTOs.User;
 import com.example.demo.entidad.Mascota;
-import com.example.demo.entidad.User;
 import com.example.demo.entidad.Veterinario;
 
 public interface VeterinarioServiceInterface {

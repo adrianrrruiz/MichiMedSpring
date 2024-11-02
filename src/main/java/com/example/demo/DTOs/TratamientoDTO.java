@@ -1,5 +1,14 @@
-package com.example.demo.entidad;
+package com.example.demo.DTOs;
 
+import com.example.demo.entidad.Droga;
+import com.example.demo.entidad.Mascota;
+import com.example.demo.entidad.Veterinario;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class TratamientoDTO {
   private Long id;
   private Mascota mascota;
@@ -7,33 +16,10 @@ public class TratamientoDTO {
   private Droga droga;
   private String fecha;
 
-  public TratamientoDTO() {
-  }
-
   public TratamientoDTO(String fecha, Mascota mascota, Veterinario veterinario, Droga droga) {
     this.fecha = fecha;
     this.mascota = mascota;
     this.veterinario = veterinario;
     this.droga = droga;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public Mascota getMascota() {
-    return mascota;
-  }
-
-  public Veterinario getVeterinario() {
-    return veterinario;
-  }
-
-  public Droga getDroga() {
-    return droga;
-  }
-
-  public String getFecha() {
-    return fecha;
   }
 }
