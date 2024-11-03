@@ -72,19 +72,24 @@ public class DatabaseInit implements ApplicationRunner {
                 Veterinario veterinarioSave;
                 UserEntity userEntity;
 
-                adminSave = new Administrador("1014977178", "Adrian Ruiz", "1234");
+                // Uso de patrón Builder
+                adminSave = Administrador.builder().cedula("1014977178").nombre("Adrian Ruiz").contrasena("1234")
+                                .build();
                 userEntity = saveUserAdministrador(adminSave);
                 adminSave.setUser(userEntity);
                 administradorRepository.save(adminSave);
-                adminSave = new Administrador("1052380081", "Carlos Mejía", "1234");
+                adminSave = Administrador.builder().cedula("1052380081").nombre("Carlos Mejía").contrasena("1234")
+                                .build();
                 userEntity = saveUserAdministrador(adminSave);
                 adminSave.setUser(userEntity);
                 administradorRepository.save(adminSave);
-                adminSave = new Administrador("1010961264", "Juan Pablo", "1234");
+                adminSave = Administrador.builder().cedula("1010961264").nombre("Juan Pablo").contrasena("1234")
+                                .build();
                 userEntity = saveUserAdministrador(adminSave);
                 adminSave.setUser(userEntity);
                 administradorRepository.save(adminSave);
-                adminSave = new Administrador("123", "Juan Angarita", "1234");
+                adminSave = Administrador.builder().cedula("123").nombre("Juan Angarita").contrasena("1234")
+                                .build();
                 userEntity = saveUserAdministrador(adminSave);
                 adminSave.setUser(userEntity);
                 administradorRepository.save(adminSave);
