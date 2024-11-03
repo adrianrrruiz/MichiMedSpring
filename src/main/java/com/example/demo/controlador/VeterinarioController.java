@@ -1,9 +1,12 @@
 package com.example.demo.controlador;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 import com.example.demo.entidad.Mascota;
+import com.example.demo.entidad.UserEntity;
 import com.example.demo.entidad.Veterinario;
+import com.example.demo.repositorio.UserRepository;
+import com.example.demo.security.CustomUserDetailService;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.servicio.VeterinarioServiceInterface;
 
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping("/veterinarios")
 
@@ -33,6 +35,12 @@ public class VeterinarioController {
 
     @Autowired
     VeterinarioServiceInterface veterinarioService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CustomUserDetailService customUserDetailService;
 
     // localhost:8090/veterinarios
     @GetMapping("")
@@ -57,15 +65,19 @@ public class VeterinarioController {
 
     // localhost:8090/veterinarios/add
     @PostMapping("/add")
-    public ResponseEntity<Veterinario> addVeterinario(@RequestBody Veterinario veterinario) {
-        try {
-            Veterinario savedVeterinario = veterinarioService.add(veterinario);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
-                    .body(savedVeterinario);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity addVeterinario(@RequestBody Veterinario veterinario) {
+        if (userRepository.existsByUsername(veterinario.getCedula())) {
+            return new ResponseEntity<String>("Este usuario ya existe", HttpStatus.BAD_REQUEST);
         }
+
+        UserEntity user = customUserDetailService.VeterinarioToUser(veterinario);
+        veterinario.setUser(user);
+        Veterinario newVeterinario = veterinarioService.add(veterinario);
+        if (newVeterinario == null) {
+            return new ResponseEntity<Veterinario>(newVeterinario, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<Veterinario>(newVeterinario, HttpStatus.CREATED);
     }
 
     @PutMapping("/update")

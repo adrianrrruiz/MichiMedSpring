@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.entidad.Administrador;
@@ -15,12 +16,16 @@ import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Droga;
 import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.Tratamiento;
+import com.example.demo.entidad.UserEntity;
 import com.example.demo.entidad.Veterinario;
+import com.example.demo.entidad.Role;
 import com.example.demo.repositorio.AdministradorRepository;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.RoleRepository;
 import com.example.demo.repositorio.TratamientoRepository;
+import com.example.demo.repositorio.UserRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
@@ -48,13 +53,41 @@ public class DatabaseInit implements ApplicationRunner {
         @Autowired
         TratamientoRepository tratamientoRepository;
 
+        @Autowired
+        PasswordEncoder passwordEncoder;
+
+        @Autowired
+        UserRepository userRepository;
+
+        @Autowired
+        RoleRepository roleRepository;
+
         @Override
         public void run(ApplicationArguments args) throws Exception {
 
-                administradorRepository.save(new Administrador("1014977178", "Adrian Ruiz", "1234"));
-                administradorRepository.save(new Administrador("1052380081", "Carlos Mejía", "1234"));
-                administradorRepository.save(new Administrador("1010961264", "Juan Pablo", "1234"));
-                administradorRepository.save(new Administrador("123", "Juan Angarita", "1234"));
+                roleRepository.save(new Role("ADMINISTRADOR"));
+                roleRepository.save(new Role("VETERINARIO"));
+
+                Administrador adminSave;
+                Veterinario veterinarioSave;
+                UserEntity userEntity;
+
+                adminSave = new Administrador("1014977178", "Adrian Ruiz", "1234");
+                userEntity = saveUserAdministrador(adminSave);
+                adminSave.setUser(userEntity);
+                administradorRepository.save(adminSave);
+                adminSave = new Administrador("1052380081", "Carlos Mejía", "1234");
+                userEntity = saveUserAdministrador(adminSave);
+                adminSave.setUser(userEntity);
+                administradorRepository.save(adminSave);
+                adminSave = new Administrador("1010961264", "Juan Pablo", "1234");
+                userEntity = saveUserAdministrador(adminSave);
+                adminSave.setUser(userEntity);
+                administradorRepository.save(adminSave);
+                adminSave = new Administrador("123", "Juan Angarita", "1234");
+                userEntity = saveUserAdministrador(adminSave);
+                adminSave.setUser(userEntity);
+                administradorRepository.save(adminSave);
 
                 mascotaRepository.save(new Mascota("Michito", 3, "angola", 5.3f, "", "En tratamiento", "20/09/18",
                                 "20/09/18",
@@ -474,48 +507,111 @@ public class DatabaseInit implements ApplicationRunner {
                 clienteRepository.save(new Cliente("2610987654", "Monica Salazar", "monica@gmail.com", "ijkl"));
 
                 // Veterinarios
-                veterinarioRepository.save(new Veterinario("123456789", "Juan Pérez", "1234", "Cirugía",
-                                "https://randomuser.me/api/portraits/men/1.jpg"));
-                veterinarioRepository.save(new Veterinario("987654321", "María Gómez", "4321", "Dermatología",
-                                "https://randomuser.me/api/portraits/women/2.jpg"));
-                veterinarioRepository.save(new Veterinario("456789123", "Carlos Díaz", "5678", "Oncología",
-                                "https://randomuser.me/api/portraits/men/3.jpg"));
-                veterinarioRepository.save(new Veterinario("789123456", "Laura Sánchez", "8765", "Cardiología",
-                                "https://randomuser.me/api/portraits/women/4.jpg"));
-                veterinarioRepository.save(new Veterinario("654321987", "Pedro Ramírez", "3456", "Neurología",
-                                "https://randomuser.me/api/portraits/men/5.jpg"));
-                veterinarioRepository.save(new Veterinario("321654987", "Lucía Martínez", "6789", "Gastroenterología",
-                                "https://randomuser.me/api/portraits/women/6.jpg"));
-                veterinarioRepository.save(new Veterinario("456123789", "Andrés Torres", "7890", "Oftalmología",
-                                "https://randomuser.me/api/portraits/men/7.jpg"));
-                veterinarioRepository.save(new Veterinario("789654123", "Elena González", "8901", "Ortopedia",
-                                "https://randomuser.me/api/portraits/women/8.jpg"));
-                veterinarioRepository.save(new Veterinario("147852369", "Sofía Ruiz", "9012", "Pediatría",
-                                "https://randomuser.me/api/portraits/women/9.jpg"));
-                veterinarioRepository.save(new Veterinario("963852741", "Roberto Morales", "2345", "Urología",
-                                "https://randomuser.me/api/portraits/men/10.jpg"));
-                veterinarioRepository.save(new Veterinario("258369147", "Adriana Castro", "3456", "Endocrinología",
-                                "https://randomuser.me/api/portraits/women/11.jpg"));
-                veterinarioRepository.save(new Veterinario("147963258", "Gabriel Fernández", "4567", "Neumología",
-                                "https://randomuser.me/api/portraits/men/12.jpg"));
-                veterinarioRepository.save(new Veterinario("852741963", "Patricia Herrera", "5678", "Hematología",
-                                "https://randomuser.me/api/portraits/women/13.jpg"));
-                veterinarioRepository.save(new Veterinario("369258147", "Ricardo Silva", "6789", "Dermatología",
-                                "https://randomuser.me/api/portraits/men/14.jpg"));
-                veterinarioRepository.save(new Veterinario("753159852", "Martín López", "7890", "Reumatología",
-                                "https://randomuser.me/api/portraits/men/15.jpg"));
-                veterinarioRepository.save(new Veterinario("951753258", "Alicia Vega", "8901", "Oncología",
-                                "https://randomuser.me/api/portraits/women/16.jpg"));
-                veterinarioRepository.save(new Veterinario("159753486", "Natalia Ramos", "9123", "Nefrología",
-                                "https://randomuser.me/api/portraits/women/17.jpg"));
-                veterinarioRepository.save(new Veterinario("753486159", "Eduardo Pérez", "1239", "Psiquiatría",
-                                "https://randomuser.me/api/portraits/men/18.jpg"));
-                veterinarioRepository.save(new Veterinario("486159753", "Isabel Morales", "1345", "Inmunología",
-                                "https://randomuser.me/api/portraits/women/19.jpg"));
-                veterinarioRepository.save(new Veterinario("975318642", "Fernando Castro", "4561", "Infectología",
-                                "https://randomuser.me/api/portraits/men/20.jpg"));
-                veterinarioRepository.save(new Veterinario("753864159", "Paola Medina", "5612", "Geriatría",
-                                "https://randomuser.me/api/portraits/women/21.jpg"));
+                veterinarioSave = new Veterinario("123456789", "Juan Pérez", "1234", "Cirugía",
+                                "https://randomuser.me/api/portraits/men/1.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("987654321", "María Gómez", "4321", "Dermatología",
+                                "https://randomuser.me/api/portraits/women/2.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("456789123", "Carlos Díaz", "5678", "Oncología",
+                                "https://randomuser.me/api/portraits/men/3.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("789123456", "Laura Sánchez", "8765", "Cardiología",
+                                "https://randomuser.me/api/portraits/women/4.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("654321987", "Pedro Ramírez", "3456", "Neurología",
+                                "https://randomuser.me/api/portraits/men/5.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("321654987", "Lucía Martínez", "6789", "Gastroenterología",
+                                "https://randomuser.me/api/portraits/women/6.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("456123789", "Andrés Torres", "7890", "Oftalmología",
+                                "https://randomuser.me/api/portraits/men/7.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("789654123", "Elena González", "8901", "Ortopedia",
+                                "https://randomuser.me/api/portraits/women/8.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("147852369", "Sofía Ruiz", "9012", "Pediatría",
+                                "https://randomuser.me/api/portraits/women/9.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("963852741", "Roberto Morales", "2345", "Urología",
+                                "https://randomuser.me/api/portraits/men/10.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("258369147", "Adriana Castro", "3456", "Endocrinología",
+                                "https://randomuser.me/api/portraits/women/11.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("147963258", "Gabriel Fernández", "4567", "Neumología",
+                                "https://randomuser.me/api/portraits/men/12.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("852741963", "Patricia Herrera", "5678", "Hematología",
+                                "https://randomuser.me/api/portraits/women/13.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("369258147", "Ricardo Silva", "6789", "Dermatología",
+                                "https://randomuser.me/api/portraits/men/14.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("753159852", "Martín López", "7890", "Reumatología",
+                                "https://randomuser.me/api/portraits/men/15.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("951753258", "Alicia Vega", "8901", "Oncología",
+                                "https://randomuser.me/api/portraits/women/16.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("159753486", "Natalia Ramos", "9123", "Nefrología",
+                                "https://randomuser.me/api/portraits/women/17.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("753486159", "Eduardo Pérez", "1239", "Psiquiatría",
+                                "https://randomuser.me/api/portraits/men/18.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("486159753", "Isabel Morales", "1345", "Inmunología",
+                                "https://randomuser.me/api/portraits/women/19.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("975318642", "Fernando Castro", "4561", "Infectología",
+                                "https://randomuser.me/api/portraits/men/20.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
+                veterinarioSave = new Veterinario("753864159", "Paola Medina", "5612", "Geriatría",
+                                "https://randomuser.me/api/portraits/women/21.jpg");
+                userEntity = saveUserVeterinario(veterinarioSave);
+                veterinarioSave.setUser(userEntity);
+                veterinarioRepository.save(veterinarioSave);
 
                 // Crear y guardar Tratamientos con relaciones
                 tratamientoRepository.save(new Tratamiento("05/08/24"));
@@ -619,6 +715,26 @@ public class DatabaseInit implements ApplicationRunner {
                         tratamientoRepository.save(tratamiento);
                 }
 
+        }
+
+        private UserEntity saveUserVeterinario(Veterinario veterinario) {
+                UserEntity userEntity = new UserEntity();
+                userEntity.setUsername(veterinario.getCedula());
+                userEntity.setPassword(passwordEncoder.encode(veterinario.getContrasena()));
+
+                Role roles = roleRepository.findByName("VETERINARIO").get();
+                userEntity.setRoles(List.of(roles));
+                return userRepository.save(userEntity);
+        }
+
+        private UserEntity saveUserAdministrador(Administrador administrador) {
+                UserEntity userEntity = new UserEntity();
+                userEntity.setUsername(administrador.getCedula());
+                userEntity.setPassword(passwordEncoder.encode(administrador.getContrasena()));
+
+                Role roles = roleRepository.findByName("ADMINISTRADOR").get();
+                userEntity.setRoles(List.of(roles));
+                return userRepository.save(userEntity);
         }
 
 }

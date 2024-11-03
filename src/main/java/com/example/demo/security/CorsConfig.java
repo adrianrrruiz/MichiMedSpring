@@ -15,10 +15,11 @@ import org.springframework.web.filter.CorsFilter;
 public class CorsConfig {
 
   @Bean
-  public FilterRegistrationBean<CorsFilter> corsFilter() {
+  public CorsFilter corsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
     CorsConfiguration config = new CorsConfiguration();
+
     config.setAllowCredentials(true);
     config.addAllowedOrigin("http://localhost:4200");
     config.setAllowedHeaders(Arrays.asList(
@@ -32,9 +33,11 @@ public class CorsConfig {
         HttpMethod.DELETE.name()));
 
     source.registerCorsConfiguration("/**", config);
-    FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
+    // FilterRegistrationBean<CorsFilter> bean = new
+    // FilterRegistrationBean<CorsFilter>(new CorsFilter(source));
 
-    bean.setOrder(-102);
-    return bean;
+    // bean.setOrder(-102);
+    // return bean;
+    return new CorsFilter(source);
   }
 }

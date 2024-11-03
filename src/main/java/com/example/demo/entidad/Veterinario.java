@@ -5,12 +5,15 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Transient;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +21,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Veterinario {
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private UserEntity user;
 
     @Id
     @GeneratedValue
@@ -30,6 +37,7 @@ public class Veterinario {
 
     private String cedula;
     private String nombre;
+    @Transient // No se guarda en la base de datos
     private String contrasena;
     private String especialidad;
     private String urlFoto;
