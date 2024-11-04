@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.DTOs.User;
-import com.example.demo.security.CustomUserDetailService;
+import com.example.demo.security.JWTGenerator;
 import com.example.demo.servicio.AdministradorServiceInterface;
 import com.example.demo.servicio.VeterinarioServiceInterface;
 
@@ -30,10 +30,10 @@ public class SignInController {
     VeterinarioServiceInterface veterinarioService;
 
     @Autowired
-    CustomUserDetailService customUserDetailService;
+    AuthenticationManager authenticationManager;
 
     @Autowired
-    AuthenticationManager authenticationManager;
+    JWTGenerator jwtGenerator;
 
     @PostMapping
     public ResponseEntity login(@RequestBody User user) {
@@ -61,7 +61,9 @@ public class SignInController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return new ResponseEntity<String>("Usuario autenticado", HttpStatus.OK);
+        String token = jwtGenerator.generateToken(authentication);
+
+        return new ResponseEntity<String>(token, HttpStatus.OK);
 
     }
 }
