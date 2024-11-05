@@ -32,4 +32,9 @@ public class AdministradorService implements AdministradorServiceInterface {
     return -1L;
   }
 
+  public Administrador findByCedula(String cedula) {
+    Optional<Administrador> admin = administradorRepository.findByCedula(cedula);
+    return admin.get();
+  }
+
 }

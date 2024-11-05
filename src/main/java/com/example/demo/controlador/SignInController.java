@@ -13,8 +13,10 @@ import com.example.demo.servicio.VeterinarioServiceInterface;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,33 +39,36 @@ public class SignInController {
 
     @PostMapping
     public ResponseEntity login(@RequestBody User user) {
-        // Long id = veterinarioService.verifyCredentials(user);
-        // Long idAdmin = administradorService.verifyCredentials(user);
-        // Map<String, Object> response = new HashMap<>();
-        // if (idAdmin != -1L) {
-        // response.put("status", "ok");
-        // response.put("id", idAdmin);
-        // response.put("admin", true);
-        // return ResponseEntity.ok(response);
-        // }
-        // if (id != -1L) {
-        // response.put("status", "ok");
-        // response.put("id", id);
-        // response.put("admin", false);
-        // return ResponseEntity.ok(response);
-        // }
-        // response.put("status", "error");
-        // response.put("message", "Usuario o contraseña incorrectos");
-        // return ResponseEntity.status(401).body(response);
 
+        boolean isAdmin = false;
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getCedula(), user.getPassword()));
+
+        Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) authentication.getAuthorities();
+        for (GrantedAuthority authority : authorities) {
+            if (authority.getAuthority().equals("ADMINISTRADOR")) {
+                isAdmin = true;
+                break;
+            }
+        }
+
+        long id = -1L;
+        if (isAdmin) {
+            id = administradorService.findByCedula(user.getCedula()).getId();
+        } else {
+            id = veterinarioService.findByCedula(user.getCedula()).getId();
+        }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtGenerator.generateToken(authentication);
 
-        return new ResponseEntity<String>(token, HttpStatus.OK);
+        Map<String, Object> response = new HashMap<>();
+        response.put("isAdmin", isAdmin);
+        response.put("token", token);
+        response.put("id", id);
+
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 
     }
 }
