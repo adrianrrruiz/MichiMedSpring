@@ -41,6 +41,12 @@ public class ClienteController {
         return clienteService.SearchById(id);
     }
 
+    // http://localhost:8090/clientes/cedula/{cedula}
+    @GetMapping("/cedula/{cedula}")
+    public Cliente getClienteByCedula(@PathVariable("cedula") String cedula) {
+        return clienteService.findByCedula(cedula);
+    }
+
     // http://localhost:8090/clientes/mascotas/{id}
     @GetMapping("/mascotas/{id}")
     @Operation(summary = "Obtener las mascotas de un cliente")

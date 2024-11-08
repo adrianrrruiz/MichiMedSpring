@@ -55,6 +55,6 @@ public class ClienteService implements ClienteServiceInterface {
 
     @Override
     public Cliente findByCedula(String cedula) {
-        return repository.findByCedula(cedula).orElse(null);
+        return repository.findByCedula(cedula).get();
     }
 }
