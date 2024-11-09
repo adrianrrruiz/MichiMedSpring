@@ -15,6 +15,7 @@ import com.example.demo.entidad.Administrador;
 import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Droga;
 import com.example.demo.entidad.Mascota;
+import com.example.demo.entidad.Producto;
 import com.example.demo.entidad.Tratamiento;
 import com.example.demo.entidad.UserEntity;
 import com.example.demo.entidad.Veterinario;
@@ -23,6 +24,7 @@ import com.example.demo.repositorio.AdministradorRepository;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.ProductoRepository;
 import com.example.demo.repositorio.RoleRepository;
 import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.UserRepository;
@@ -61,6 +63,9 @@ public class DatabaseInit implements ApplicationRunner {
 
         @Autowired
         RoleRepository roleRepository;
+
+        @Autowired
+        ProductoRepository productoRepository;
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
@@ -645,6 +650,53 @@ public class DatabaseInit implements ApplicationRunner {
                 drogaRepository.save(new Droga("ibuprofeno", 80000.0, 110000.0, 6, 0));
                 drogaRepository.save(new Droga("amoxicilina", 60000.0, 90000.0, 5, 0));
                 drogaRepository.save(new Droga("dexametasona", 40000.0, 70000.0, 4, 0));
+
+                // Productos
+                productoRepository.save(new Producto("Shampoo para Gatos",
+                                "Shampoo de alta calidad para el cuidado del pelaje de gatos", 12400.0,
+                                "https://img.freepik.com/foto-gratis/botella-champu-aislada-sobre-fondo-blanco_1232-1823.jpg"));
+                productoRepository.save(new Producto("Arena para gatos", "Arena absorbente de alta calidad", 15000.0,
+                                "https://img.freepik.com/foto-gratis/arena-gatos_144627-16791.jpg"));
+                productoRepository.save(new Producto("Rascador", "Rascador para gatos con múltiples niveles", 45000.0,
+                                "https://img.freepik.com/foto-gratis/gato-rascador_144627-16792.jpg"));
+                productoRepository.save(new Producto("Juguete de plumas", "Juguete interactivo con plumas para gatos",
+                                8000.0, "https://img.freepik.com/foto-gratis/juguete-plumas-gatos_144627-16793.jpg"));
+                productoRepository.save(new Producto("Comida seca", "Comida seca premium para gatos adultos", 25000.0,
+                                "https://img.freepik.com/foto-gratis/comida-seca-gatos_144627-16794.jpg"));
+                productoRepository.save(new Producto("Comida húmeda", "Comida húmeda gourmet para gatos", 30000.0,
+                                "https://img.freepik.com/foto-gratis/comida-humeda-gatos_144627-16795.jpg"));
+                productoRepository.save(new Producto("Cama para gatos", "Cama suave y cómoda para gatos", 35000.0,
+                                "https://img.freepik.com/foto-gratis/cama-gatos_144627-16796.jpg"));
+                productoRepository.save(new Producto("Transportadora", "Transportadora segura y cómoda para gatos",
+                                50000.0, "https://img.freepik.com/foto-gratis/transportadora-gatos_144627-16797.jpg"));
+                productoRepository.save(new Producto("Collar antipulgas", "Collar antipulgas de larga duración",
+                                20000.0,
+                                "https://img.freepik.com/foto-gratis/collar-antipulgas-gatos_144627-16798.jpg"));
+                productoRepository.save(new Producto("Cepillo", "Cepillo para el cuidado del pelaje de gatos", 12000.0,
+                                "https://img.freepik.com/foto-gratis/cepillo-gatos_144627-16799.jpg"));
+                productoRepository.save(new Producto("Cortauñas", "Cortauñas seguro y fácil de usar para gatos",
+                                10000.0, "https://img.freepik.com/foto-gratis/cortauñas-gatos_144627-16800.jpg"));
+                productoRepository.save(new Producto("Fuente de agua", "Fuente de agua automática para gatos", 40000.0,
+                                "https://img.freepik.com/foto-gratis/fuente-agua-gatos_144627-16801.jpg"));
+                productoRepository.save(new Producto("Arenero", "Arenero cubierto para gatos", 30000.0,
+                                "https://img.freepik.com/foto-gratis/arenero-gatos_144627-16802.jpg"));
+                productoRepository.save(new Producto("Juguete de ratón", "Juguete de ratón con sonido para gatos",
+                                7000.0, "https://img.freepik.com/foto-gratis/juguete-raton-gatos_144627-16803.jpg"));
+                productoRepository.save(new Producto("Ropa para gatos", "Ropa cómoda y elegante para gatos", 20000.0,
+                                "https://img.freepik.com/foto-gratis/ropa-gatos_144627-16804.jpg"));
+                productoRepository.save(new Producto("Cama calefactora", "Cama calefactora para gatos", 60000.0,
+                                "https://img.freepik.com/foto-gratis/cama-calefactora-gatos_144627-16805.jpg"));
+                productoRepository.save(new Producto("Juguete láser", "Juguete láser interactivo para gatos", 15000.0,
+                                "https://img.freepik.com/foto-gratis/juguete-laser-gatos_144627-16806.jpg"));
+                productoRepository.save(new Producto("Comedero automático",
+                                "Comedero automático programable para gatos", 55000.0,
+                                "https://img.freepik.com/foto-gratis/comedero-automatico-gatos_144627-16807.jpg"));
+                productoRepository.save(new Producto("Rascador de cartón", "Rascador de cartón reciclable para gatos",
+                                10000.0, "https://img.freepik.com/foto-gratis/rascador-carton-gatos_144627-16808.jpg"));
+                productoRepository.save(new Producto("Cama de ventana", "Cama de ventana para gatos con ventosas",
+                                25000.0, "https://img.freepik.com/foto-gratis/cama-ventana-gatos_144627-16809.jpg"));
+                productoRepository.save(new Producto("Juguete de peluche", "Juguete de peluche suave para gatos",
+                                9000.0, "https://img.freepik.com/foto-gratis/juguete-peluche-gatos_144627-16810.jpg"));
 
                 // Obtener todas las mascotas y clientes
                 List<Mascota> mascotas = mascotaRepository.findAll();
