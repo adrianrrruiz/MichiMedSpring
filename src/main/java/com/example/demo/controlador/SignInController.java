@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.DTOs.User;
 import com.example.demo.security.JWTGenerator;
 import com.example.demo.servicio.AdministradorServiceInterface;
+import com.example.demo.servicio.UserService;
 import com.example.demo.servicio.VeterinarioServiceInterface;
+import com.example.demo.servicio.EmailService;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,6 +35,12 @@ public class SignInController {
 
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     JWTGenerator jwtGenerator;
@@ -70,5 +78,25 @@ public class SignInController {
 
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 
+    }
+
+    @PostMapping("/reset")
+    public void resetPassword(@RequestBody Map<String, String> payload) {
+        String token = payload.get("token");
+        String newPassword = payload.get("newPassword");
+        if (userService.validatePasswordResetToken(token)) {
+            userService.updatePassword(token, newPassword);
+        } else {
+            throw new RuntimeException("Token no válido o expirado");
+        }
+    }
+
+    @PostMapping("/request-reset")
+    public ResponseEntity requestPasswordReset(@RequestBody Map<String, String> payload) {
+        String email = payload.get("email");
+        String token = userService.generatePasswordResetToken(email);
+        String message = "Por favor, copia este código para poder hacer tu reset de contraseña: " + token;
+        emailService.sendEmail(email, "Solicitud de restablecimiento de contraseña", message);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

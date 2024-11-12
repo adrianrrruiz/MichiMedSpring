@@ -37,6 +37,7 @@ public class Veterinario {
 
     private String cedula;
     private String nombre;
+    private String email;
     @Transient // No se guarda en la base de datos
     private String contrasena;
     private String especialidad;

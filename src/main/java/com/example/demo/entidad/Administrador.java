@@ -30,6 +30,7 @@ public class Administrador {
 
   private String cedula;
   private String nombre;
+  private String email;
   @Transient // No se guarda en la base de datos
   private String contrasena;
 
@@ -37,5 +38,6 @@ public class Administrador {
     this.cedula = cedula;
     this.nombre = nombre;
     this.contrasena = contrasena;
+
   }
 }
