@@ -78,23 +78,27 @@ public class DatabaseInit implements ApplicationRunner {
                 UserEntity userEntity;
 
                 // Uso de patrón Builder
+                // Uso de patrón Builder
                 adminSave = Administrador.builder().cedula("1014977178").nombre("Adrian Ruiz").contrasena("1234")
-                                .build();
+                                .email("adrian.ruiz@example.com").build();
                 userEntity = saveUserAdministrador(adminSave);
                 adminSave.setUser(userEntity);
                 administradorRepository.save(adminSave);
+
                 adminSave = Administrador.builder().cedula("1052380081").nombre("Carlos Mejía").contrasena("1234")
-                                .build();
+                                .email("mejiaesteban10@gmail.com").build();
                 userEntity = saveUserAdministrador(adminSave);
                 adminSave.setUser(userEntity);
                 administradorRepository.save(adminSave);
+
                 adminSave = Administrador.builder().cedula("1010961264").nombre("Juan Pablo").contrasena("1234")
-                                .build();
+                                .email("juan.pablo@example.com").build();
                 userEntity = saveUserAdministrador(adminSave);
                 adminSave.setUser(userEntity);
                 administradorRepository.save(adminSave);
+
                 adminSave = Administrador.builder().cedula("123").nombre("Juan Angarita").contrasena("1234")
-                                .build();
+                                .email("juan.angarita@example.com").build();
                 userEntity = saveUserAdministrador(adminSave);
                 adminSave.setUser(userEntity);
                 administradorRepository.save(adminSave);
@@ -778,7 +782,8 @@ public class DatabaseInit implements ApplicationRunner {
                 UserEntity userEntity = new UserEntity();
                 userEntity.setUsername(veterinario.getCedula());
                 userEntity.setPassword(passwordEncoder.encode(veterinario.getContrasena()));
-
+                userEntity.setEmail(veterinario.getEmail());
+        
                 Role roles = roleRepository.findByName("VETERINARIO").get();
                 userEntity.setRoles(List.of(roles));
                 return userRepository.save(userEntity);
@@ -788,7 +793,8 @@ public class DatabaseInit implements ApplicationRunner {
                 UserEntity userEntity = new UserEntity();
                 userEntity.setUsername(administrador.getCedula());
                 userEntity.setPassword(passwordEncoder.encode(administrador.getContrasena()));
-
+                userEntity.setEmail(administrador.getEmail());
+        
                 Role roles = roleRepository.findByName("ADMINISTRADOR").get();
                 userEntity.setRoles(List.of(roles));
                 return userRepository.save(userEntity);
