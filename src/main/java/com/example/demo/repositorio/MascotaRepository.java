@@ -17,4 +17,9 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
 
     @Query(value = "SELECT estado, COUNT(*) AS cantidad FROM MASCOTA WHERE estado IN ('En tratamiento', 'Tratado') GROUP BY estado;", nativeQuery = true)
     List<Map<String, Object>> contarMascotasPorEstado();
+
+
+    List<Mascota> findByEstadoIgnoreCase(String estado);
+
+
 }

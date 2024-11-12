@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -86,4 +87,27 @@ public class MascotaController {
                         Map.Entry::getKey,
                         entry -> entry.getValue().intValue()));
     }
+
+    // Endpoint para iniciar adopción
+    @PutMapping("/{id}/iniciarAdopcion")
+    public ResponseEntity<Void> iniciarAdopcion(@PathVariable Long id) {
+        mascotaService.iniciarAdopcion(id);
+        return ResponseEntity.noContent().build();
+    }
+    
+
+    // Endpoint para confirmar adopción
+    @PutMapping("/{id}/confirmarAdopcion")
+    public ResponseEntity<Void> confirmarAdopcion(@PathVariable Long id) {
+        mascotaService.confirmarAdopcion(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/pendientesAdopcion")
+    public List<Mascota> obtenerMascotasPendientesAdopcion() {
+        return mascotaService.SearchAll().stream()
+                .filter(mascota -> "Pendiente de Confirmación".equals(mascota.getEstado()))
+                .collect(Collectors.toList());
+    }
+
 }

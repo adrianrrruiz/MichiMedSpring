@@ -24,13 +24,9 @@ public class MascotaService implements MascotaServiceInterface {
 
     @Override
     public List<Mascota> SearchAll() {
-        List<Mascota> todasLasMascotas = repository.findAll();
-        // Filtrar mascotas eliminadas antes de devolverlas
-        List<Mascota> mascotasActivas = todasLasMascotas.stream()
+        return repository.findAll().stream()
                 .filter(mascota -> !"Eliminada".equalsIgnoreCase(mascota.getEstado()))
                 .collect(Collectors.toList());
-
-        return mascotasActivas;
     }
 
     @Override
@@ -51,9 +47,9 @@ public class MascotaService implements MascotaServiceInterface {
         repository.save(mascota);
     }
 
+    @Override
     public Map<String, Long> contarMascotasPorEstado() {
         List<Map<String, Object>> resultados = repository.contarMascotasPorEstado();
-
         return resultados.stream()
                 .collect(Collectors.toMap(
                         resultado -> (String) resultado.get("estado"),
@@ -64,9 +60,29 @@ public class MascotaService implements MascotaServiceInterface {
 
     @Override
     public int obtenerCantidadMascotasTratadas() {
-        List<Mascota> todasLasMascotas = repository.findAll();
-        return (int) todasLasMascotas.stream()
+        return (int) repository.findAll().stream()
                 .filter(mascota -> "Tratado".equalsIgnoreCase(mascota.getEstado()))
                 .count();
+    }
+
+    @Override
+    public void confirmarAdopcion(Long id) {
+        Mascota mascota = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada con id: " + id));
+        mascota.setEstado("Adoptado");
+        repository.save(mascota);
+    }
+
+    @Override
+    public void iniciarAdopcion(Long id) {
+        Mascota mascota = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada con id: " + id));
+        mascota.setEstado("Pendiente de Confirmación");
+        repository.save(mascota);
+    }
+
+    @Override
+    public List<Mascota> obtenerMascotasPendientesAdopcion() {
+        return repository.findByEstadoIgnoreCase("Pendiente de Confirmación");
     }
 }

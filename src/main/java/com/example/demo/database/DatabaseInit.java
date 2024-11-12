@@ -99,7 +99,7 @@ public class DatabaseInit implements ApplicationRunner {
                 adminSave.setUser(userEntity);
                 administradorRepository.save(adminSave);
 
-                mascotaRepository.save(new Mascota("Michito", 3, "angola", 5.3f, "", "En tratamiento", "20/09/18",
+                mascotaRepository.save(new Mascota("Michito", 3, "angola", 5.3f, "", "En Adopción", "20/09/18",
                                 "20/09/18",
                                 "esomeprazol",
                                 "https://images.ctfassets.net/denf86kkcx7r/4IPlg4Qazd4sFRuCUHIJ1T/f6c71da7eec727babcd554d843a528b8/gatocomuneuropeo-97?fm=webp&w=612"));

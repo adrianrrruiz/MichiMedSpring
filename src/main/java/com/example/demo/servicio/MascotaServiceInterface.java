@@ -7,18 +7,23 @@ import com.example.demo.entidad.Mascota;
 
 public interface MascotaServiceInterface {
 
-    public Mascota SearchById(Long id);
+    Mascota SearchById(Long id);
 
-    public List<Mascota> SearchAll();
+    List<Mascota> SearchAll();
 
-    public void deleteById(Long id);
+    void deleteById(Long id);
 
-    public void update(Mascota mascota);
+    void update(Mascota mascota);
 
-    public void add(Mascota mascota);
+    void add(Mascota mascota);
 
-    public Map<String, Long> contarMascotasPorEstado();
+    Map<String, Long> contarMascotasPorEstado();
 
-    public int obtenerCantidadMascotasTratadas();
+    int obtenerCantidadMascotasTratadas();
 
+    void iniciarAdopcion(Long id);
+
+    void confirmarAdopcion(Long id);
+
+    List<Mascota> obtenerMascotasPendientesAdopcion();
 }
