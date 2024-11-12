@@ -23,9 +23,24 @@ public class GPTController {
   @Autowired
   private ChatgptService chatgptService;
 
-  @GetMapping("/chat")
-  public String chatWith(@RequestParam String message) {
-    return chatgptService.sendMessage(message);
+  @GetMapping("/frase-motivacional")
+  public String fraseMotivacional() {
+    Integer maxTokens = 35; // Reducido para una frase corta
+    String model = "gpt-4o-mini";
+    Double temperature = 0.9;
+    Double topP = 1.0;
+
+    // Define el mensaje para el modelo
+    String message = "Imagina que eres el líder del equipo de MichiMed, una clínica veterinaria especializada en el cuidado y bienestar de gatos. Genera una frase motivacional creativa y única para inspirar a nuestro personal en solo 20 palabras o menos. Alterna entre estilos como citas inspiradoras, mensajes personalizados o recordatorios de impacto positivo. La frase debe ser corta, alentadora y debe variar en cada generación.";
+
+    List<MultiChatMessage> messages = Arrays.asList(
+        new MultiChatMessage("user", message));
+    // Envía la solicitud
+
+    MultiChatRequest multiChatRequest = new MultiChatRequest(model, messages, maxTokens, temperature, topP);
+    MultiChatResponse chatResponse = chatgptService.multiChatRequest(multiChatRequest);
+
+    return chatResponse.getChoices().get(0).getMessage().getContent();
   }
 
   @GetMapping("/prompt")
